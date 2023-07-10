@@ -1,0 +1,63 @@
+/frontend/.DS_Store
+
+# NPM package repo
+/frontend/node_modules
+/frontend/package-lock.json
+
+# Generated distribution
+/frontend/dist
+
+# Local env files
+/frontend/.env.local
+/frontend/.env.*.local
+
+# Log files
+/frontend/npm-debug.log*
+ 
+# Editor configuration
+/frontend/.vscode
+
+
+# BACK : NPM package repo
+/backend/node_modules
+/backend/package-lock.json
+
+# Backend : Laravel Hot
+/backend/public/hot
+
+# Backend : Storage
+/backend/public/storage
+
+# Backend : Storage key
+/backend/storage/*.key
+
+# Backend : Vendor PHP Library
+/backend/vendor
+
+# Backend : Enviroment Variable file
+/backend/.env
+
+# Backend : Enviroment Variable file backup
+/backend/.env.backup
+
+# Backend : Unit Test
+/backend/.phpunit.result.cache
+
+# Backend : Docker file
+/backend/docker-compose.override.yml
+
+# Backend : Home Stead
+/backend/Homestead.json
+/backend/Homestead.yaml
+
+# Backend : npm logo
+/backend/npm-debug.log
+
+# Backend : Yarn log
+/backend/yarn-error.log
+
+# Backend : idea
+/backend/.idea
+
+# Backend : vscode 
+/backend/.vscode
