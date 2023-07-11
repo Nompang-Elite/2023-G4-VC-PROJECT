@@ -1,100 +1,104 @@
 <template>
-  <v-card
-    max-width="26rem"
-    class="mx-auto mt-15 spacing-playground pa-2"
-    elevation="5"
-  >
-    <v-card-title class="font-weight-bold"> Register </v-card-title>
+  <v-card max-width="28rem" rounded="lg" class="mx-auto mt-15">
+    <v-card-title> Register </v-card-title>
     <v-card-subtitle>
-      Already have an account? <a href="/login">Sign In</a>
+      Already have an account? <a href="/login">Sign in</a>
     </v-card-subtitle>
     <v-card-text>
-      <v-form ref="form" lazy-validation>
+      <v-form ref="form" lazy-validate>
         <v-row>
-          <v-col cols="20">
+          <v-col cols="14">
             <v-text-field
               variant="solo"
-              label="First name"
-              type="text"
-              append-inner-icon="mdi-text"
               density="compact"
-              :rules="firstnameRules"
+              label="First Name"
+              prepend-inner-icon="mdi-text"
               v-model="user.firstname"
+              :rules="rules.name"
+              required
             >
             </v-text-field>
           </v-col>
-          <v-col cols="20">
+
+          <v-col cols="14">
             <v-text-field
               variant="solo"
-              label="Last name"
-              type="text"
-              append-inner-icon="mdi-text"
               density="compact"
-              :rules="lastnameRules"
+              label="Last Name"
+              prepend-inner-icon="mdi-text"
               v-model="user.lastname"
+              :rules="rules.name"
+              required
             >
             </v-text-field>
           </v-col>
         </v-row>
         <v-text-field
           variant="solo"
+          density="compact"
+          label="Phone"
+          prepend-inner-icon="mdi-phone"
+          v-model="user.phone"
+          type="number"
+          :rules="rules.phone"
+          required
+        >
+        </v-text-field>
+        <v-text-field
+          variant="solo"
+          density="compact"
+          prepend-inner-icon="mdi-email"
           label="Email"
           type="email"
-          append-inner-icon="mdi-email"
-          density="compact"
-          :rules="emailRules"
           v-model="user.email"
+          :rules="rules.email"
+          required
         >
         </v-text-field>
-        <v-text-field
-          variant="solo"
-          label="Phone"
-          type="text"
-          append-inner-icon="mdi-phone"
-          density="compact"
-          v-model="user.phone"
-        >
-        </v-text-field>
+        <p v-if="exist" class="font-weight-light">Email already exist</p>
         <v-row>
-          <v-col cols="20">
+          <v-col cols="14">
             <v-text-field
               variant="solo"
-              label="Password"
-              type="text"
-              append-inner-icon="mdi-lock-outline"
               density="compact"
+              prepend-inner-icon="mdi-lock"
+              label="Password"
+              type="password"
               v-model="user.password"
+              :rules="rules.password"
+              required
             >
             </v-text-field>
           </v-col>
-          <v-col cols="20">
+          <v-col cols="14">
             <v-text-field
               variant="solo"
-              label="Confirm Password"
-              type="text"
-              append-inner-icon="mdi-lock-check-outline"
               density="compact"
+              prepend-inner-icon="mdi-lock-check"
+              label="Confirm Password"
+              type="password"
               v-model="user.password_confirmation"
+              :rules="rules.passwordConfirm"
+              required
             >
             </v-text-field>
           </v-col>
         </v-row>
-
         <v-select
-          label="Gender"
           :items="['Male', 'Female']"
-          variant="solo"
           density="compact"
-          append-inner-icon="mdi-account"
+          variant="solo"
+          label="Gender"
           v-model="user.gender"
+          :rules="rules.gender"
         ></v-select>
 
         <v-btn
-          variant="elevated"
-          height="3.6rem"
-          color="gray"
+          @click="submitData"
           block
-          @click="submitForm"
+          variant="elevated"
+          height="4rem"
+          color="success"
         >
           Register
         </v-btn>
@@ -104,86 +108,73 @@
 </template>
 
 <script>
-import { useUserStore } from "@/store/UserStore";
 import api from "@/router/api";
-import { toRefs } from "vue";
+import { useUserStore } from "@/store/UserStore";
+
 export default {
-  setup() {
-    const userStore = useUserStore();
-    return toRefs(userStore);
-  },
   data() {
     return {
+      exist: false,
       user: {
         firstname: null,
         lastname: null,
-        email: null,
         phone: null,
-        gender: null,
+        email: null,
         password: null,
         password_confirmation: null,
-        current_location: "0.0.0.0",
+        gender: null,
+        current_location: null,
       },
-      emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) =>
-          /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-            v
-          ) || "E-mail must be valid",
-      ],
-      passwordRules: [
-        (v) => !!v || "Password is required",
-        (v) =>
-          /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(v) ||
-          "Password must contain at least lowercase letter, one number, a special character and one uppercase letter",
-      ],
-      lastnameRules: [
-        (v) => !!v || "First name is required",
-        (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
-      ],
-      firstnameRules: [
-        (v) => !!v || "Last name is required",
-        (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
-      ],
+      rules: {
+        email: [
+          // Regex pattern: https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
+          (v) =>
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+              v
+            ) || "Email required",
+        ],
+        phone: [(v) => v !== null || "Phone required"],
+        name: [(v) => v != null] || "Required",
+        password: [
+          (v) =>
+            /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(v) ||
+            "Password must contain at least lowercase letter, one number, a special character and one uppercase let",
+        ],
+        passwordConfirm: [
+          (v) => v == this.user.password || "Password not match",
+        ],
+        gender: [(v) => v !== null || "Select your gender"],
+      },
     };
   },
+
   methods: {
-    submitForm() {
-      // refered form
-      this.$refs.form.validate();
-      if (this.$refs.form.validate()) {
-        // Parsing Proxy array to normal array
-        const usrObj = JSON.parse(JSON.stringify(this.user));
-        // convert to single char for gender
-        usrObj["gender"] == "Male"
-          ? (usrObj["gender"] = "m")
-          : (usrObj["gender"] = "f");
-        // using defined axios
-        api.api_base
-          .post("/api/v1/auth/register", usrObj, {
-            // Setting content type to json
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-          .then((result) => {
-            if (result.data.status == "successfully") {
-              console.log(result.data);
-              // Set authorization header for the current session
-              //  Source: https://stackoverflow.com/questions/58388884/set-bearer-token-after-login
-              api.api_base.defaults.headers.common.Authorization =
-                "Bearer " + result.data["access_token"];
-              // Store user data
-              this.data = result.data;
-              // Route to home page
-              this.$router.push("/");
-            }
-          })
-          .catch((err) => {
-            console.log(err.response.data.errors);
-          });
-      }
+    submitData() {
+      const usrObj = JSON.parse(JSON.stringify(this.user));
+      usrObj.gender == "Male" ? (usrObj.gender = "m") : (usrObj.gender = "f");
+      api.api_base
+        .post("/v1/auth/register", usrObj)
+        .then((result) => {
+          console.log(result.data);
+          this.userStore.data = result.data;
+          this.$router.push("/");
+        })
+        .catch((err) => {
+          console.log(usrObj);
+          console.log(err.response.data);
+          if (
+            err.response.data.errors.email ==
+            "The email has already been taken."
+          ) {
+            this.exist = true;
+          }
+        });
     },
+  },
+
+  setup() {
+    let userStore = useUserStore();
+    return { userStore };
   },
 };
 </script>
