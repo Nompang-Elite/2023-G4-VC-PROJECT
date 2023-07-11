@@ -1,6 +1,10 @@
 <template>
-  <v-card max-width="28rem" rounded="lg" class="mx-auto mt-15">
-    <v-card-title> Register </v-card-title>
+  <v-card
+    max-width="30rem"
+    rounded="lg"
+    class="spacing-playground pa-4 mx-auto mt-15"
+  >
+    <v-card-title class="text-h4"> Register </v-card-title>
     <v-card-subtitle>
       Already have an account? <a href="/login">Sign in</a>
     </v-card-subtitle>
@@ -97,8 +101,8 @@
           @click="submitData"
           block
           variant="elevated"
-          height="4rem"
-          color="success"
+          height="3rem"
+          color="info"
         >
           Register
         </v-btn>
@@ -155,13 +159,19 @@ export default {
       api.api_base
         .post("/v1/auth/register", usrObj)
         .then((result) => {
-          console.log(result.data);
-          this.userStore.data = result.data;
-          this.$router.push("/");
+          if (result.data) {
+            console.log(result.data);
+            // Set authorization header for the current session
+            //  Source: https://stackoverflow.com/questions/58388884/set-bearer-token-after-login
+            api.api_base.defaults.headers.common.Authorization =
+              "Bearer " + result.data["access_token"];
+            // Store user data
+            this.userStore.data = result.data;
+            // Redirect to home page
+            this.$router.push("/");
+          }
         })
         .catch((err) => {
-          console.log(usrObj);
-          console.log(err.response.data);
           if (
             err.response.data.errors.email ==
             "The email has already been taken."
