@@ -1,140 +1,54 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Traits\HttpResponse;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-        // Route filtering wit middleware:
-        $this->middleware('auth:api')->except(['login', 'register', 'error']);
-    }
+    use HttpResponse;
 
-    public function register(Request $request)
-    {
-        /**
-         * Regex pattern source for the validation:
-         * https://stackoverflow.com/questions/31539727/laravel-password-validation-rule
-         * 
-         * */
 
-        // dd($request->input());
+    /**
+     * 
+     * User register
+     * 
+     * **/
+    public function register(Request $req)
+    {
         $validate = Validator::make(
-            $request->input(),
+            $req->input(),
             [
-                'firstname' => 'required',
-                'lastname' => 'required',
-                'gender' => 'required',
-                'phone' => 'required',
-                'email' => 'required|email|unique:users,email',
-                'account_type' => 'required|alpha_num',
-                'password' => 'required|min:10|confirmed|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
-            ],
-            []
+                "firstname" => "required|max:500",
+                "lastname" => "required|max:500",
+                "email" => "required|max:1000|email|unique:users,email",
+                "phone" => "required|min:9|max:12",
+                "gender" => "required|max:2",
+                // References:  https://stackoverflow.com/questions/31539727/laravel-password-validation-rule
+                "password" => "required|confirmed|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/"
+            ]
         );
 
+        // Check if the validation fail:
         if ($validate->fails()) {
-            return response()->json(
-                [
-                    'error' => $validate->errors()
-                ],
+            return $this->error(
+                $validate->errors(),
                 401
             );
         }
 
-        $user = User::create(
-            [
-                'firstname' => $request['firstname'],
-                'lastname' => $request['lastname'],
-                'gender' => $request['gender'],
-                'phone' => $request['phone'],
-                'email' => $request['email'],
-                'account_type' => $request['account_type'],
-                'password' => $request['password'],
-            ]
+        // Create user obj:
+        $usr = User::create(
+            $req->input()
         );
-        return response()->json(
-            [
-                'user' => $user,
-                'access_token' => Auth::login($user)
-            ],
-            201
+        // Return success msg:
+        return $this->success(
+            $data = array_merge(array('user' => $usr), ["access_token" => Auth::login($usr)])
         );
     }
-
-
-    /**
-     * 
-     * User Login
-     * 
-     * **/
-
-    public function login(Request $request)
-    {
-        $validate = Validator::make(
-            $request->input(),
-            [
-                'password' => 'required|min:10|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
-                'email' => 'required|email',
-            ]
-        );
-
-        if (!$validate->fails()) {
-            // Attempt login with auth guard:
-            $token = auth()->attempt($request->input());
-            if ($token) {
-                return response()->json(
-                    [
-                        'user' => auth()->user(),
-                        'access_token' => $token
-                    ]
-                );
-            }
-        }
-
-        return response()->json(
-            [
-                'error' => !$validate->errors() ? $validate->errors(): "Account not available!",
-            ]
-        );
-    }
-
-    /**
-     * User Logout
-     * 
-     * Source Code from: https://dev-yakuza.posstree.com/en/laravel/jwt-logout/
-     * **/
-
-    public function logout()
-    {
-        // Check for the existing user:
-        if (auth()->hasUser()) {
-            // Clear user token with auth():
-            Auth::guard('api')->logout();
-            // Return a successful message:
-            return response()->json([
-                'status' => 'success',
-                'message' => 'logout'
-            ], 201);
-        }
-        // Return a unseccessfull message if already logout:
-        return response()->json([
-            'status' => 'unsuccessfuly',
-            'message' => 'You already logout'
-        ], 204);
-    }
-
-
-
-
-    /**
-     * HTTP Code docs source:
-     * https://kinsta.com/blog/http-status-codes/#:~:text=400s%3A%20Client%20error%20codes%20indicating,the%20fulfillment%20of%20the%20request.
-     * **/
 }
