@@ -19,8 +19,13 @@ class User extends Authenticatable implements JWTSubject
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
+        'phone',
+        'gender',
         'email',
+        'current_location',
+        'role',
         'password',
     ];
 
@@ -43,9 +48,6 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    // Rest omitted for brevity
-
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -65,6 +67,4 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-
-    // Guide: https://jwt-auth.readthedocs.io/en/develop/quick-start/
 }
