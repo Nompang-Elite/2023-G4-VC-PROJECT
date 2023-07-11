@@ -24,11 +24,10 @@
             density="compact"
             :error-messages="error"
           ></v-text-field>
-          <v-checkbox label="Remember me"></v-checkbox>
-          <p class="mx-3 mb-5" style="margin-top: -20px">
+          <v-card-subtitle class="my-1 mb-4" style="margin-top: -20px">
             Don't have account? 
-            <router-link to="/signup" >Sing Up</router-link>
-          </p>
+            <router-link to="/register" >Sing Up</router-link>
+          </v-card-subtitle>
           <v-btn type="submit" block class="mt-0" @click="login" color="blue"
             >Login</v-btn
           >

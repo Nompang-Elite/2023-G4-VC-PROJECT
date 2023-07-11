@@ -13,7 +13,11 @@ class AuthController extends Controller
 {
     use HttpResponse;
 
-
+    public function __construct()
+    {
+        // Route filtering wit middleware:
+        $this->middleware('auth:api')->except(['login', 'register', 'error']);
+    }
     /**
      * 
      * User register
@@ -51,4 +55,42 @@ class AuthController extends Controller
             $data = array_merge(array('user' => $usr), ["access_token" => Auth::login($usr)])
         );
     }
+
+    /*
+     * 
+     * User Login
+     * 
+     **/
+    public function login(Request $request)
+    {
+        $validate = Validator::make(
+            $request->input(),
+            [
+                'password' => 'required|min:10|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+                'email' => 'required|email',
+            ]
+        );
+        if (!$validate->fails()) {
+            // Attempt login with auth guard:
+            $token = auth()->attempt($request->input());
+            if ($token) {
+                return response()->json(
+                    [
+                        'user' => auth()->user(),
+                        'access_token' => $token
+                    ]
+                );
+            }
+        }
+        return response()->json(
+            [
+                'error' => !$validate->errors() ? $validate->errors() : "Account not available!",
+            ]
+        );
+    }
+    /*
+     * User Logout
+     * 
+     * Source Code from: https://dev-yakuza.posstree.com/en/laravel/jwt-logout/
+     * **/
 }
