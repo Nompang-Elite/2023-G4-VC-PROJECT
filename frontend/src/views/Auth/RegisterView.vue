@@ -178,6 +178,7 @@ export default {
           ) {
             this.exist = true;
           }
+          console.log(err);
         });
     },
   },

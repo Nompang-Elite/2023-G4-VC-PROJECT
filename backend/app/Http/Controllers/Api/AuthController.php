@@ -66,7 +66,7 @@ class AuthController extends Controller
         $validate = Validator::make(
             $request->input(),
             [
-                'password' => 'required|min:10|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+                'password' => 'required|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
                 'email' => 'required|email',
             ]
         );
@@ -85,7 +85,8 @@ class AuthController extends Controller
         return response()->json(
             [
                 'error' => !$validate->errors() ? $validate->errors() : "Account not available!",
-            ]
+            ],
+            401
         );
     }
     /*

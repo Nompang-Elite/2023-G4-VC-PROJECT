@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Authentication Route:
-Route::group(['prefix' => 'auth'], function () {
+Route::group(['prefix' => '/v1/auth'], function () {
     // Register
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     // Login
