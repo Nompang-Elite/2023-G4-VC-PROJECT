@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "vue-base",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,9 +14,8 @@
     "pinia": "^2.1.4",
     "roboto-fontface": "*",
     "vue": "^3.2.13",
-    "vue-axios": "^3.5.2",
-    "vue-router": "^4.0.3",
-    "vuetify": "^3.0.0-beta.0",
+    "vue-router": "^4.2.4",
+    "vuetify": "^3.3.7",
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
@@ -24,7 +23,6 @@
     "@babel/eslint-parser": "^7.12.16",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
