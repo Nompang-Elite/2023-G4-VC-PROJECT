@@ -165,8 +165,13 @@ export default {
             //  Source: https://stackoverflow.com/questions/58388884/set-bearer-token-after-login
             api.api_base.defaults.headers.common.Authorization =
               "Bearer " + result.data["access_token"];
+            document.cookie = `access_token = ${result.data["access_token"]}`;
             // Store user data
             this.userStore.data = result.data;
+            // This line fix the user check condition in realtime
+            this.userStore.loggedIn = true;
+            // User session
+            sessionStorage.setItem("user", JSON.stringify(result.data.user));
             // Redirect to home page
             this.$router.push("/");
           }

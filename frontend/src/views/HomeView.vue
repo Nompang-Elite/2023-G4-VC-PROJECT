@@ -8,7 +8,7 @@
         </div>
       </v-sheet> -->
       <!-- Image corousal -->
-      <v-img :src=" slide.image "  height="200vh" cover></v-img>
+      <v-img :src="slide.image" height="200vh" cover></v-img>
     </v-carousel-item>
   </v-carousel>
 
@@ -16,7 +16,6 @@
   <v-container>
     <header class="font-weight-bold" style="margin-bottom: 1rem">
       <h1>Top Hotels</h1>
-      
     </header>
     <v-row>
       <v-col cols="3" v-for="(item, index) of hotels" :key="index">
@@ -29,34 +28,66 @@
           </v-card-title>
 
           <!-- Card subtitle gose here -->
-          <v-card-subtitle>
-            {{ item.location }} Province
-          </v-card-subtitle>
+          <v-card-subtitle> {{ item.location }} Province </v-card-subtitle>
 
           <!-- Card text content gose here -->
           <v-card-text>
             {{ item.description }}
-
           </v-card-text>
 
           <!-- Card action goes here -->
           <v-card-actions class="flex-row-reverse">
-            <v-btn variant="outlined"  style="background-color: rgb(199, 16, 16); color: white;" density="comfortable" flat>Details</v-btn>
-            <div class="rating" >
-                  <input value="star-1" name="star-radio" id="star-1" type="radio">
-                  <label for="star-1">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
-                  </label>
-                  <input value="star-1" name="star-radio" id="star-2" type="radio">
-                  <label for="star-2">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
-                  </label>
-                  <input value="star-1" name="star-radio" id="star-3" type="radio">
-                  <label for="star-3">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
-                  </label>
-               
-              </div>
+            <v-btn
+              variant="outlined"
+              style="background-color: rgb(199, 16, 16); color: white"
+              density="comfortable"
+              flat
+              >Details</v-btn
+            >
+            <div class="rating">
+              <input
+                value="star-1"
+                name="star-radio"
+                id="star-1"
+                type="radio"
+              />
+              <label for="star-1">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+                    pathLength="360"
+                  ></path>
+                </svg>
+              </label>
+              <input
+                value="star-1"
+                name="star-radio"
+                id="star-2"
+                type="radio"
+              />
+              <label for="star-2">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+                    pathLength="360"
+                  ></path>
+                </svg>
+              </label>
+              <input
+                value="star-1"
+                name="star-radio"
+                id="star-3"
+                type="radio"
+              />
+              <label for="star-3">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+                    pathLength="360"
+                  ></path>
+                </svg>
+              </label>
+            </div>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -64,30 +95,33 @@
   </v-container>
 </template>
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   data() {
     return {
       slides: [
         {
-          image:"https://content.r9cdn.net/kimg/b8/6a/e7fd425d-5d242312-0.jpg",
+          image: "https://content.r9cdn.net/kimg/b8/6a/e7fd425d-5d242312-0.jpg",
         },
         {
-          image:"https://static.wixstatic.com/media/8859a2_07ad173abdc146bc8d2bc33123ccdebc~mv2.jpg/v1/fit/w_1000%2Ch_1000%2Cal_c%2Cq_80,enc_auto/file.jpg",
+          image:
+            "https://static.wixstatic.com/media/8859a2_07ad173abdc146bc8d2bc33123ccdebc~mv2.jpg/v1/fit/w_1000%2Ch_1000%2Cal_c%2Cq_80,enc_auto/file.jpg",
         },
         {
-          image:"https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?cs=srgb&dl=pexels-pixabay-258154.jpg&fm=jpg",
+          image:
+            "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?cs=srgb&dl=pexels-pixabay-258154.jpg&fm=jpg",
         },
       ],
       hotels: [],
     };
   },
   mounted() {
-    axios.get('http://127.0.0.1:8000/api/hotel')
-      .then(response => {
+    axios
+      .get("http://127.0.0.1:8000/api/hotel")
+      .then((response) => {
         this.hotels = response.data.data;
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   },
@@ -95,7 +129,6 @@ export default {
 </script>
 
 <style>
-
 /* ---------------star icon-------------- */
 .rating {
   margin-left: 50px;
@@ -182,6 +215,4 @@ export default {
     fill: var(--fill);
   }
 }
-
 </style>
-

@@ -13,6 +13,6 @@ import NavBar from "./components/nav/NavBar.vue";
 import FooterApp from "./components/footer/FooterApp.vue";
 export default {
   name: "App",
-  components: { NavBar,FooterApp },
+  components: { NavBar, FooterApp },
 };
 </script>

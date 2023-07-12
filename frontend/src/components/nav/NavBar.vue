@@ -21,7 +21,7 @@
     <!-- Search bar -->
     <!-- Source : https://vuetifyjs.com/en/components/text-fields/ -->
     <v-text-field
-      style="margin-left: 200px;"
+      style="margin-left: 200px"
       density="compact"
       variant="outlined"
       label="Search templates"
@@ -35,25 +35,48 @@
     <!-- Using right spacer to push the right element-->
     <v-spacer></v-spacer>
 
-    <!-- Action button for top nav-->
-    <v-btn variant="outlined" style="background-color: rgb(199, 16, 16); color: white; ">
-      <v-icon>mdi-cart</v-icon>
-      <span>MyCart</span>
-    </v-btn>
-    <v-btn variant="outlined" style="margin: 0.4rem;background-color: rgb(61, 61, 248);color: white; ">
-      <v-tab to="/Register">
-        
-        <v-icon>mdi-account-plus</v-icon>
-        <span>Register</span>
-      </v-tab>
-    </v-btn>
-    <v-btn variant="outlined" style="background-color: rgb(61, 61, 248); color: white; ">
-      <v-tab to="/login">       
-        <v-icon>mdi-login</v-icon>
-        <span>Login</span>
-      </v-tab>
-    </v-btn>
+    <div v-if="loggedIn">
+      <!-- User options after login -->
+      <v-row class="mx-4" nav>
+        <v-col>
+          <v-btn variant="elevated" color="info">
+            <v-icon>mdi-cart</v-icon>
+            <span>MyCart</span>
+          </v-btn>
+        </v-col>
 
+        <v-col>
+          <v-btn
+            variant="elevated"
+            color="red"
+            prepend-icon="mdi-login"
+            @click="logOut"
+          >
+            Logout
+          </v-btn>
+        </v-col>
+      </v-row>
+    </div>
+
+    <!-- Action button for top nav login and register-->
+    <div v-else>
+      <v-row class="mx-4" nav>
+        <v-col>
+          <v-btn to="/register" variant="elevated">
+            <v-icon>mdi-account-plus</v-icon>
+            <span>Register</span>
+          </v-btn>
+        </v-col>
+        <v-col>
+          <v-btn variant="elevated">
+            <v-tab to="/login">
+              <v-icon>mdi-login</v-icon>
+              <span>Login</span>
+            </v-tab>
+          </v-btn>
+        </v-col>
+      </v-row>
+    </div>
     <!-- Extended app-bar with slot -->
 
     <template #extension>
@@ -82,12 +105,19 @@
 </template>
 
 <script>
+import { useUserStore } from "@/store/UserStore";
+import { toRefs } from "vue";
 export default {
   name: "NavBar",
   data() {
     return {
       toggle: false,
     };
+  },
+
+  setup() {
+    const user = useUserStore();
+    return toRefs(user);
   },
 };
 </script>
