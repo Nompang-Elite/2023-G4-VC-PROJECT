@@ -1,25 +1,45 @@
 <template>
-  <v-carousel height="500" hide-delimiters>
-    <v-carousel-item v-for="(slide, i) in slides" :key="i">
-      <!-- Sample test -->
-      <!-- <v-sheet height="100%">
-        <div class="d-flex fill-height justify-center align-center">
-          <div class="text-h2">{{ slide }} Slide</div>
-        </div>
-      </v-sheet> -->
-      <!-- Image corousal -->
-      <v-img :src=" slide.image "  height="200vh" cover></v-img>
-    </v-carousel-item>
-  </v-carousel>
-
-  <!-- Card container -->
-  <v-container>
-    <header class="font-weight-bold" style="margin-bottom: 1rem">
-      <h1>Top Hotels</h1>
-      
-    </header>
+  <v-container style="margin-top: 20px;">
+    <header class="font-weight-bold d-flex flex=2 " style="margin-bottom: 1rem">
+      <h1 style="flex: 1.3;">HOTELS IN PROVINCCE</h1>
+      <v-select
+        label="Select location"
+        v-model="selectedLocation"
+        :items="[
+            'Phnom Penh',
+            'Banteay Meanchey', 
+            'Kampong Chhnang', 
+            'Siem Reap', 
+            'Kampong Cham',
+            'Kampong Chhnang', 
+            'Kampong Speu',
+            'Battambang', 
+            'Prey Veng',
+            'Kampong Thom',
+            'Kampot',
+            'Kandal',
+            'Koh Kong',
+            'Kratie',
+            'Mondulkiri',
+            'Preah Vihear',
+            'Pursat',
+            'Ratanakiri',
+            'Preah Sihanouk',
+            'Stung Treng',
+            'Svay Rieng',
+            'Takeo',
+            'Oddar Meanchey',
+            'Kep',
+            'Pailin',
+            'Tboung Khmum'
+          ]"
+        variant="outlined"
+        style="flex: 0.7; color: rgb(9, 39, 122);"
+      ></v-select>
+            
+    </header><br><br>
     <v-row>
-      <v-col cols="3" v-for="(item, index) of hotels" :key="index">
+      <v-col cols="3" v-for="(item, index) of filteredHotels" :key="index">
         <v-card>
           <v-img :src="item.image" height="160px" cover></v-img>
 
@@ -28,7 +48,7 @@
             {{ item.name }}
           </v-card-title>
 
-          <!-- Card subtitle gose here -->
+          <!-- Card location gose here -->
           <v-card-subtitle>
             {{ item.location }} Province
           </v-card-subtitle>
@@ -41,7 +61,7 @@
 
           <!-- Card action goes here -->
           <v-card-actions class="flex-row-reverse">
-            <v-btn variant="outlined"  style="background-color: rgb(199, 16, 16); color: white;" density="comfortable" flat>Details</v-btn>
+            <v-btn variant="outlined"  style=" background-color: rgb(199, 16, 16); color: white;" density="comfortable" flat>Details</v-btn>
             <div class="rating" >
                   <input value="star-1" name="star-radio" id="star-1" type="radio">
                   <label for="star-1">
@@ -68,24 +88,42 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      slides: [
-        {
-          image:"https://content.r9cdn.net/kimg/b8/6a/e7fd425d-5d242312-0.jpg",
-        },
-        {
-          image:"https://static.wixstatic.com/media/8859a2_07ad173abdc146bc8d2bc33123ccdebc~mv2.jpg/v1/fit/w_1000%2Ch_1000%2Cal_c%2Cq_80,enc_auto/file.jpg",
-        },
-        {
-          image:"https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?cs=srgb&dl=pexels-pixabay-258154.jpg&fm=jpg",
-        },
-      ],
+      selectedLocation:"",
       hotels: [],
+      // hotels: [
+      //   {
+      //     name:"First",
+      //     image:"https://thumbor.bigedition.com/bellagio/nQWpvOgeqwg-HB7eVkIv5KhJFZg=/480x360/filters:format(webp):quality(80)/granite-web-prod/f8/65/f865c38a2c4a4607a1cb065201f4d743.jpg",
+      //     location:"Prey Veng",
+      //     desrciption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatueveniet laborum possimus, amet",
+      //   },
+
+      // ],
     };
+  },
+  computed: {
+    
+    filteredHotels() {
+  
+      if (this.selectedLocation === "") {
+        // If no location is selected, return all hotels
+        return this.hotels;
+      }
+       else if(this.hotels.location === this.selectedLocation) {
+        console.log(this.hotels.location);
+         // Otherwise, filter hotels by selected location
+         return "Not found"
+      }
+      else {
+        return this.hotels.filter(hotel => hotel.location === this.selectedLocation);
+      }
+    }
   },
   mounted() {
     axios.get('http://127.0.0.1:8000/api/hotel')
       .then(response => {
-        this.hotels = response.data.data;
+        console.log(this.hotels = response.data.data);
+        // this.hotels = response.data;
       })
       .catch(error => {
         console.log(error);
@@ -184,4 +222,5 @@ export default {
 }
 
 </style>
+
 
