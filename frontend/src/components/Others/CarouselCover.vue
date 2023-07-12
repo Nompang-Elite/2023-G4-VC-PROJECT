@@ -5,7 +5,7 @@
       <!-- Sheet to contain card -->
       <v-sheet class="pa-4">
         <!-- Card -->
-        <v-card rounded="xl">
+        <v-card rounded="xl" elevation="4">
           <v-row>
             <v-col>
               <!-- Card image -->

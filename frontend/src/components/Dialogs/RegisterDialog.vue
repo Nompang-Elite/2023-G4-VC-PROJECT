@@ -3,7 +3,10 @@
     <v-card width="28rem" rounded="xl" class="spacing-playground pa-4 mx-auto">
       <v-card-title class="text-h4"> Register </v-card-title>
       <v-card-subtitle>
-        Already have an account? <a href="/login">Sign in</a>
+        Already have an account?
+        <span class="" @click="(register = !register), (login = !login)"
+          >Log In</span
+        >
       </v-card-subtitle>
       <v-card-text>
         <v-form ref="form" lazy-validate>
@@ -107,6 +110,7 @@
             variant="elevated"
             height="3rem"
             color="info"
+            rounded="xl"
           >
             Register
           </v-btn>

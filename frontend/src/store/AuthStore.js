@@ -18,14 +18,6 @@ export const useAuthStore = defineStore("Auth", {
         gender: null,
         current_location: null,
       },
-
-      // Login data structure
-      formDialog: false,
-      form: {
-        email: "",
-        password: "",
-      },
-      error: "",
     };
   },
   // Authentication action
@@ -50,8 +42,8 @@ export const useAuthStore = defineStore("Auth", {
         });
     },
 
-    loginUser() {
-      const usrObj = JSON.parse(JSON.stringify(this.form));
+    loginUser(form) {
+      const usrObj = JSON.parse(JSON.stringify(form));
       api.api_base
         // get link from backend using method Post to Login
         .post("/v1/auth/login", usrObj)

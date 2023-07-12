@@ -8,7 +8,7 @@
             src="https://publicdomainvectors.org/tn_img/abstract-user-flat-4.webp"
             width="35%"
           ></v-img>
-          <h1 align="center" justify="center" class="mb-6">Sign In</h1>
+          <h1 align="center" justify="center" class="mb-6">Login</h1>
         </v-card-item>
         <v-form fast-fail @submit.prevent>
           <v-text-field
@@ -37,9 +37,10 @@
             type="submit"
             block
             class="mt-0"
-            @click="loginUser"
+            @click="loginUser(form)"
             color="blue"
             rounded="xl"
+            height="3rem"
             >Login</v-btn
           >
         </v-form>
@@ -53,6 +54,18 @@ import { useAuthStore } from "@/store/AuthStore";
 import { toRefs } from "vue";
 
 export default {
+  data() {
+    return {
+      // Login data structure
+      formDialog: false,
+      form: {
+        email: "",
+        password: "",
+      },
+      error: "",
+    };
+  },
+
   setup() {
     const Auth = useAuthStore();
     return toRefs(Auth);

@@ -26,7 +26,7 @@
     <!-- Buttons Options -->
     <div v-if="!checkUser()">
       <v-btn
-        text="Sign In"
+        text="Login"
         variant="elevated"
         color="info"
         prepend-icon="mdi-account-circle-outline"
@@ -36,7 +36,7 @@
       >
       </v-btn>
       <v-btn
-        text="Sign Up"
+        text="Register"
         variant="elevated"
         color="info"
         prepend-icon="mdi-account-plus"
