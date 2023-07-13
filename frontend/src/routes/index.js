@@ -20,7 +20,7 @@ const routes = [
   {
     path: "/near_me",
     name: "NearMe",
-    component: () => import("@/views/HomeView.vue"),
+    component: () => import("@/views/NearMe.vue"),
   },
   {
     path: "/abouts",
