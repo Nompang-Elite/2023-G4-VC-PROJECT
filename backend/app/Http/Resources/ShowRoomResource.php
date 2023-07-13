@@ -17,6 +17,7 @@ class ShowRoomResource extends JsonResource
         return [
             'id'=>$this->id,
             'room_type'=>$this->room_type,
+            'room_number'=>$this->room_number,
             'image'=>$this->image,
             'property_type'=>$this->property_type,
             'room_status'=>$this->room_status,
