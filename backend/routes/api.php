@@ -1,21 +1,22 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\HotelController;
+use App\Http\Controllers\Api\RoomController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-// Authentication Route:
-Route::group(['prefix' => '/v1/auth'], function () {
-    // Register
-    Route::post('/register', [AuthController::class, 'register'])->name('register');
-    // Login
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
-    // Logout
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-    // More here...
-});
-
+//Hotel controller route
 Route::get('/hotel', [HotelController::class,'index']);
+Route::get('/hotel/{id}', [HotelController::class,'show']);
+Route::delete('/hotel/{id}', [HotelController::class,'destroy']);
+//room controller route
+Route::get('/rooms', [RoomController::class,'index']);
+Route::get('/hotel/{id}', [RoomController::class,'show']);
+
+//room in hotel route
+Route::get("/hotel_room", [HotelController::class,'HotelRoom']);
+Route::get("/hotel_room/{id}", [HotelController::class,'HotelRoomId']);

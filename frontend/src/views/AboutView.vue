@@ -61,7 +61,7 @@
 
           <!-- Card action goes here -->
           <v-card-actions class="flex-row-reverse">
-            <v-btn variant="outlined"  style=" background-color: rgb(199, 16, 16); color: white;" density="comfortable" flat>Details</v-btn>
+            <v-btn variant="outlined"  style=" background-color: rgb(199, 16, 16); color: white;" density="comfortable" flat @click="goToDetail(item.id)">Details</v-btn>
             <div class="rating" >
                   <input value="star-1" name="star-radio" id="star-1" type="radio">
                   <label for="star-1">
@@ -117,6 +117,13 @@ export default {
       else {
         return this.hotels.filter(hotel => hotel.location === this.selectedLocation);
       }
+    }
+  },
+//============ Navigate to the detail page with the selected hotel's ID as a parameter===========
+  methods: {
+    goToDetail(id) {
+      console.log(id);
+      this.$router.push(`/hotel/${id}`);
     }
   },
   mounted() {

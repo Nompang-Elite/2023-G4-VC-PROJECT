@@ -37,57 +37,22 @@
 
           <!-- Card action goes here -->
           <v-card-actions class="flex-row-reverse">
-            <v-btn
-              variant="outlined"
-              style="background-color: rgb(199, 16, 16); color: white"
-              density="comfortable"
-              flat
-              >Details</v-btn
-            >
-            <div class="rating">
-              <input
-                value="star-1"
-                name="star-radio"
-                id="star-1"
-                type="radio"
-              />
-              <label for="star-1">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-                    pathLength="360"
-                  ></path>
-                </svg>
-              </label>
-              <input
-                value="star-1"
-                name="star-radio"
-                id="star-2"
-                type="radio"
-              />
-              <label for="star-2">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-                    pathLength="360"
-                  ></path>
-                </svg>
-              </label>
-              <input
-                value="star-1"
-                name="star-radio"
-                id="star-3"
-                type="radio"
-              />
-              <label for="star-3">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-                    pathLength="360"
-                  ></path>
-                </svg>
-              </label>
-            </div>
+            <v-btn variant="outlined"  style="background-color: rgb(199, 16, 16); color: white;" density="comfortable" flat @click="goToDetail(item.id)">Details</v-btn>
+            <div class="rating" >
+                  <input value="star-1" name="star-radio" id="star-1" type="radio">
+                  <label for="star-1">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+                  </label>
+                  <input value="star-1" name="star-radio" id="star-2" type="radio">
+                  <label for="star-2">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+                  </label>
+                  <input value="star-1" name="star-radio" id="star-3" type="radio">
+                  <label for="star-3">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+                  </label>
+               
+              </div>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -114,6 +79,13 @@ export default {
       ],
       hotels: [],
     };
+  },
+//========= Navigate to the detail page with the selected hotel's ID as a parameter==========
+  methods: {
+    goToDetail(id) {
+      console.log(id);
+      this.$router.push(`/hotel/${id}`);
+    }
   },
   mounted() {
     axios
