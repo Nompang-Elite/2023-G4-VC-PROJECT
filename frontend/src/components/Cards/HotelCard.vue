@@ -18,7 +18,7 @@
             <v-img
               class="align-end text-white"
               height="200"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+              :src="item.image"
               cover
             >
               <v-card-title>{{ item.name }}</v-card-title>
@@ -28,7 +28,7 @@
               {{ item.location }}
             </v-card-subtitle>
 
-            <v-card-text>
+            <v-card-text class="card-text">
               <div>{{ item.description }}</div>
             </v-card-text>
 
@@ -55,3 +55,9 @@ export default {
   props: ["items"],
 };
 </script>
+<style scoped>
+.card-text {
+  overflow-y: hidden;
+  height: 6rem;
+}
+</style>

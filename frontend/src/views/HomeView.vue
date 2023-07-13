@@ -1,16 +1,17 @@
 <template>
   <Carousel :slides="topHotels" />
   <!-- Using the items props to pass down the data list for card -->
-  <Card :items="topHotels" />
+  <Card :items="hotels" />
 </template>
 <script>
 import Carousel from "@/components/Others/CarouselCover.vue";
 import Card from "@/components/Cards/HotelCard.vue";
-
+import api from "@/routes/api";
 export default {
   components: { Carousel, Card },
   data() {
     return {
+      hotels: [],
       topHotels: [
         {
           name: "Angkor",
@@ -50,6 +51,15 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    api.api_base
+      .get("/hotel")
+      .then((res) => {
+        console.log(res.data.data);
+        this.hotels = res.data.data;
+      })
+      .catch((err) => console.log(err));
   },
 };
 </script>
