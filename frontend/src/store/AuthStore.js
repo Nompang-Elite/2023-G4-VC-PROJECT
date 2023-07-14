@@ -32,10 +32,12 @@ export const useAuthStore = defineStore("Auth", {
           if (result.data) this.authorizeUser(result);
         })
         .catch((err) => {
-          if (
-            err.response.data.errors.email ==
-            "The email has already been taken."
-          ) {
+          if (typeof err.response.data.errors !== "undefined") {
+            if (
+              err.response.data.errors.email !==
+              "The email has already been taken."
+            )
+              alert(typeof err.response.data.errors);
             this.exist = true;
           }
           console.log(err);
