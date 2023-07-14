@@ -11,15 +11,15 @@
     <!-- Search bar -->
     <!-- Source: https://vuetifyjs.com/en/components/text-fields/ -->
     <v-text-field
-      :loading="loading"
       density="compact"
       variant="solo"
       label="Search"
       append-inner-icon="mdi-magnify"
       single-line
       hide-details
-      @click:append-inner="onClick"
       rounded="xl"
+      v-model="searchInput"
+      @keydown.enter="passSearchInput"
     ></v-text-field>
 
     <v-spacer></v-spacer>
@@ -42,7 +42,6 @@
         prepend-icon="mdi-account-plus"
         class="mr-6"
         rounded="xl"
-        @click.prevent="test"
       >
       </v-btn>
     </div>
@@ -85,22 +84,13 @@ export default {
   },
   // Search bar loading
   data: () => ({
-    loaded: false,
-    loading: false,
+    searchInput: null,
   }),
 
   methods: {
-    onClick() {
-      this.loading = true;
-
-      setTimeout(() => {
-        this.loading = false;
-        this.loaded = true;
-      }, 2000);
-    },
-
-    test() {
-      console.log((this.register = !this.register));
+    passSearchInput() {
+      console.log("Press");
+      this.$emit("search-input", this.searchInput);
     },
   },
 };

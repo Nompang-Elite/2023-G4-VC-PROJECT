@@ -20,3 +20,4 @@ Route::group(['prefix' => '/v1/auth'], function () {
 });
 
 Route::get('/hotel', [HotelController::class, 'index']);
+Route::get('/hotel/search', [HotelController::class, 'search']);

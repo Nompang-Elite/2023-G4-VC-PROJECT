@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <NavBar />
+    <NavBar @search-input="search" />
     <!-- Login and register dialog container  -->
-    <v-container v-if="!checkUser()">
+    <v-container v-if="!Auth.checkUser()">
       <login />
       <Register />
     </v-container>
@@ -28,16 +28,22 @@ import Footer from "@/components/Navigations/FooterNav.vue";
 import Login from "@/components/Dialogs/LoginDialog.vue";
 import Register from "@/components/Dialogs/RegisterDialog.vue";
 import { useAuthStore } from "@/store/AuthStore";
-import { toRefs } from "vue";
+import { useUserStore } from "@/store/UserStore";
+// import api from "@/routes/api";
 export default {
   setup() {
     const Auth = useAuthStore();
-    return toRefs(Auth);
+    const User = useUserStore();
+    return { Auth, User };
   },
   components: { NavBar, Footer, Login, Register },
   data: () => ({}),
-
-  methods: {},
+  methods: {
+    search(e) {
+      this.User.getSearchData(e);
+      this.$router.push("/search");
+    },
+  },
 };
 </script>
 
