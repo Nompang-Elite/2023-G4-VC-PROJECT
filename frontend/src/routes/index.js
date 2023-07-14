@@ -34,6 +34,11 @@ const routes = [
     name: "Not Found",
     component: () => import("@/components/Errors/NotFound.vue"),
   },
+  {
+    path: "/search",
+    name: "Search",
+    component: () => import("@/views/SearchView.vue"),
+  },
 ];
 
 export default createRouter({
