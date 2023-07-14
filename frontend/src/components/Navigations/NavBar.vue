@@ -42,6 +42,7 @@
         prepend-icon="mdi-account-plus"
         class="mr-6"
         rounded="xl"
+        @click.prevent="register = !register"
       >
       </v-btn>
     </div>
