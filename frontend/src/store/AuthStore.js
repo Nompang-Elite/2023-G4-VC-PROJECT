@@ -32,6 +32,7 @@ export const useAuthStore = defineStore("Auth", {
           if (result.data) this.authorizeUser(result);
         })
         .catch((err) => {
+          //Solution source: https://stackoverflow.com/questions/3390396/how-can-i-check-for-undefined-in-javascript
           if (typeof err.response.data.errors !== "undefined") {
             if (
               err.response.data.errors.email !==
