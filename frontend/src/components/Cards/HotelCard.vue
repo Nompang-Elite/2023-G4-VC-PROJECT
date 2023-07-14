@@ -1,7 +1,7 @@
 <template>
   <!-- Card container -->
   <v-container class="mb-8">
-    <header class="py-4 text-h6">Top Reviews</header>
+    <header class="py-4 text-h6">{{ containerName }}</header>
     <v-row>
       <v-col cols="4" v-for="(item, i) in items" :key="i">
         <!-- Set card hovering effect -->
@@ -52,7 +52,7 @@
 <script>
 export default {
   // Proping the items list
-  props: ["items"],
+  props: ["items", "container-name"],
 };
 </script>
 <style scoped>

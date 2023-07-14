@@ -15,6 +15,8 @@ export const useUserStore = defineStore("User", {
           this.results = res.data.data;
         })
         .catch((err) => console.log(err));
+      // Return true if there is data
+      return this.results.length > 1;
     },
   },
 });

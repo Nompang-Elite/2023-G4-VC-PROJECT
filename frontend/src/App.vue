@@ -40,8 +40,12 @@ export default {
   data: () => ({}),
   methods: {
     search(e) {
-      this.User.getSearchData(e);
-      this.$router.push("/search");
+      if (!(e === null) && e !== "" && this.User.getSearchData(e)) {
+        this.$router.push("/search");
+      } else {
+        // redirect to not found if no result
+        this.$router.push("/search/not_found");
+      }
     },
   },
 };

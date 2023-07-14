@@ -90,7 +90,6 @@ export default {
 
   methods: {
     passSearchInput() {
-      console.log("Press");
       this.$emit("search-input", this.searchInput);
     },
   },
