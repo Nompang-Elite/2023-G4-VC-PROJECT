@@ -18,8 +18,9 @@ return new class extends Migration
             $table->char('phone', 12);
             $table->char('gender', 2);
             $table->string('email')->unique();
-            $table->string('current_location')->nullable();
-            $table->string('role')->default('guest');
+            $table->string('current_location')->default("unknown");
+            $table->unsignedBigInteger('user_type')->default(3);
+            $table->foreign('user_type')->references("id")->on('user_types');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->timestamps();

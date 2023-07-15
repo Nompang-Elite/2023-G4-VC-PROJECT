@@ -20,6 +20,18 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        Hotel::factory(20)->create();
+
+        // Create user type
+        $this->call(UserTypesSeeder::class);
+        // Create user
+        $this->call(UsersSeeder::class);
+        // Create hotel data
+        $this->call(HotelsSeeder::class);
+        // Create hotel info data
+        $this->call(HotelsInfoSeeder::class);
+        // Create room types data
+        $this->call(RoomTypesSeeder::class);
+        // Create rooms data
+        $this->call(RoomsSeeder::class);
     }
 }

@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hotel extends Model
+class HotelInfo extends Model
 {
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'name',
-        'image',
-        'location',
-        'description',
+        "address",
+        "city",
+        "country",
+        "postal_code",
+        "phone",
+        "email",
+        "hotel_id",
     ];
 }
