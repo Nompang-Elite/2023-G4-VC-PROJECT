@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Route;
 
 //Hotel controller route
 Route::get('/hotel', [HotelController::class, 'index']);
-Route::get('/hotel/{id}', [HotelController::class, 'show']);
-Route::delete('/hotel/{id}', [HotelController::class, 'destroy']);
+Route::get('/hotel/{id}/details', [HotelController::class, 'show']);
+Route::delete('/hotel/{id}/delete', [HotelController::class, 'destroy']);
+Route::get('/hotel/search', [HotelController::class, 'search']);
+
+
+
 //room controller route
 Route::get('/rooms', [RoomController::class, 'index']);
-Route::get('/hotel/{id}', [RoomController::class, 'show']);
-
-Route::get('/hotel', [HotelController::class, 'index']);
-Route::get('/hotel/search', [HotelController::class, 'search']);
+Route::get('/rooms/{id}/details', [RoomController::class, 'show']);
