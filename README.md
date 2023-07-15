@@ -54,9 +54,12 @@ MAIL_FROM_NAME=PNCAA
 
 ### Step 6: Create app key
 > <code> php artisan key:generate </code>
+### Step 7: Create JWT key
+
+> <code> php artisan jwt:secret </code>
 
 
-### Step 7: Running Application
+### Step 8: Running Application
 - [x] If you are in local development environments
 > <code> php artisan serve </code> --port=YOUR_PORT (port is optional) 
 
