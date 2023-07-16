@@ -6,23 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Room extends Model
+class Rooms extends Model
 {
     use HasFactory;
-    
+    public $timestamps = false;
     protected $fillable = [
-        'room_type',
-        'image',
-        'property_type',
-        'room_status',
-        'price',
-        'hotel_id',
+        "number",
+        "name",
+        "status",
+        "room_type_id",
+        "hotel_id",
     ];
 
-    public function hotel():BelongsTo
+    public function hotel(): BelongsTo
     {
         return $this->belongsTo(Hotel::class);
     }
-
 }
-

@@ -13,13 +13,26 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            "firstname" => "Jame",
-            "lastname" => "smith",
-            "gender" => "M",
-            "phone" => "0123456789",
-            "email" => "jamesmith@gmail.com",
-            "password" => "!@#$1234Abc",
-        ]);
+        $users = [
+            [
+                "firstname" => "Jimmy",
+                "lastname" => "Janne",
+                "gender" => "M",
+                "phone" => "0123456789",
+                "email" => "jimmyjane@gmail.com",
+                "password" => "!@#123Abc",
+            ],
+            [
+                "firstname" => "Jame",
+                "lastname" => "smith",
+                "gender" => "M",
+                "phone" => "0123456789",
+                "email" => "jamesmith@gmail.com",
+                "password" => "!@#123Abc",
+            ]
+        ];
+        foreach ($users as $user) {
+            User::create($user);
+        }
     }
 }
