@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Rooms extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $fillable = [
         "number",
         "name",
