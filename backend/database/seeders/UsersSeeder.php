@@ -27,7 +27,23 @@ class UsersSeeder extends Seeder
                 "lastname" => "smith",
                 "gender" => "M",
                 "phone" => "0123456789",
-                "email" => "jamesmith@gmail.com",
+                "email" => "jamesmith1@gmail.com",
+                "password" => "!@#123Abc",
+            ],
+            [
+                "firstname" => "Jame",
+                "lastname" => "smith",
+                "gender" => "M",
+                "phone" => "0123456789",
+                "email" => "jamesmith2@gmail.com",
+                "password" => "!@#123Abc",
+            ],
+            [
+                "firstname" => "Jame",
+                "lastname" => "smith",
+                "gender" => "M",
+                "phone" => "0123456789",
+                "email" => "jamesmith3@gmail.com",
                 "password" => "!@#123Abc",
             ]
         ];
