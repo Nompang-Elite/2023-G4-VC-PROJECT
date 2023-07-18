@@ -32,7 +32,7 @@
         prepend-icon="mdi-account-circle-outline"
         class="mr-2"
         rounded="xl"
-        @click.prevent="loginDialog = !loginDialog"
+        @click.prevent="Auth.loginDialog = !Auth.loginDialog"
       >
       </v-btn>
       <v-btn
@@ -42,7 +42,7 @@
         prepend-icon="mdi-account-plus"
         class="mr-6"
         rounded="xl"
-        @click.prevent="registerDialog = !registerDialog"
+        @click.prevent="Auth.registerDialog = !Auth.registerDialog"
       >
       </v-btn>
     </div>
@@ -79,8 +79,8 @@ import { useAuthStore } from "@/store/AuthStore";
 import { toRefs } from "vue";
 export default {
   setup() {
-    const Auth = useAuthStore();
-    return toRefs(Auth);
+    const Auth = toRefs(useAuthStore());
+    return { Auth };
   },
   // Search bar loading
   data: () => ({
