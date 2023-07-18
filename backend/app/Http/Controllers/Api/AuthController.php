@@ -84,13 +84,13 @@ class AuthController extends Controller
                 $usr->user_type = UserTypes::find($usr->user_type)->type;
                 $usr->access_token = $token;
 
-                return response()->json(
+                return $this->success(
                     $usr,
-                    201
+                    200
                 );
             }
         }
-        return response()->json(
+        return $this->error(
             [
                 'error' => !$validate->errors() ? $validate->errors() : "Account not available!",
             ],

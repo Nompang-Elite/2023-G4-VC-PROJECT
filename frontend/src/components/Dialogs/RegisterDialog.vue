@@ -107,7 +107,7 @@
             rounded="xl"
           ></v-select>
           <v-btn
-            @click="Auth.guestRegister"
+            @click="Auth.guestRegister(Auth.userRegisterInfo)"
             block
             variant="elevated"
             height="3rem"

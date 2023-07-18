@@ -26,12 +26,30 @@
     <!-- Buttons Options -->
     <div v-if="Auth.userLogged()">
       <v-btn
-        text="Logout"
         variant="elevated"
         color="info"
-        prepend-icon="mdi-logout"
-        class="mr-6"
+        prepend-icon="mdi-history"
+        class="mr-2"
         rounded="xl"
+        text="History"
+      >
+      </v-btn>
+      <v-btn
+        variant="elevated"
+        color="info"
+        prepend-icon="mdi-cart"
+        class="mr-2"
+        rounded="xl"
+        text="Booking"
+      >
+      </v-btn>
+      <v-btn
+        variant="elevated"
+        color="red"
+        icon="mdi-logout"
+        class="mr-2"
+        size="44"
+        @click.prevent="Auth.logout()"
       >
       </v-btn>
     </div>

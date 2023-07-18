@@ -30,10 +30,20 @@
               :error-messages="error"
             ></v-text-field>
             <v-card-subtitle class="mb-5">
-              Don't have account?
-              <router-link to="/register">Register</router-link>
+              Don't have an account?
+              <span
+                class=""
+                @click="
+                  (Auth.registerDialog = !Auth.registerDialog),
+                    (Auth.loginDialog = !Auth.loginDialog)
+                "
+                >Register</span
+              >
             </v-card-subtitle>
-            <v-btn class="mx-auto w-100 bg-info rounded-xl" type="submit"
+            <v-btn
+              class="mx-auto w-100 bg-info rounded-xl"
+              type="submit"
+              @click.prevent="Auth.guestLogin(form)"
               >Login
               <v-progress-circular
                 v-if="loading"
