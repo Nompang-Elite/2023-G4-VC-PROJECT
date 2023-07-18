@@ -69,6 +69,14 @@ const routes = [
       },
     ],
   },
+  {
+    /**
+     * Route to the room list views
+     * */
+    path: "/room",
+    name: "Rooms",
+    component: () => import("@/views/ListRoom.vue"),
+  },
 
   // More route goes here!!!
 ];
