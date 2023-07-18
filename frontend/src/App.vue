@@ -2,7 +2,7 @@
   <v-app>
     <NavBar @search-input="search" />
     <!-- Login and register dialog container  -->
-    <v-container v-if="!Auth.checkUser()">
+    <v-container >
       <login />
       <Register />
     </v-container>

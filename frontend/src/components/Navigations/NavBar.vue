@@ -24,7 +24,7 @@
 
     <v-spacer></v-spacer>
     <!-- Buttons Options -->
-    <div v-if="!checkUser()">
+    <div>
       <v-btn
         text="Login"
         variant="elevated"
@@ -46,7 +46,7 @@
       >
       </v-btn>
     </div>
-    <div v-else>
+    <div>
       <v-btn
         text="Logout"
         variant="elevated"

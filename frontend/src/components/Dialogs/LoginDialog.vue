@@ -1,0 +1,84 @@
+<template>
+  <v-main>
+    <v-btn color="success" @click="dialog = true">Open dialog</v-btn>
+    <v-dialog v-model="dialog">
+      <v-sheet width="350" class="mx-auto" rounded="xl">
+        <v-card class="mx-auto pa-5">
+          <v-card-text align="center" justify="center">
+            <v-img
+              src="https://o.remove.bg/downloads/b04d896c-7c3e-4719-94fb-4adb4a17249a/image-removebg-preview.png"
+              width="100"
+              class="mb-3"
+              cover
+            ></v-img>
+            <h1>Login</h1>
+          </v-card-text>
+          <v-form @submit.prevent="login">
+            <v-text-field
+                label="Email"
+                v-model="form.email"
+                variant="solo"
+                density="compact"
+                rounded="xl"
+            ></v-text-field>
+            <v-text-field
+                label="Password"
+                v-model="form.password"
+                variant="solo"
+                density="compact"
+                rounded="xl"
+                type="password"
+                :error-messages="error"
+            ></v-text-field>
+            <v-card-subtitle class="mb-5">
+              Don't have account?
+              <router-link to="/register">Register</router-link>
+            </v-card-subtitle>
+              <v-btn
+                class="mx-auto w-100 bg-info rounded-xl" type="submit"
+                >Login
+                <v-progress-circular
+                v-if="loading"
+                class="position-fixed"
+                indeterminate
+                width="3"
+                color="success"           
+                ></v-progress-circular>
+                </v-btn
+              >
+        </v-form>
+        </v-card>
+      </v-sheet>
+    </v-dialog>
+  </v-main>
+</template>
+<script>
+    import { useAuthStore } from "@/store/AuthStore";
+    import { toRefs } from "vue";
+export default {
+    data() {
+        return {
+            dialog: false,
+            form: {
+                email: '',
+                password: '',
+            },
+            loading: false,
+            error: ""
+        };
+    },
+    methods: {
+        login() {
+        this.loading = true;
+        // perform login logic here
+        setTimeout(() => {
+            this.loading = false;
+        }, 3000);
+        },
+    },
+    setup() {
+        const Auth = useAuthStore();
+        return toRefs(Auth)
+    }
+};
+</script>
