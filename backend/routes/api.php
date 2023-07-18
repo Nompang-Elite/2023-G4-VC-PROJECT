@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\HotelController;
 use Illuminate\Http\Request;
@@ -19,5 +20,18 @@ Route::group(['prefix' => '/v1/auth'], function () {
     // More here...
 });
 
-Route::get('/hotel', [HotelController::class, 'index']);
-Route::get('/hotel/search', [HotelController::class, 'search']);
+
+Route::group(['prefix' => 'hotel'], function () {
+    Route::get('/', [HotelController::class, 'index']);
+    Route::get('/search', [HotelController::class, 'search']);
+
+    // Hotel routes goes here...
+});
+
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/info', [AdminController::class, 'info']);
+
+    // Admin routes goes here...
+});
