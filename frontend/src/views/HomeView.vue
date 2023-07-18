@@ -1,7 +1,7 @@
 <template>
   <Carousel :slides="topHotels" />
   <!-- Using the items props to pass down the data list for card -->
-  <Card :items="hotels" container-name="Top Reviews" />
+  <Card :items="topHotels" container-name="Top Reviews" />
 </template>
 <script>
 import Carousel from "@/components/Others/CarouselCover.vue";

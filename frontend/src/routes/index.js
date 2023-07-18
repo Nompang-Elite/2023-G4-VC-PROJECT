@@ -17,6 +17,10 @@ const routes = [
     component: () => import("@/views/HomeView.vue"),
   },
   {
+    path: '/detail',
+    component: ()=>import("@/views/DetailHotel.vue"),
+  },
+  {
     /**
      * Route to the hotel views
      * */
