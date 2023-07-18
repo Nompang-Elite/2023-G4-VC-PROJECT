@@ -32,7 +32,7 @@
         prepend-icon="mdi-account-circle-outline"
         class="mr-2"
         rounded="xl"
-        @click.prevent="login = !login"
+        @click.prevent="loginDialog = !loginDialog"
       >
       </v-btn>
       <v-btn
@@ -42,7 +42,7 @@
         prepend-icon="mdi-account-plus"
         class="mr-6"
         rounded="xl"
-        @click.prevent="register = !register"
+        @click.prevent="registerDialog = !registerDialog"
       >
       </v-btn>
     </div>
@@ -54,7 +54,6 @@
         prepend-icon="mdi-logout"
         class="mr-6"
         rounded="xl"
-        @click.prevent="logout"
       >
       </v-btn>
     </div>
