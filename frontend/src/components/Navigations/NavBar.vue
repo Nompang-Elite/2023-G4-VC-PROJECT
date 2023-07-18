@@ -24,7 +24,18 @@
 
     <v-spacer></v-spacer>
     <!-- Buttons Options -->
-    <div>
+    <div v-if="Auth.userLogged()">
+      <v-btn
+        text="Logout"
+        variant="elevated"
+        color="info"
+        prepend-icon="mdi-logout"
+        class="mr-6"
+        rounded="xl"
+      >
+      </v-btn>
+    </div>
+    <div v-else>
       <v-btn
         text="Login"
         variant="elevated"
@@ -46,18 +57,6 @@
       >
       </v-btn>
     </div>
-    <div>
-      <v-btn
-        text="Logout"
-        variant="elevated"
-        color="info"
-        prepend-icon="mdi-logout"
-        class="mr-6"
-        rounded="xl"
-      >
-      </v-btn>
-    </div>
-
     <!-- Add more options here! with v-if checkUserData().role -->
 
     <!-- Toolbar for cutomers -->
@@ -76,10 +75,10 @@
 
 <script>
 import { useAuthStore } from "@/store/AuthStore";
-import { toRefs } from "vue";
+import { reactive } from "vue";
 export default {
   setup() {
-    const Auth = toRefs(useAuthStore());
+    const Auth = reactive(useAuthStore());
     return { Auth };
   },
   // Search bar loading

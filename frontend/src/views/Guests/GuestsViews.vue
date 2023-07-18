@@ -4,6 +4,8 @@
       <NavBar @search-input="searchHotel" />
     </template>
     <template #footer>
+      <LoginDialog />
+      <RegisterDialog />
       <FooterNav />
     </template>
   </MainViews>
@@ -15,10 +17,15 @@ import MainViews from "../Main/MainViews.vue";
 import NavBar from "@/components/Navigations/NavBar.vue";
 // Footer template
 import FooterNav from "@/components/Navigations/FooterNav.vue";
+// Login dialog
+import LoginDialog from "@/components/Dialogs/LoginDialog.vue";
+// Register dialog
+import RegisterDialog from "@/components/Dialogs/RegisterDialog.vue";
 // Authentication Store
 import { useAuthStore } from "@/store/AuthStore";
 // Guest Store
 import { useGuestStore } from "@/store/GuestStore";
+// Reactive package from vue
 import { reactive } from "vue";
 export default {
   // Composition setup
@@ -28,7 +35,7 @@ export default {
     return { Auth, Guest };
   },
   // Components
-  components: { MainViews, NavBar, FooterNav },
+  components: { MainViews, NavBar, FooterNav, LoginDialog, RegisterDialog },
   // Methods
   methods: {
     searchHotel(e) {
