@@ -37,12 +37,12 @@ class AdminController extends Controller
             "email" => "required|email",
             "password" => "required"
         ])) {
-            if (auth()->attempt($req->input())) {
+            if ($token = auth()->attempt($req->input())) {
                 // Store as variable
                 $usr = auth()->user();
                 // Convert user type id to its type name
                 $usr->user_type = UserTypes::find($usr->user_type)->type;
-                return $usr->user_type  == "admin" ? $this->success($usr, "authorized") : $this->error("please login with admin account!");
+                return $usr->user_type  == "admin" ? $this->success(["user" => $usr, "access_token" => $token], "authorized") : $this->error("please login with admin account!");
             }
             return $this->error("unauthorized");
         };

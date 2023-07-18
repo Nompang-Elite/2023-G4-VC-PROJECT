@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserTypes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\HttpResponse;
@@ -74,12 +75,16 @@ class AuthController extends Controller
             // Attempt login with auth guard:
             $token = auth()->attempt($request->input());
             if ($token) {
-                return response()->json(
+                // Added user type conversion:
+                $usr = auth()->user();
+                $usr->user_type = UserTypes::find($usr->user_type)->type;
+                // Keep normal user from login to admin penel
+                return $usr->user_type !== 'admin' ? response()->json(
                     [
-                        'user' => auth()->user(),
+                        'user' => $usr,
                         'access_token' => $token
                     ]
-                );
+                ) : $this->error('unauthorized', 401);;
             }
         }
         return response()->json(
