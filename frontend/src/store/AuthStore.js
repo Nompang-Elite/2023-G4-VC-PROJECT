@@ -8,5 +8,12 @@ export const useAuthStore = defineStore("Auth", {
     };
   },
   // Authentication action
-  actions: {},
+  actions: {
+    // Guest account login:
+    guestLogin() {},
+    // Admin account login
+    adminLogin() {},
+    // Logout function
+    logout() {},
+  },
 });
