@@ -33,5 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoomTypesSeeder::class);
         // Create rooms data
         $this->call(RoomsSeeder::class);
+        // Create rooms data
+        $this->call(ReviewsSeeder::class);
     }
 }
