@@ -69,7 +69,11 @@ const routes = [
       },
     ],
   },
-
+  {
+    path: '/register_hotel',
+    name: 'Register Hotel',
+    component: () => import('@/components/Dialogs/RegisterHotelDialog.vue'),
+  }
   // More route goes here!!!
 ];
 
