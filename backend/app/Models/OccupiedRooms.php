@@ -10,8 +10,10 @@ class OccupiedRooms extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
+        "room_id",
         "check_in",
         "check_out",
-        "room_id",
+        
     ];
+    
 }
