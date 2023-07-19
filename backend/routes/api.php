@@ -12,7 +12,7 @@ Route::group(['prefix' => 'guest'], function () {
     // Register
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     // Login
-    Route::post('/login', [AuthController::class, 'log  in'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
