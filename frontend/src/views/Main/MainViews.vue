@@ -1,6 +1,7 @@
 <template>
   <slot name="nav"></slot>
   <v-main>
+    <slot name="toolbar"></slot>
     <!--Router transition: https://www.youtube.com/watch?v=gAwKhi7Huhc -->
     <router-view v-slot="{ Component, route }">
       <Transition name="main" mode="out-in">

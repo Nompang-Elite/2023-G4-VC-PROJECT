@@ -11,13 +11,14 @@ const routes = [
 
   {
     path: "/",
+    name: "Home",
     children: [
       {
         /**
          * Route to the hotel views
          * */
         path: "",
-        name: "Home",
+        name: "Home Main",
         component: () => import("@/views/HomeView.vue"),
       },
       {
@@ -75,6 +76,7 @@ const routes = [
         component: () => import("@/views/DetailHotel.vue"),
       },
     ],
+    meta: { isGuest: true },
   },
 
   {
@@ -85,6 +87,16 @@ const routes = [
     component: () => import("@/components/Errors/NotFound.vue"),
   },
 
+  {
+    path: "/admin",
+    children: [
+      {
+        path: "",
+        component: () => import("@/views/Admin/AdminHomeView.vue"),
+      },
+    ],
+    meta: { isAdmin: false },
+  },
   // More route goes here!!!
 ];
 
