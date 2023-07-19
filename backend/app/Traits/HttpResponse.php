@@ -27,4 +27,14 @@ trait HttpResponse
             $code
         );
     }
+
+    private function unauthorize($code = 401)
+    {
+        return response()->json(
+            [
+                "status" => "unauthorize",
+            ],
+            $code
+        );
+    }
 }

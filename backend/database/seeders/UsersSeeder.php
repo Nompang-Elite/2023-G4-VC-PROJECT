@@ -45,6 +45,15 @@ class UsersSeeder extends Seeder
                 "phone" => "0123456789",
                 "email" => "jamesmith3@gmail.com",
                 "password" => "!@#123Abc",
+            ],
+            [
+                "firstname" => "Admin",
+                "lastname" => "The Best",
+                "gender" => "M",
+                "phone" => "0123456789",
+                "user_type" => 1,
+                "email" => "admin@gmail.com",
+                "password" => "!@#123Abc",
             ]
         ];
         foreach ($users as $user) {

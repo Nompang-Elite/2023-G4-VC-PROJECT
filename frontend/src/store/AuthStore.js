@@ -4,6 +4,11 @@ export const useAuthStore = defineStore("Auth", {
   // Stated Data for the authentication
   state() {
     return {
+      // Views activate
+      guestView: true,
+      hotelView: false,
+      adminView: false,
+      adminLog: false,
       // Dialog trigger
       loginDialog: false,
       registerDialog: false,
@@ -33,6 +38,8 @@ export const useAuthStore = defineStore("Auth", {
         "Bearer " + data["access_token"];
       // Save token to cookie
       document.cookie = `access_token = ${data["access_token"]}`;
+      // Delete after store in cookie
+      delete data["access_token"];
       // User data session
       sessionStorage.setItem("user_data", JSON.stringify(data));
       // User logged
@@ -42,7 +49,7 @@ export const useAuthStore = defineStore("Auth", {
     },
 
     // Guest post request for auth
-    guestAuthPostRequest(path, form) {
+    async guestAuthPostRequest(path, form) {
       api.api_base
         .post(path, form)
         .then((res) => {
@@ -70,9 +77,14 @@ export const useAuthStore = defineStore("Auth", {
     // Admin account login
     adminLogin(userData) {
       api.api_base
-        .post("/guest/login", userData)
+        .post("/admin/login", userData)
         .then((res) => {
-          console.log(res.data);
+          if (res.status == 200) {
+            // ដកចេញពេលដើម្បី security
+            sessionStorage.clear("adminSecret");
+            sessionStorage.setItem("admin_logged", true);
+            this.authorize(res.data.data);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -81,13 +93,19 @@ export const useAuthStore = defineStore("Auth", {
 
     // Logout function
     logout() {
-      // Clear all session and cookie
-      sessionStorage.clear();
-      document.cookie = `access_token =`;
+      this.clearUserData();
+      this.guestAuthPostRequest("/guest/logout");
       // Refresh page
       location.reload();
     },
 
+    // Clear client side data
+    clearUserData() {
+      // Clear all session and cookie
+      sessionStorage.clear();
+      document.cookie = document.cookie = "access_token=; Max-Age=0";
+      // Solution : https://stackoverflow.com/questions/2144386/how-to-delete-a-cookie
+    },
     // Check if there is user logged in
     userLogged() {
       return this.convertToArray(sessionStorage.getItem("user_logged"));
