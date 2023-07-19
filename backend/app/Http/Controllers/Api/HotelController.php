@@ -19,10 +19,14 @@ class HotelController extends Controller
         $hotel = ShowHotelResource::collection($hotel);
         if ($hotel)
             return $this->success($hotel, "list of hotels");
-
+            
         return $this->error("list is empty", 404);
     }
-
+// -------------Relation hotel with room---------------
+    public function HotelRoom(){
+        $hotel = Hotel::with(['rooms'])->get();
+        return response()->json(['success' => true, 'data' => $hotel],200);
+    }
 
     /**
      * 

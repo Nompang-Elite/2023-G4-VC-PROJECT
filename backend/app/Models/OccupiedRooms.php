@@ -15,14 +15,4 @@ class OccupiedRooms extends Model
         "room_id",
     ];
 
-    public static function occupiedRooms($request, $id=null){
-        $occupiedRooms = $request->only(['check_in','check_out','room_id']);
-        $occupiedRooms = self::updateOrCreate(['id' => $id], $occupiedRooms);
-        return $occupiedRooms;  
-    }
-
-    public function room()
-    {
-        return $this->belongsTo(Rooms::class);
-    }
 }
