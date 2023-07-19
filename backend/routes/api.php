@@ -24,19 +24,19 @@ Route::group(['prefix' => 'guest'], function () {
 
 Route::group(['prefix' => 'hotel'], function () {
     Route::get('/', [HotelController::class, 'index']);
-    Route::get('/hotel/{id}', [HotelController::class, 'show']);
+    Route::get('/{id}', [HotelController::class, 'show']);
 
-//====HotelInfo Routes========
-Route::get('/hotelInfo', [HotelInfoController::class, 'index']);
-// Route::get('/hotel/{id}', [HotelController::class, 'show']);
-
-
-Route::get('/hotelsInfo', [HotelController::class, 'HotelsInfo']);
-Route::get('/hotelsInfo/{id}', [HotelController::class, 'HotelsInfoId']);
+    //====HotelInfo Routes========
+    Route::get('/hotelInfo', [HotelInfoController::class, 'index']);
+    // Route::get('/hotel/{id}', [HotelController::class, 'show']);
 
 
-//======Search Routes=======
-Route::get('/search', [HotelController::class, 'search']);
+    Route::get('/info/all', [HotelController::class, 'HotelsInfo']);
+    Route::get('/info/{id}', [HotelController::class, 'HotelsInfoId']);
+
+
+    //======Search Routes=======
+    Route::get('/search', [HotelController::class, 'search']);
 
     // Hotel routes goes here...
 });
