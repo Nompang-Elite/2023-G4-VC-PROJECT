@@ -3,6 +3,7 @@
     <GuestsViews v-if="guestView" />
     <HotelViews v-if="hotelView" />
     <AdminViews v-if="adminView" />
+    <AdminLoginDialog />
   </v-app>
 </template>
 
@@ -10,15 +11,24 @@
 import GuestsViews from "./views/Guests/GuestsViews.vue";
 import HotelViews from "./views/Hotels/HotelViews.vue";
 import AdminViews from "./views/Admin/AdminViews.vue";
+import AdminLoginDialog from "./components/Dialogs/AdminLoginDialog.vue";
+import { useAuthStore } from "./store/AuthStore";
+import { reactive } from "vue";
 export default {
-  data() {
+  setup() {
+    const Auth = reactive(useAuthStore());
     return {
-      guestView: true,
-      hotelView: false,
-      adminView: false,
+      Auth,
     };
   },
-  components: { GuestsViews, HotelViews, AdminViews },
+  data() {
+    return {
+      guestView: false,
+      hotelView: false,
+      adminView: true,
+    };
+  },
+  components: { GuestsViews, HotelViews, AdminViews, AdminLoginDialog },
 };
 </script>
 

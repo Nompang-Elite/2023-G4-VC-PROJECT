@@ -77,6 +77,15 @@ const routes = [
     component: () => import("@/components/Errors/NotFound.vue"),
   },
 
+  {
+    path: "/admin",
+    children: [
+      {
+        path: "",
+        component: () => import("@/views/Admin/AdminHomeView.vue"),
+      },
+    ],
+  },
   // More route goes here!!!
 ];
 
