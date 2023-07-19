@@ -11,8 +11,7 @@ class Hotel extends Model
     public $timestamps = false;
     protected $fillable = [
         'name',
-        'image',
-        'location',
         'description',
+        'user_id'
     ];
 }

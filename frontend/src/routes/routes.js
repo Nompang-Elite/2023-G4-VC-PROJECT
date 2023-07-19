@@ -77,6 +77,17 @@ const routes = [
     component: () => import("@/components/Errors/NotFound.vue"),
   },
 
+
+  {
+    path: "/hotel",
+    children: [
+      {
+        path: "register",
+        component: () => import("@/components/Dialogs/RegisterHotelDialog.vue"),
+      }
+    ]
+  }
+
   // More route goes here!!!
 ];
 

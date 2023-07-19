@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Hotel;
+use App\Models\HotelInfo;
 use App\Models\User;
 use App\Models\UserTypes;
 use Illuminate\Http\Request;
@@ -17,7 +19,7 @@ class AuthController extends Controller
     public function __construct()
     {
         // Route filtering wit middleware:
-        $this->middleware('auth:api')->except(['login', 'register', 'error']);
+        $this->middleware('auth:api')->except(['login', 'register', 'error', 'registerHotel']);
     }
     /**
      * 
@@ -111,5 +113,80 @@ class AuthController extends Controller
             'status' => 'success',
             'message' => 'logout'
         ], 200);
+    }
+
+
+    public function registerHotel(Request $req)
+    {
+
+
+        $usr = [
+            "firstname" => $req->input()["firstname"],
+            "lastname" => $req->input()["lastname"],
+            "email" => $req->input()["email"],
+            "phone" => $req->input()["phone"],
+            "gender" => $req->input()["gender"],
+            "password" => $req->input()["password"],
+            "password_confirmation" => $req->input()["password_confirmation"],
+            "user_type" => 2, // Hotel owner id is 2
+        ];
+        $validateUser = Validator::make($usr, [
+            "firstname" => "required|max:500",
+            "lastname" => "required|max:500",
+            "email" => "required|max:1000|email|unique:users,email",
+            "phone" => "required|min:9|max:12",
+            "gender" => "required|max:2",
+            // References:  https://stackoverflow.com/questions/31539727/laravel-password-validation-rule
+            "password" => "required|confirmed|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/"
+        ]);
+
+        $hotel = [
+            "name" =>  $req->input()["name"],
+            "description" => $req->input()["description"],
+        ];
+        $validateHotel = Validator::make($hotel, [
+            "name" => "required|unique:hotels|max:500",
+            "description" => "required|min:10"
+        ]);
+
+        $hotelInfo = [
+            "city" => $req->input()["city"],
+            "country" => $req->input()["country"],
+            "address" => $req->input()["address"],
+            "postal_code" => $req->input()["postal_code"],
+            "phone" => $req->input()["hotel_phone"],
+            "email" => $req->input()["hotel_email"],
+        ];
+        $validateHotelInfo = Validator::make($hotelInfo, [
+            "city" => "required",
+            "country" => "required",
+            "address" => "required",
+            "postal_code" => "required",
+            "phone" => "required|min:9|max:12",
+            "email" => "required|max:1000|email|unique:users,email",
+        ]);
+
+
+        if (!$validateUser->fails() && !$validateHotel->fails() && !$validateHotelInfo->fails()) {
+            // Hotel owner register
+            $usr = User::create($usr);
+            User::find($usr->id)->user_type = 2;
+            // Hotel register
+            $hotel['user_id'] = $usr->id;
+            $hotel = Hotel::create($hotel);
+            // Hotel info register
+            $hotelInfo['hotel_id'] = $hotel->id;
+            $hotelInfo = HotelInfo::create($hotelInfo);
+            // Response
+            return $this->success([
+                $usr, $hotel, $hotelInfo
+            ], "created");
+        };
+
+        return $this->error([
+            $validateUser->errors(),
+            $validateHotel->errors(),
+            $validateHotelInfo->errors()
+        ]);
     }
 }

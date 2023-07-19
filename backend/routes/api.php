@@ -21,3 +21,4 @@ Route::group(['prefix' => 'guest'], function () {
 
 Route::get('/hotel', [HotelController::class, 'index']);
 Route::get('/hotel/search', [HotelController::class, 'search']);
+Route::post('/hotel/register', [AuthController::class, "registerHotel"]);
