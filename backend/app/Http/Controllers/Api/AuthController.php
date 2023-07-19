@@ -119,7 +119,6 @@ class AuthController extends Controller
     public function registerHotel(Request $req)
     {
 
-
         $usr = [
             "firstname" => $req->input()["firstname"],
             "lastname" => $req->input()["lastname"],
@@ -140,13 +139,14 @@ class AuthController extends Controller
             "password" => "required|confirmed|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/"
         ]);
 
+
         $hotel = [
-            "name" =>  $req->input()["name"],
+            "name" =>  $req->input()["hotel_name"],
             "description" => $req->input()["description"],
         ];
         $validateHotel = Validator::make($hotel, [
             "name" => "required|unique:hotels|max:500",
-            "description" => "required|min:10"
+            "description" => "required|min:10" 
         ]);
 
         $hotelInfo = [
