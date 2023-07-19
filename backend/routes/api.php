@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Route;
 
 
 // Authentication Route:
-Route::group(['prefix' => '/v1/auth'], function () {
+Route::group(['prefix' => 'guest'], function () {
     // Register
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     // Login
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'log  in'])->name('login');
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
