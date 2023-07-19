@@ -51,9 +51,14 @@ class AuthController extends Controller
         $usr = User::create(
             $req->input()
         );
+        // Get account type 
+        $usr->user_type = UserTypes::find(User::find($usr->id)->user_type)->type;
+        // Add token to user object response
+        $usr->access_token = Auth::login($usr);
         // Return success msg:
         return $this->success(
-            $data = array_merge(array('user' => $usr), ["access_token" => Auth::login($usr)])
+            $usr,
+            200
         );
     }
 
@@ -73,21 +78,19 @@ class AuthController extends Controller
         );
         if (!$validate->fails()) {
             // Attempt login with auth guard:
-            $token = auth()->attempt($request->input());
-            if ($token) {
-                // Added user type conversion:
+            if ($token = auth()->attempt($request->input())) {
                 $usr = auth()->user();
+                // Get user type via ID
                 $usr->user_type = UserTypes::find($usr->user_type)->type;
-                // Keep normal user from login to admin penel
-                return $usr->user_type !== 'admin' ? response()->json(
-                    [
-                        'user' => $usr,
-                        'access_token' => $token
-                    ]
-                ) : $this->error('unauthorized', 401);;
+                $usr->access_token = $token;
+
+                return $this->success(
+                    $usr,
+                    200
+                );
             }
         }
-        return response()->json(
+        return $this->error(
             [
                 'error' => !$validate->errors() ? $validate->errors() : "Account not available!",
             ],
@@ -99,4 +102,14 @@ class AuthController extends Controller
      * 
      * Source Code from: https://dev-yakuza.posstree.com/en/laravel/jwt-logout/
      * **/
+
+    public function logout()
+    {
+        Auth::guard('api')->logout();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'logout'
+        ], 200);
+    }
 }
