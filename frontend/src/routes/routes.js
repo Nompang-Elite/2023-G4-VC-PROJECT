@@ -79,7 +79,7 @@ const routes = [
   },
 
   {
-    path: "/",
+    path: "/admin",
     children: [
       {
         path: "",
