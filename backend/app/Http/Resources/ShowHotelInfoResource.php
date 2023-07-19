@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ShowHotelResource extends JsonResource
+class ShowHotelInfoResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,13 @@ class ShowHotelResource extends JsonResource
     {
         return [
             'id' =>$this -> id,
-            'name' =>$this -> name,
-            'rate' =>$this -> rate,
-            'description' =>$this -> description,
-            'user_id' =>$this -> user_id,
+            'address' =>$this -> address,
+            'city' =>$this -> city,
+            'country' =>$this -> country,
+            'postal_code' =>$this -> postal_code,
+            'phone' =>$this -> phone,
+            'email' =>$this -> email,
+            'hotel_id' =>$this -> hotel_id,
         ];
     }
 }

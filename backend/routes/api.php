@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\HotelController;
+use App\Http\Controllers\Api\HotelInfoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,18 @@ Route::group(['prefix' => 'guest'], function () {
 
     // More here...
 });
-
+//====Hotels Routes========
 Route::get('/hotel', [HotelController::class, 'index']);
+Route::get('/hotel/{id}', [HotelController::class, 'show']);
+
+//====HotelInfo Routes========
+Route::get('/hotelInfo', [HotelInfoController::class, 'index']);
+// Route::get('/hotel/{id}', [HotelController::class, 'show']);
+
+
+Route::get('/hotelsInfo', [HotelController::class, 'HotelsInfo']);
+Route::get('/hotelsInfo/{id}', [HotelController::class, 'HotelsInfoId']);
+
+
+//======Search Routes=======
 Route::get('/hotel/search', [HotelController::class, 'search']);

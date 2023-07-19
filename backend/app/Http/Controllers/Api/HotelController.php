@@ -23,6 +23,22 @@ class HotelController extends Controller
         return $this->error("list is empty", 404);
     }
 
+     /**
+     *get hotel id
+     */
+    public function show($id)
+    {
+
+        //get only one hotel
+        $hotel = Hotel::find($id);
+        $hotel = new ShowhotelResource($hotel);
+        if ($hotel)
+        return $this->success($hotel, "list of hotel");
+
+    return $this->error("list is empty", 404);
+
+    }
+
 
     /**
      * 
@@ -42,4 +58,25 @@ class HotelController extends Controller
         // Error if no result
         return $this->error("not match!");
     }
+
+//====get all hotel with info==========
+    public function HotelsInfo(){
+        $hotel = Hotel::with(['HotelInfos'])->get();
+        if ($hotel)
+        return $this->success($hotel, "list of hotels with hotels info");
+
+    return $this->error("list is empty", 404);
+    }
+
+    //====get only one hotel with info==========
+
+    public function HotelsInfoId($id){
+        $hotel = Hotel::with(['HotelInfos'])->find($id);
+        if ($hotel)
+        return $this->success($hotel, "list of hotel");
+
+    return $this->error("list is empty", 404);
+
+    }
+
 };
