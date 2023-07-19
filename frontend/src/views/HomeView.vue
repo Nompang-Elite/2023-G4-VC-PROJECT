@@ -1,7 +1,7 @@
 <template>
   <Carousel :slides="topHotels" />
   <!-- Using the items props to pass down the data list for card -->
-  <Card :items="topHotels" container-name="Top Reviews" />
+  <Card :items="hotels" container-name="Top Reviews" />
 </template>
 <script>
 import Carousel from "@/components/Others/CarouselCover.vue";
@@ -56,6 +56,7 @@ export default {
     api.api_base
       .get("/hotel")
       .then((res) => {
+        console.log(this.hotels = res.data.data);
         this.hotels = res.data.data;
       })
       .catch((err) => console.log(err));

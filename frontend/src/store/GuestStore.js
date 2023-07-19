@@ -1,7 +1,7 @@
 import api from "@/routes/api";
 import { defineStore } from "pinia";
 
-export const useUserStore = defineStore("User", {
+export const useGuestStore = defineStore("Guest", {
   state() {
     return {
       results: [],
@@ -12,7 +12,7 @@ export const useUserStore = defineStore("User", {
       api.api_base
         .get("/hotel/search?s=" + input)
         .then((res) => {
-          this.results = res.data.data;
+          this.results = JSON.parse(JSON.stringify(res.data.data));
         })
         .catch((err) => console.log(err));
       // Return true if there is data

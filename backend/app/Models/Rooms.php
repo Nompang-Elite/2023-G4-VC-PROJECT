@@ -14,7 +14,5 @@ class Rooms extends Model
         "number",
         "room_type_id",
         "hotel_id",
-        "room_type_id",
-        "hotel_id",
     ];
 }
