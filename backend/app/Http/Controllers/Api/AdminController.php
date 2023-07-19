@@ -42,7 +42,8 @@ class AdminController extends Controller
                 $usr = auth()->user();
                 // Convert user type id to its type name
                 $usr->user_type = UserTypes::find($usr->user_type)->type;
-                return $usr->user_type  == "admin" ? $this->success(["user" => $usr, "access_token" => $token], "authorized") : $this->error("please login with admin account!");
+                $usr->access_token = $token;
+                return $usr->user_type  == "admin" ? $this->success($usr, "authorized") : $this->error("please login with admin account!");
             }
             return $this->error("unauthorized");
         };

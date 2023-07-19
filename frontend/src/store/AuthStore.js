@@ -33,6 +33,8 @@ export const useAuthStore = defineStore("Auth", {
         "Bearer " + data["access_token"];
       // Save token to cookie
       document.cookie = `access_token = ${data["access_token"]}`;
+      // Delete after store in cookie
+      delete data["access_token"];
       // User data session
       sessionStorage.setItem("user_data", JSON.stringify(data));
       // User logged
@@ -70,9 +72,13 @@ export const useAuthStore = defineStore("Auth", {
     // Admin account login
     adminLogin(userData) {
       api.api_base
-        .post("/guest/login", userData)
+        .post("/admin/login", userData)
         .then((res) => {
-          console.log(res.data);
+          if (res.status == 200) {
+            // ដកចេញពេលដើម្បី security
+            sessionStorage.clear("adminSecret");
+            this.authorize(res.data.data);
+          }
         })
         .catch((err) => {
           console.log(err);
