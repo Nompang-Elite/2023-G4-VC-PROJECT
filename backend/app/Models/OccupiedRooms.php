@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class OccupiedRooms extends Model
 {
@@ -13,7 +14,16 @@ class OccupiedRooms extends Model
         "room_id",
         "check_in",
         "check_out",
-        
+
     ];
-    
+    // Relationship between occupiedRoom has many hostedAt
+    public function occupiedRooms(): HasMany
+    {
+        return $this->hasMany(OccupiedRooms::class);
+    }
+    // Relationship between room and occupiedRoom
+    public function room()
+    {
+        return $this->belongsTo(Rooms::class);
+    }
 }

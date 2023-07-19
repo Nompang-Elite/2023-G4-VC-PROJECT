@@ -76,7 +76,15 @@ const routes = [
     name: "Not Found",
     component: () => import("@/components/Errors/NotFound.vue"),
   },
-
+  {
+    path: "/hotel",
+    children: [
+      {
+        path: "guests",
+        component: () => import("@/views/Hotels/HotelGuestsView.vue"),
+      },
+    ],
+  },
   // More route goes here!!!
 ];
 
