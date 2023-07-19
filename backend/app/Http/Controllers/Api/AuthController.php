@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserTypes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\HttpResponse;
@@ -50,9 +51,14 @@ class AuthController extends Controller
         $usr = User::create(
             $req->input()
         );
+        // Get account type 
+        $usr->user_type = UserTypes::find(User::find($usr->id)->user_type)->type;
+        // Add token to user object response
+        $usr->access_token = Auth::login($usr);
         // Return success msg:
         return $this->success(
-            $data = array_merge(array('user' => $usr), ["access_token" => Auth::login($usr)])
+            $usr,
+            200
         );
     }
 
@@ -72,17 +78,19 @@ class AuthController extends Controller
         );
         if (!$validate->fails()) {
             // Attempt login with auth guard:
-            $token = auth()->attempt($request->input());
-            if ($token) {
-                return response()->json(
-                    [
-                        'user' => auth()->user(),
-                        'access_token' => $token
-                    ]
+            if ($token = auth()->attempt($request->input())) {
+                $usr = auth()->user();
+                // Get user type via ID
+                $usr->user_type = UserTypes::find($usr->user_type)->type;
+                $usr->access_token = $token;
+
+                return $this->success(
+                    $usr,
+                    200
                 );
             }
         }
-        return response()->json(
+        return $this->error(
             [
                 'error' => !$validate->errors() ? $validate->errors() : "Account not available!",
             ],
@@ -94,4 +102,14 @@ class AuthController extends Controller
      * 
      * Source Code from: https://dev-yakuza.posstree.com/en/laravel/jwt-logout/
      * **/
+
+    public function logout()
+    {
+        Auth::guard('api')->logout();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'logout'
+        ], 200);
+    }
 }

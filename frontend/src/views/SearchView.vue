@@ -1,17 +1,18 @@
 <template>
   <!-- <Card :items="User.results" /> -->
-  <Card :items="results" container-name="Results" />
+  <Card :items="Guest.results" container-name="Results" />
 </template>
 
 <script>
-import { useUserStore } from "@/store/UserStore";
+import { useGuestStore } from "@/store/GuestStore";
 import Card from "@/components/Cards/HotelCard.vue";
-import { toRefs } from "vue";
+import { reactive } from "vue";
 export default {
   components: { Card },
   setup() {
-    // return { User: useUserStore() };
-    return toRefs(useUserStore());
+    const Guest = reactive(useGuestStore());
+    return { Guest };
   },
 };
 </script>
+@/store/GuestsStore

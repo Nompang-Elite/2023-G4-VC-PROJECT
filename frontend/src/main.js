@@ -3,8 +3,8 @@ import App from "./App.vue";
 import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
 import routes from "./routes";
-import { createPinia } from "pinia";
+import Pinia from "./store/PiniaMain";
 
 loadFonts();
 
-createApp(App).use(createPinia()).use(routes).use(vuetify).mount("#app");
+createApp(App).use(Pinia).use(routes).use(vuetify).mount("#app");

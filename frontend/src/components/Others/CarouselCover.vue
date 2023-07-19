@@ -4,7 +4,6 @@
     <v-carousel-item v-for="(hotel, i) in slides" :key="i">
       <v-sheet>
         <v-img
-          transition
           aspect-ratio="16/9"
           cover
           src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
