@@ -1,10 +1,15 @@
 <template>
-  <v-dialog v-model="register" width="auto" close-delay="0">
+  <v-dialog v-model="Auth.registerDialog" width="auto" close-delay="0">
     <v-card width="28rem" rounded="xl" class="spacing-playground pa-4 mx-auto">
       <v-card-title class="text-h4"> Register </v-card-title>
       <v-card-subtitle>
         Already have an account?
-        <span class="" @click="(register = !register), (login = !login)"
+        <span
+          class=""
+          @click="
+            (Auth.registerDialog = !Auth.registerDialog),
+              (Auth.loginDialog = !Auth.loginDialog)
+          "
           >Log In</span
         >
       </v-card-subtitle>
@@ -18,13 +23,12 @@
                 density="compact"
                 label="First Name"
                 prepend-inner-icon="mdi-text"
-                v-model="user.firstname"
+                v-model="Auth.userRegisterInfo.firstname"
                 :rules="rules.name"
                 required
               >
               </v-text-field>
             </v-col>
-
             <v-col cols="14">
               <v-text-field
                 rounded="xl"
@@ -32,7 +36,7 @@
                 density="compact"
                 label="Last Name"
                 prepend-inner-icon="mdi-text"
-                v-model="user.lastname"
+                v-model="Auth.userRegisterInfo.lastname"
                 :rules="rules.name"
                 required
               >
@@ -43,11 +47,11 @@
             rounded="xl"
             variant="solo"
             density="compact"
-            label="Phone"
-            prepend-inner-icon="mdi-phone"
-            v-model="user.phone"
-            type="number"
-            :rules="rules.phone"
+            prepend-inner-icon="mdi-email"
+            label="Email"
+            type="email"
+            v-model="Auth.userRegisterInfo.email"
+            :rules="rules.email"
             required
           >
           </v-text-field>
@@ -55,15 +59,14 @@
             rounded="xl"
             variant="solo"
             density="compact"
-            prepend-inner-icon="mdi-email"
-            label="Email"
-            type="email"
-            v-model="user.email"
-            :rules="rules.email"
+            label="Phone"
+            prepend-inner-icon="mdi-phone"
+            v-model="Auth.userRegisterInfo.phone"
+            type="number"
+            :rules="rules.phone"
             required
           >
           </v-text-field>
-          <p v-if="exist" class="font-weight-light">Email already exist</p>
           <v-row>
             <v-col cols="14">
               <v-text-field
@@ -73,7 +76,7 @@
                 prepend-inner-icon="mdi-lock"
                 label="Password"
                 type="password"
-                v-model="user.password"
+                v-model="Auth.userRegisterInfo.password"
                 :rules="rules.password"
                 required
               >
@@ -87,8 +90,8 @@
                 prepend-inner-icon="mdi-lock-check"
                 label="Confirm Password"
                 type="password"
-                v-model="user.password_confirmation"
-                :rules="rules.passwordConfirm"
+                v-model="Auth.userRegisterInfo.password_confirmation"
+                :rules="rules.password_confirm"
                 required
               >
               </v-text-field>
@@ -99,13 +102,12 @@
             density="compact"
             variant="solo"
             label="Gender"
-            v-model="user.gender"
+            v-model="Auth.userRegisterInfo.gender"
             :rules="rules.gender"
             rounded="xl"
           ></v-select>
-
           <v-btn
-            @click="registerUser"
+            @click="Auth.guestRegister(Auth.userRegisterInfo)"
             block
             variant="elevated"
             height="3rem"
@@ -119,12 +121,15 @@
     </v-card>
   </v-dialog>
 </template>
-
 <script>
 import { useAuthStore } from "@/store/AuthStore";
-import { toRefs } from "vue";
-
+import { reactive } from "vue";
 export default {
+  setup() {
+    const Auth = reactive(useAuthStore());
+
+    return { Auth };
+  },
   data() {
     return {
       rules: {
@@ -142,16 +147,13 @@ export default {
             /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(v) ||
             "Password must contain at least lowercase letter, one number, a special character and one uppercase let",
         ],
-        passwordConfirm: [
-          (v) => v == this.user.password || "Password not match",
+        password_confirm: [
+          (v) =>
+            v == this.Auth.userRegisterInfo.password || "Password not match",
         ],
         gender: [(v) => v !== null || "Select your gender"],
       },
     };
-  },
-  setup() {
-    const Auth = useAuthStore();
-    return toRefs(Auth);
   },
 };
 </script>

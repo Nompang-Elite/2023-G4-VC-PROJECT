@@ -2,7 +2,7 @@
   <!-- Card container -->
   <v-container class="mb-8">
     <header class="py-4 text-h6">{{ containerName }}</header>
-    <v-row>
+    <v-row v-if="items.length > 1">
       <v-col cols="4" v-for="(item, i) in items" :key="i">
         <!-- Set card hovering effect -->
         <v-hover v-slot="{ isHovering, props }">
@@ -21,8 +21,9 @@
               :src="item.image"
               cover
             >
-              <v-card-title>{{ item.name }}</v-card-title>
             </v-img>
+
+            <v-card-title>{{ item.name }}</v-card-title>
 
             <v-card-subtitle class="pt-4">
               {{ item.location }}
