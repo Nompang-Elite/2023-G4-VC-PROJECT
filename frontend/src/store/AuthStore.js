@@ -4,6 +4,11 @@ export const useAuthStore = defineStore("Auth", {
   // Stated Data for the authentication
   state() {
     return {
+      // Views activate
+      guestView: true,
+      hotelView: false,
+      adminView: false,
+      adminLog: false,
       // Dialog trigger
       loginDialog: false,
       registerDialog: false,
@@ -44,7 +49,7 @@ export const useAuthStore = defineStore("Auth", {
     },
 
     // Guest post request for auth
-    guestAuthPostRequest(path, form) {
+    async guestAuthPostRequest(path, form) {
       api.api_base
         .post(path, form)
         .then((res) => {
@@ -77,6 +82,7 @@ export const useAuthStore = defineStore("Auth", {
           if (res.status == 200) {
             // ដកចេញពេលដើម្បី security
             sessionStorage.clear("adminSecret");
+            sessionStorage.setItem("admin_logged", true);
             this.authorize(res.data.data);
           }
         })
@@ -87,13 +93,18 @@ export const useAuthStore = defineStore("Auth", {
 
     // Logout function
     logout() {
-      // Clear all session and cookie
-      sessionStorage.clear();
-      document.cookie = `access_token =`;
+      this.clearUserData();
       // Refresh page
       location.reload();
     },
 
+    // Clear client side data
+    clearUserData() {
+      // Clear all session and cookie
+      sessionStorage.clear();
+      document.cookie = document.cookie = "access_token=; Max-Age=0";
+      // Solution : https://stackoverflow.com/questions/2144386/how-to-delete-a-cookie
+    },
     // Check if there is user logged in
     userLogged() {
       return this.convertToArray(sessionStorage.getItem("user_logged"));

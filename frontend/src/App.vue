@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <GuestsViews v-if="guestView" />
-    <HotelViews v-if="hotelView" />
-    <AdminViews v-if="adminView" />
-    <AdminLoginDialog />
+    <AdminLoginDialog v-if="Auth.adminLog" />
+    <GuestsViews v-if="Auth.guestView" />
+    <HotelViews v-if="Auth.hotelView" />
+    <AdminViews v-if="Auth.adminView" />
   </v-app>
 </template>
 
@@ -15,17 +15,21 @@ import AdminLoginDialog from "./components/Dialogs/AdminLoginDialog.vue";
 import { useAuthStore } from "./store/AuthStore";
 import { reactive } from "vue";
 export default {
+  created() {
+    if (JSON.parse(sessionStorage.getItem("adminSecret"))) {
+      this.Auth.adminLog = true;
+    } else if (JSON.parse(sessionStorage.getItem("admin_logged"))) {
+      sessionStorage.removeItem("user_logged");
+      this.Auth.adminView = true;
+      this.Auth.guestView = !this.Auth.adminView;
+    } else {
+      this.Auth.clearUserData();
+    }
+  },
   setup() {
     const Auth = reactive(useAuthStore());
     return {
       Auth,
-    };
-  },
-  data() {
-    return {
-      guestView: false,
-      hotelView: false,
-      adminView: true,
     };
   },
   components: { GuestsViews, HotelViews, AdminViews, AdminLoginDialog },
