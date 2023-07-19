@@ -67,6 +67,7 @@ const routes = [
         ],
       },
     ],
+    meta: { isGuest: true },
   },
 
   {
@@ -78,13 +79,14 @@ const routes = [
   },
 
   {
-    path: "/admin",
+    path: "/",
     children: [
       {
         path: "",
         component: () => import("@/views/Admin/AdminHomeView.vue"),
       },
     ],
+    meta: { isAdmin: false },
   },
   // More route goes here!!!
 ];

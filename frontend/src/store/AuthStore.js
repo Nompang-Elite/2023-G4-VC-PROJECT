@@ -94,6 +94,7 @@ export const useAuthStore = defineStore("Auth", {
     // Logout function
     logout() {
       this.clearUserData();
+      this.guestAuthPostRequest("/guest/logout");
       // Refresh page
       location.reload();
     },
