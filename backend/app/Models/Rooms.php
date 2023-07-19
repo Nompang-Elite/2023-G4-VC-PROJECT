@@ -14,7 +14,23 @@ class Rooms extends Model
         "number",
         "room_type_id",
         "hotel_id",
-        "room_type_id",
-        "hotel_id",
     ];
+    public static function room($request, $id=null){
+        $room = $request->only(['name','number', 'room_type_id', 'hotel_id']);
+        $room = self::updateOrCreate(['id' => $id], $room);
+        return $room;  
+    }
+
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class);
+    }
+    
+    public function roomImage()
+    {
+        return $this->hasMany(RoomImages::class);
+    }
 }
+
+
+

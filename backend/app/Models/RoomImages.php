@@ -13,4 +13,14 @@ class RoomImages extends Model
         "room_id",
         "image_id",
     ];
+    public static function hotel($request, $id=null){
+        $roomImage = $request->only(['room_id','image_id']);
+        $roomImage = self::updateOrCreate(['id' => $id], $roomImage);
+        return $roomImage;  
+    }
+
+    public function room()
+    {
+        return $this->belongsTo(Rooms::class);
+    }
 }

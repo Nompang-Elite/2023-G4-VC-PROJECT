@@ -15,4 +15,15 @@ class Hotel extends Model
         'location',
         'description',
     ];
+
+    public static function hotel($request, $id=null){
+        $hotel = $request->only(['name','image', 'location', 'description']);
+        $hotel = self::updateOrCreate(['id' => $id], $hotel);
+        return $hotel;  
+    }
+
+    public function room()
+    {
+        return $this->hasMany(Rooms::class);
+    }
 }
