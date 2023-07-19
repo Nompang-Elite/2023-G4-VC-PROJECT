@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Hotel;
+use App\Models\OccupiedRooms;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -35,5 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoomsSeeder::class);
         // Create rooms data
         $this->call(ReviewsSeeder::class);
+         // Create occupiedRoom data
+        $this->call(OccupiedRoomsSeeder::class);
     }
 }
