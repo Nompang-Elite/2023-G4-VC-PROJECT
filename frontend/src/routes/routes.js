@@ -11,13 +11,14 @@ const routes = [
 
   {
     path: "/",
+    name: "Home",
     children: [
       {
         /**
          * Route to the hotel views
          * */
         path: "",
-        name: "Home",
+        name: "Home Main",
         component: () => import("@/views/HomeView.vue"),
       },
       {
