@@ -28,7 +28,7 @@ router.beforeEach((to, from, next) => {
       !to.meta.isGuest
     )
       next();
-  } else if (to.meta.isGuest) {
+  } else if (to.meta.isGuest || to.meta.isHotel) {
     next();
   }
 });

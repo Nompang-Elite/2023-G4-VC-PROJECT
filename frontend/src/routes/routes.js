@@ -86,6 +86,7 @@ const routes = [
         component: () => import("@/views/Hotels/HotelGuestsView.vue"),
       },
     ],
+    meta: { isHotel: true },
   },
   {
     path: "/admin",
