@@ -1,19 +1,15 @@
 <template>
   <!-- ===================Contain-card==================== -->
-  <v-container>
-    <header>
-      <v-sheet>
+    <v-sheet width="1400" class="mx-auto">
+      <v-card-text>
         <v-btn to="/" class="ma-4" color="blue darken-2" dark>
           <v-icon size="large">mdi-chevron-double-left</v-icon>
-          Back
-        
+          Back    
         </v-btn>
-      </v-sheet>
-    </header>
-    <v-row>
-      <v-col> 
+      </v-card-text>
+
   <!-- ======Card hotel======== -->
-        <Card />
+        <Card :hotel="hotels"/>
 
     <!-- ============slind Image hotel======================== -->
         <v-sheet elevation="2" max-width="1300"  class="mx-auto rounded-xl">
@@ -31,10 +27,8 @@
         </v-sheet>
       <!-- ============Card Room======================== -->
         <CardRoom />  
+    </v-sheet>
 
-      </v-col>
-    </v-row>
-  </v-container>
    
 </template>
 
@@ -42,14 +36,14 @@
 //=========Card hotel==== //
 import Card from "@/components/Cards/HotelDetailCard.vue";
 import CardRoom from "@/components/Cards/RoomCard.vue";
-
+import api from "@/routes/api";
 
 
 export default {
   components: { Card,CardRoom },
   data() {
     return {
-      hotel: [],
+      hotels: [],
       roomImgs: [
         {
           img: "https://hotelxtoronto.com/_novaimg/4906918-1481330_0_0_2200_1200_2200_1200.rc.jpg",
@@ -67,15 +61,16 @@ export default {
     };
   },
 
-  // mounted() {
-  //   axios
-  //     .get(`http://127.0.0.1:8000/api/hotel_room/${this.$route.params.id}`)
-  //     .then((response) => {
-  //       this.hotel = response.data.data;
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // },
+  mounted() {
+    api.api_base
+      .get(`/hotel/info/${this.$route.params.id}`)
+      .then((response) => {
+        console.log(this.hotel = response.data.data);
+        this.hotels = response.data.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 };
 </script>

@@ -71,8 +71,7 @@ const routes = [
         /**
          * Route to the detail views
          * */
-        path: "detail",
-        name: "detail",
+        path: '/hotel/:id',
         component: () => import("@/views/DetailHotel.vue"),
       },
     ],
