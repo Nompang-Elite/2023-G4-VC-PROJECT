@@ -40,7 +40,6 @@
           class="mx-11 mt-4"
           label="Email"
           v-model="registerHotelForm.email"
-          error-messages="eamilError"
         ></v-text-field>
         <v-card-text class="d-flex mx-5">
           <v-text-field
@@ -50,14 +49,10 @@
             class="mx-2"
             v-model="registerHotelForm.password"
             label="Password"
-            :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-            :type="showPassword ? 'text' : 'password'"
-            @click:append="showPassword = !showPassword"
+            type="password"
           ></v-text-field>
           <v-text-field
-            :append-icon="showPasswordConfirm ? 'mdi-eye-off' : 'mdi-eye'"
-            :type="showPasswordConfirm ? 'text' : 'password'"
-            @click:append="showPasswordConfirm = !showPasswordConfirm"
+            type="password"
             rounded="pill"
             density="compact"
             variant="solo"
@@ -198,7 +193,7 @@ export default {
         .catch((error) => {
           if (error.response) {
             console.log("Status:", error.response.status);
-            console.log("Data:", error.response.data.errors[0].email);
+            console.log("Data:", error.response.data);
           } else {
             console.log("Error:", error.message);
           }
