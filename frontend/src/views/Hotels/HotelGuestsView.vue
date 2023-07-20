@@ -1,6 +1,6 @@
 <template>
   <!-- Using the items props to pass down the data list for card -->
-  <Table :items ="desserts"/>
+  <Table :items ="listOfguests"/>
 </template>
 <script>
 import Table from "@/components/Cards/TableListGuests.vue";
@@ -9,12 +9,11 @@ export default {
   components: { Table },
   created() {
     api.api_base
-    .get(`/hotel/2/guests/reserved`)
+    .get(`/hotel/1/guests/reserved`)
     .then((res) => {
       if (res.data) {
-        console.log(res.data.data);
         // Assign the data to a component variable
-        this.desserts = res.data.data;
+        this.listOfguests = res.data.data;
       }
     })
     .catch((error) => {
@@ -23,36 +22,7 @@ export default {
   },
   data () {
       return {
-        desserts: [
-          // {
-          //   name: 'Burger',
-          //   calories: 660,
-          // },
-          // {
-          //   name: 'Sandwich',
-          //   calories: 660,
-          // },
-          // {
-          //   name: 'Cheese Whopper',
-          //   calories: 790,
-          // },
-          // {
-          //   name: 'Cheese Whopper',
-          //   calories: 790,
-          // },
-          // {
-          //   name: 'Cheese Whopper',
-          //   calories: 790,
-          // },
-          // {
-          //   name: 'Cheese Whopper',
-          //   calories: 790,
-          // },
-          // {
-          //   name: 'Bacon King',
-          //   calories: 1150,
-          // },
-        ],
+        listOfguests: [],
       }
     },
 };

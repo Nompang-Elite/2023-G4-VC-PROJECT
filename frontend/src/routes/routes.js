@@ -109,6 +109,10 @@ const routes = [
         path: "",
         component: () => import("@/views/Hotels/HotelHomeView.vue"),
       },
+      {
+        path: "guests",
+        component: () => import("@/views/Hotels/HotelGuestsView.vue"),
+      },
     ],
     meta: {
       isOwner: true,
