@@ -7,6 +7,7 @@
         variant="elevated"
         rounded="xl"
         class="mr-2"
+        :to="toolbarBtn.to"
         >{{ toolbarBtn.text }}</v-btn
       >
     </v-toolbar>
@@ -19,19 +20,19 @@ export default {
       toolbarBtns: [
         {
           text: "home",
-          to: "",
+          to: "/owner",
         },
         {
           text: "guests",
-          to: "",
+          to: "/guests",
         },
         {
           text: "rooms",
-          to: "",
+          to: "/rooms",
         },
         {
           text: "reviews",
-          to: "",
+          to: "/reviews",
         },
       ],
     };
