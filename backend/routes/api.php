@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\GuestControll;
 use App\Http\Controllers\Api\HotelController;
+use App\Http\Controllers\Api\Hotels\HotelGuestController;
 use App\Http\Controllers\Api\OccupiedRoomsControll;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,9 @@ Route::group(['prefix' => 'guest'], function () {
 Route::group(['prefix' => 'hotel'], function () {
     Route::get('/', [HotelController::class, 'index']);
     Route::get('/search', [HotelController::class, 'search']);
+
+    Route::get('/{id}/guests', [HotelGuestController::class, 'getHotelGuests']);
+    Route::get('/guests/reserved', [HotelGuestController::class, 'reservedGuestAtHotel']);
 
     // Hotel routes goes here...
 });
