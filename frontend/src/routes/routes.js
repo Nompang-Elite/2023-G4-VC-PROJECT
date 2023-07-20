@@ -79,14 +79,6 @@ const routes = [
   },
 
   {
-    //Solution Redirection: https://stackoverflow.com/questions/50961082/vue-js-how-to-redirect-to-a-common-route-if-route-isnt-found
-    // Vue 3 need to use /:pathMatch(.*)*
-    path: "/:pathMatch(.*)*",
-    name: "Not Found",
-    component: () => import("@/components/Errors/NotFound.vue"),
-  },
-
-  {
     path: "/admin",
     children: [
       {
@@ -94,7 +86,31 @@ const routes = [
         component: () => import("@/views/Admin/AdminHomeView.vue"),
       },
     ],
-    meta: { isAdmin: false },
+    meta: {
+      isAdmin: true,
+    },
+  },
+
+  {
+    path: "/owner",
+    name: "Owner",
+    children: [
+      {
+        path: "",
+        component: () => import("@/views/Hotels/HotelHomeView.vue"),
+      },
+    ],
+    meta: {
+      isOwner: true,
+    },
+  },
+
+  {
+    //Solution Redirection: https://stackoverflow.com/questions/50961082/vue-js-how-to-redirect-to-a-common-route-if-route-isnt-found
+    // Vue 3 need to use /:pathMatch(.*)*
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: () => import("@/components/Errors/NotFound.vue"),
   },
   // More route goes here!!!
 ];

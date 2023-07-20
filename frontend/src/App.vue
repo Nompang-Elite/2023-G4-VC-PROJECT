@@ -22,7 +22,13 @@ export default {
       sessionStorage.removeItem("user_logged");
       this.Auth.adminView = true;
       this.Auth.guestView = !this.Auth.adminView;
-    } else if (!JSON.parse(sessionStorage.getItem("user_logged"))) {
+    } else if (JSON.parse(sessionStorage.getItem("owner_logged"))) {
+      this.Auth.hotelView = true;
+      this.Auth.guestView = !this.Auth.hotelView;
+    } else if (
+      !JSON.parse(sessionStorage.getItem("user_logged")) &&
+      !JSON.parse(sessionStorage.getItem("owner_logged"))
+    ) {
       this.Auth.clearUserData();
     }
   },

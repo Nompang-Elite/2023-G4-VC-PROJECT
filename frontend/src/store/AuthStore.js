@@ -43,7 +43,9 @@ export const useAuthStore = defineStore("Auth", {
       // User data session
       sessionStorage.setItem("user_data", JSON.stringify(data));
       // User logged
-      sessionStorage.setItem("user_logged", true);
+      data["user_type"] === "hotel_owner"
+        ? sessionStorage.setItem("owner_logged", true)
+        : sessionStorage.setItem("user_logged", true);
       // Refresh page
       location.reload();
     },
@@ -53,7 +55,7 @@ export const useAuthStore = defineStore("Auth", {
       api.api_base
         .post(path, form)
         .then((res) => {
-          if (this.checkIf(res, "guest")) {
+          if (this.checkIf(res, "guest") || this.checkIf(res, "hotel_owner")) {
             this.authorize(res.data.data);
           }
         })
@@ -64,6 +66,7 @@ export const useAuthStore = defineStore("Auth", {
 
     // Guest account login:
     guestLogin(userData) {
+      console.log(userData);
       this.guestAuthPostRequest("/guest/login", userData);
     },
 

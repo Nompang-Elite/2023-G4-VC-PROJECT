@@ -14,5 +14,6 @@ class Reservations extends Model
         "date_out",
         "made_by",
         "user_id",
+        "hotel_id",
     ];
 }

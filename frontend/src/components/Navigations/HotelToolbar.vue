@@ -20,15 +20,19 @@ export default {
       toolbarBtns: [
         {
           text: "home",
-          to: "/admin",
+          to: "/owner",
         },
         {
-          text: "users",
-          to: "/users",
+          text: "guests",
+          to: "/guests",
         },
         {
-          text: "hotels",
-          to: "/hotels",
+          text: "rooms",
+          to: "/rooms",
+        },
+        {
+          text: "reviews",
+          to: "/reviews",
         },
       ],
     };
