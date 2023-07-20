@@ -18,6 +18,7 @@ class ShowOccupiedRoomsResource extends JsonResource
             'id' =>$this -> id,
             'check_in' =>$this -> check_in,
             'check_out' =>$this -> check_out,
+            'room_id' => $this -> room_id,
         ];
     }
 }

@@ -26,7 +26,7 @@ const routes = [
          * */
         path: "hotels",
         name: "Hotels",
-        component: () => import("@/views/HotelsView.vue"),
+        component: () => import("@/views/Hotels/HotelViews.vue"),
       },
       {
         /**
@@ -77,7 +77,20 @@ const routes = [
     component: () => import("@/components/Errors/NotFound.vue"),
   },
 
-  // More route goes here!!!
+// ----------------Route List room of hotel owner-----------
+  {
+    path: "/listRoom",
+    name: "List room",
+    component: () => import("@/views/Hotels/ListRoom.vue"),
+
+  },
+  // ----------------Route List room of hotel owner-----------
+  {
+    path: "/roomType",
+    name: "Room Type",
+    component: () => import("@/views/Hotels/ListRoom.vue"),
+
+  },
 ];
 
 export default routes;

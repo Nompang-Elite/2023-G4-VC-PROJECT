@@ -18,6 +18,8 @@ class ShowHotelResource extends JsonResource
             'id' =>$this -> id,
             'name' =>$this -> name,
             'description' =>$this -> description,
+            'rate' =>$this -> rate,
+            'user_id' =>$this -> user_id,
         ];
     }
 }

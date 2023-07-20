@@ -21,6 +21,7 @@ class ShowRoomTypesResource extends JsonResource
             'max_capacity' =>$this -> max_capacity,
             'bed_count' => $this -> bed_count,
             'price' => $this -> price,
+            'hotel_id' =>$this -> hotel_id,
         ];
     }
 }
