@@ -14,4 +14,5 @@ class OccupiedRooms extends Model
         "check_out",
         "room_id",
     ];
+
 }

@@ -11,8 +11,9 @@ class Rooms extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        "name",
         "number",
+        "name",
+        "status",
         "room_type_id",
         "hotel_id",
     ];

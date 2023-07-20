@@ -14,5 +14,11 @@ class RoomType extends Model
         "description",
         "max_capacity",
         "bed_count",
+        "price",
     ];
+
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class);
+    }
 }
