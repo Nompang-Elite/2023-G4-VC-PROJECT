@@ -71,6 +71,7 @@ export default {
       rooms: [],
     };
   },
+  // ---------------Get data from rooms--------
   mounted() {
     api.api_base
       .get("/hotel/rooms")

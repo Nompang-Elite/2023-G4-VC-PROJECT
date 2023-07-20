@@ -82,8 +82,8 @@ const routes = [
     path: "/listRoom",
     name: "List room",
     component: () => import("@/views/Hotels/ListRoom.vue"),
-
   },
+
   // ----------------Route List room of hotel owner-----------
   {
     path: "/roomType",
