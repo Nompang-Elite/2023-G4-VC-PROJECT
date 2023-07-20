@@ -8,3 +8,8 @@ import Pinia from "./store/PiniaMain";
 loadFonts();
 
 createApp(App).use(Pinia).use(routes).use(vuetify).mount("#app");
+
+/**
+ * Shortcut key plugin for vue
+ * https://github.com/fgr-araujo/vue-shortkey
+ * */
