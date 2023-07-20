@@ -14,6 +14,7 @@ class RoomsController extends Controller
     // ---------------get all rooms---------------
     public function index()
     {
+        // dd(Rooms::all());
         $room = Rooms::all();
         $room = ShowRoomsResource::collection($room);
         if ($room)

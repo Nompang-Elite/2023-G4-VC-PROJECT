@@ -19,6 +19,8 @@ class ShowRoomsResource extends JsonResource
             'number' =>$this -> number,
             'name' =>$this -> name,
             'status' =>$this -> status,
+            "room_type_id"=>$this->room_type_id,
+            "hotel_id"=>$this->hotel_id
         ];
     }
 }

@@ -37,6 +37,9 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::get('/info/all', [HotelController::class, 'HotelsInfo']);
     Route::get('/info/{id}', [HotelController::class, 'HotelsInfoId']);
 
+//=============Rooms in hotel==========
+    Route::get('/room/all', [RoomsController::class, 'index']);
+
 
     //======Search Routes=======
     Route::get('/search', [HotelController::class, 'search']);
@@ -56,17 +59,17 @@ Route::get('/hotel', [HotelController::class, 'index']);
 Route::get('/hotel/search', [HotelController::class, 'search']);
 
 
-// ------------- Route hotel owner--------------
-Route::get('/hotel/rooms', [RoomsController::class, 'index']);
+// // ------------- Route hotel owner--------------
+// Route::get('/hotel/rooms/me', [RoomsController::class, 'index']);
 
-//Room_Type
-Route::get('/hotel/room_types' , [RoomTypesController::class, 'index']);
+// //Room_Type
+// Route::get('/hotel/room_types' , [RoomTypesController::class, 'index']);
 
-//Occupied Room
-Route::get('/hotel/occupied' , [OccupiedRoomsController::class, 'index']);
+// //Occupied Room
+// Route::get('/hotel/occupied' , [OccupiedRoomsController::class, 'index']);
 
-//HotelRoom
-Route::get('/hotel/hotelRoom' , [HotelController::class, 'HotelRoom']);
+// //HotelRoom
+// Route::get('/hotel/hotelRoom' , [HotelController::class, 'HotelRoom']);
 
 
 

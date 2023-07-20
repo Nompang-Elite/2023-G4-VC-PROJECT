@@ -26,7 +26,7 @@
           </v-carousel>
         </v-sheet>
       <!-- ============Card Room======================== -->
-        <CardRoom />  
+        <CardRoom :hotel="hotels" />  
     </v-sheet>
 
    
