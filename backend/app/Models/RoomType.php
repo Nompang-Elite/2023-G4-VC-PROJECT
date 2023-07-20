@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class RoomType extends Model
 {
@@ -20,5 +21,9 @@ class RoomType extends Model
     public function hotel()
     {
         return $this->belongsTo(Hotel::class);
+    }
+    public function Rooms():HasMany
+    {
+        return $this->hasMany(Rooms::class);
     }
 }

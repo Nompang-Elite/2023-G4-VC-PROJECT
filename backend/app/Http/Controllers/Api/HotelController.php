@@ -66,7 +66,7 @@ class HotelController extends Controller
 
 //====get all hotel with info==========
     public function HotelsInfo(){
-        $hotel = Hotel::with(['HotelInfos','Rooms'])->get();
+        $hotel = Hotel::with(['HotelInfos','Rooms','RoomsType'])->get();
         if ($hotel)
         return $this->success($hotel, "list of hotels with hotels info");
 
@@ -76,7 +76,7 @@ class HotelController extends Controller
     //====get only one hotel with info==========
 
     public function HotelsInfoId($id){
-        $hotel = Hotel::with(['HotelInfos','Rooms'])->find($id);
+        $hotel = Hotel::with(['HotelInfos','Rooms','RoomsType'])->find($id);
         if ($hotel)
         return $this->success($hotel, "list of hotel");
 

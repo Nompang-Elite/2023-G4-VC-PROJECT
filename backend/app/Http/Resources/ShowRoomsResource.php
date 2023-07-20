@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,7 +20,7 @@ class ShowRoomsResource extends JsonResource
             'number' =>$this -> number,
             'name' =>$this -> name,
             'status' =>$this -> status,
-            "room_type_id"=>$this->room_type_id,
+            "room_type_id"=>RoomType::find($this->room_type_id),
             "hotel_id"=>$this->hotel_id
         ];
     }
