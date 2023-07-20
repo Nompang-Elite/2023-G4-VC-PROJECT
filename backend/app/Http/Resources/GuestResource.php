@@ -21,13 +21,22 @@ class GuestResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // $reservation = Reservations::find($this->reservation_id);
-        // $reservedRoom = ReservedRooms::find($reservation->id);
-        // $roomType = RoomType::find($reservedRoom->room_type_id);
-        // $user = User::find($reservation->user_id);
+        $hostedAt = HostedAt::find($this->user_id);
+        $occupied = OccupiedRooms::find($hostedAt->occupied_id);
+        $room = Rooms::find($occupied->room_id);
+        $roomType = RoomType::find($room->room_type_id);
 
+        $res = [
+            "id" => $this->id,
+            "date_in" => $this->date_in,
+            "date_out" => $this->date_out,
+            "made_by" => $this->made_by,
+            "user_id" => $this->user_id,
+            "hotel_id" => $this->hotel_id,
+            "room_status" => $room->number,
+            "room_type" => $roomType->name,
+        ];
 
-
-        return  [];
+        return  $res;
     }
 }

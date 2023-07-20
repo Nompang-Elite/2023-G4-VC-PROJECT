@@ -7,6 +7,7 @@ use App\Http\Resources\GuestResource;
 use App\Http\Resources\ReservedRoomsResource;
 use App\Models\Hotel;
 use App\Models\OccupiedRooms;
+use App\Models\Reservations;
 use App\Models\Rooms;
 use App\Models\RoomType;
 use App\Traits\HttpResponse;
@@ -27,7 +28,12 @@ class HotelGuestController extends Controller
         return $this->error("not found", 404);
     }
 
-    public function reservedGuestAtHotel(){
-        
+    public function reservedGuestAtHotel($id)
+    {
+        $reservation = GuestResource::collection(Reservations::where("hotel_id", $id)->get());
+
+        return $this->success(
+            $reservation
+        );
     }
 }

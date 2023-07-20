@@ -29,7 +29,7 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::get('/search', [HotelController::class, 'search']);
 
     Route::get('/{id}/guests', [HotelGuestController::class, 'getHotelGuests']);
-    Route::get('/guests/reserved', [HotelGuestController::class, 'reservedGuestAtHotel']);
+    Route::get('/{id}/guests/reserved', [HotelGuestController::class, 'reservedGuestAtHotel']);
 
     // Hotel routes goes here...
 });

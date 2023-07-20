@@ -17,18 +17,26 @@
         <v-table density="compact rounded-l" style="width: 80%; margin: auto; background-color: rgb(253, 250, 253); ">
           <thead>
             <tr>
-              <th class="text-left ">Name</th>
-              <th class="text-left">Calories</th>
-              <th class="text-left">Calories</th>
-              <th class="text-left">Calories</th>
+              <th class="text-left ">ID</th>
+              <th class="text-left">DATE_IN</th>
+              <th class="text-left">DATE_OUT</th>
+              <th class="text-left">STATUS</th>
+              <th class="text-left">USER_ID</th>
+              <th class="text-left">HOTEL_ID</th>
+              <th class="text-left">ROOM_NUMBER</th>
+              <th class="text-left">ROOM_TYPE</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(item, index) in items" :key="index">
-              <td>{{ item.name}}</td>
-              <td>{{ item.calories}}</td>
-              <td>{{ item.calories }}</td>
-              <td>{{ item.calories}}</td>
+              <td>{{ item.id}}</td>
+              <td>{{ item.date_in}}</td>
+              <td>{{ item.date_out }}</td>
+              <td>{{ item.made_by}}</td>
+              <td>{{ item.user_id}}</td>
+              <td>{{ item.hotel_id}}</td>
+              <td>{{ item.room_status}}</td>
+              <td>{{ item.room_type}}</td>
             </tr>
           </tbody>
         </v-table>
