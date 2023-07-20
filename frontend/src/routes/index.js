@@ -20,14 +20,22 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // Admin route gaurd:
   const userInfo = JSON.parse(sessionStorage.getItem("user_data"));
-  if (userInfo !== null) {
-    console.log(userInfo["user_type"]);
+  if (!(userInfo !== "null")) {
+    console.log(userInfo !== "null");
     if (
       userInfo["user_type"] === "admin" &&
       !to.meta.isAdmin &&
       !to.meta.isGuest
-    )
+    ) {
       next();
+    } else if (
+      userInfo["user_type"] === "hotel_owner" &&
+      !to.meta.isAdmin &&
+      !to.meta.isOwner &&
+      !to.meta.isGuest
+    ) {
+      next();
+    }
   } else if (to.meta.isGuest) {
     next();
   }
