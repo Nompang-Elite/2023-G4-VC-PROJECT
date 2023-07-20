@@ -92,6 +92,11 @@ const routes = [
         path: "",
         component: () => import("@/views/Hotels/HotelHomeView.vue"),
       },
+      // ----------------Route List room of hotel owner-----------
+      {
+        path: "rooms",
+        component: () => import("@/views/Hotels/HotelListRoom.vue"),
+      },
     ],
     meta: {
       isOwner: true,
@@ -106,20 +111,6 @@ const routes = [
     component: () => import("@/components/Errors/NotFound.vue"),
   },
 
-// ----------------Route List room of hotel owner-----------
-  {
-    path: "/listRoom",
-    name: "List room",
-    component: () => import("@/views/Hotels/ListRoom.vue"),
-  },
-
-  // ----------------Route List room of hotel owner-----------
-  {
-    path: "/roomType",
-    name: "Room Type",
-    component: () => import("@/views/Hotels/ListRoom.vue"),
-
-  },
   // More route goes here!!!
 ];
 

@@ -24,15 +24,15 @@ export default {
         },
         {
           text: "guests",
-          to: "/guests",
+          to: "/owner/guests",
         },
         {
           text: "rooms",
-          to: "/rooms",
+          to: "/owner/rooms",
         },
         {
           text: "reviews",
-          to: "/reviews",
+          to: "/owner/reviews",
         },
       ],
     };
