@@ -98,6 +98,22 @@ const routes = [
     ],
     meta: { isAdmin: false },
   },
+
+  {
+    path: "/owner",
+    children: [
+      {
+        path: "",
+        component: () => import("@/views/Hotels/HotelViews.vue"),
+      },
+      {
+        path: "users",
+        // component: () => import("@/views/Hotels/HotelViews.vue"),
+      },
+    ],
+    meta: { isOwner: false },
+  },
+
   // More route goes here!!!
 ];
 
