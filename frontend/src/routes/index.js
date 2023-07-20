@@ -18,26 +18,18 @@ const router = createRouter({
 // Route Gaurd solution :https://medium.com/js-dojo/how-to-implement-route-guard-in-vue-js-9929c93a13db
 
 router.beforeEach((to, from, next) => {
+  const uAdmin = JSON.parse(sessionStorage.getItem("admin_logged"));
+  const uOwner = JSON.parse(sessionStorage.getItem("owner_logged"));
   // Admin route gaurd:
-  const userInfo = JSON.parse(sessionStorage.getItem("user_data"));
-  if (!(userInfo !== "null")) {
-    console.log(userInfo !== "null");
-    if (
-      userInfo["user_type"] === "admin" &&
-      !to.meta.isAdmin &&
-      !to.meta.isGuest
-    ) {
-      next();
-    } else if (
-      userInfo["user_type"] === "hotel_owner" &&
-      !to.meta.isAdmin &&
-      !to.meta.isOwner &&
-      !to.meta.isGuest
-    ) {
-      next();
-    }
-  } else if (to.meta.isGuest) {
+  console.log(uOwner, to.meta.isOwner);
+  if (uOwner && to.meta.isOwner) {
     next();
+  } else if (uAdmin && to.meta.isAdmin) {
+    next();
+  } else if (!uOwner && !uAdmin && to.meta.isGuest) {
+    next();
+  } else {
+    next("/not_found");
   }
 });
 
