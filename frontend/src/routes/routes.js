@@ -72,7 +72,7 @@ const routes = [
          * Route to the detail views
          * */
         path: '/hotel/:id',
-        component: () => import("@/views/DetailHotel.vue"),
+        component: () => import("@/views/Guests/DetailHotel.vue"),
       },
     ],
     meta: { isGuest: true },
