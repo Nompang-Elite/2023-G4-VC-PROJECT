@@ -4,10 +4,21 @@ import { defineStore } from "pinia";
 export const useGuestStore = defineStore("Guest", {
   state() {
     return {
-      results: [],
+      // Reviews options
+      review: {
+        isPosted: false,
+        isNotPosted: false,
+        isValidReview: false,
+        reviewDialog: false,
+        reviewsInfo: {
+          ratingVal: 0,
+          comment: null,
+        },
+      },
     };
   },
   actions: {
+    // Searching
     getSearchData(input) {
       api.api_base
         .get("/hotel/search?s=" + input)
@@ -17,6 +28,12 @@ export const useGuestStore = defineStore("Guest", {
         .catch((err) => console.log(err));
       // Return true if there is data
       return this.results.length > 1;
+    },
+
+    // Posting reviews
+    postReview() {
+      const userReviewData = this.review.reviewsInfo;
+      return userReviewData;
     },
   },
 });
