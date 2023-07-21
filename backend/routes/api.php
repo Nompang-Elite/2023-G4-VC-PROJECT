@@ -4,7 +4,6 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\HotelController;
 use App\Http\Controllers\Api\HotelInfoController;
-use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\Api\RoomsController;
 use App\Http\Controllers\Api\RoomTypesController;
 use App\Http\Controllers\Api\ImageUploadController;
@@ -40,14 +39,14 @@ Route::group(['prefix' => 'hotel'], function () {
     //=============Rooms in hotel==========
     Route::get('/room/all', [RoomsController::class, 'index']);
     //=============Rooms in hotel==========
-    Route::get('/room_types/type' , [RoomTypesController::class, 'index']);
-    //=============Rooms in hotel==========
-    Route::post('/upload/image' , [ImageController::class, 'uploadImage']);
+    Route::get('/room_types/type', [RoomTypesController::class, 'index']);
 
 
     //======Search Routes=======
     Route::get('/search', [HotelController::class, 'search']);
 
+    //==========Images Routes =============
+    Route::get('/rooms/images', [RoomTypesController::class, "getAllRoomTypeImg"]);
     Route::post('/upload/image/{id}', [ImageUploadController::class, 'roomImageUpload']);
     // Hotel routes goes here...
 });
@@ -74,13 +73,3 @@ Route::get('/hotel/search', [HotelController::class, 'search']);
 
 // //HotelRoom
 // Route::get('/hotel/hotelRoom' , [HotelController::class, 'HotelRoom']);
-
-
-
-
-
-
-
-
-
-

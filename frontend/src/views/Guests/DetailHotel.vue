@@ -65,7 +65,6 @@ export default {
     api.api_base
       .get(`/hotel/info/${this.$route.params.id}`)
       .then((response) => {
-        console.log(this.hotel = response.data.data);
         this.hotels = response.data.data;
       })
       .catch((error) => {

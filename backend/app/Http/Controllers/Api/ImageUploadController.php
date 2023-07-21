@@ -42,7 +42,6 @@ class ImageUploadController extends Controller
             $filename = $file->hashName();
 
             $file->move(storage_path('\images'), $filename);
-
             $img = Images::create(
                 [
                     'hash_name' => $filename
