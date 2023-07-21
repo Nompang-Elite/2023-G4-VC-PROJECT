@@ -24,7 +24,7 @@ export default {
         },
         {
           text: "guests",
-          to: "/guests",
+          to: "/owner/guests",
         },
         {
           text: "rooms",

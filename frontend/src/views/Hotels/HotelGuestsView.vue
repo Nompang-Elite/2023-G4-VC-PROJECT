@@ -9,7 +9,7 @@ export default {
   components: { Table },
   created() {
     api.api_base
-    .get(`/hotel/1/guests/reserved`)
+    .get(`/hotel/3/guests/reserved`)
     .then((res) => {
       if (res.data) {
         // Assign the data to a component variable
