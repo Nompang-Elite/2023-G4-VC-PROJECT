@@ -30,7 +30,7 @@ class HotelGuestController extends Controller
 
     public function reservedGuestAtHotel($id)
     {
-        $reservation = GuestResource::collection(Reservations::where("hotel_id", $id)->get());
+        $reservation = GuestResource::collection(Reservations::where("hotel_id", (integer)$id)->get());
 
         return $this->success(
             $reservation
