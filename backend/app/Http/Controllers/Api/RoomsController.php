@@ -12,9 +12,18 @@ class RoomsController extends Controller
 {
     use HttpResponse;
     // ---------------get all rooms---------------
+    // public function index()
+    // {
+    //     $room = Rooms::all();
+    //     $room = ShowRoomsResource::collection($room);
+    //     if ($room)
+    //         return $this->success($room, "list of rooms");
+            
+    //     return $this->error("list is empty", 404);
+    // }
     public function index()
     {
-        $room = Rooms::all();
+        $room = Rooms::where('status','=','unoccupied')->get();
         $room = ShowRoomsResource::collection($room);
         if ($room)
             return $this->success($room, "list of rooms");

@@ -12,8 +12,16 @@
       </v-col>
 
       <v-col cols="2" class="mt-1 d-flex" style="margin: 5%">
-        <v-btn class="bg-red-darken-1" rounded="pill">OCCUPIED</v-btn>
-        <v-btn class="mx-4 bg-info" rounded="pill">UNOCCUPIED</v-btn>
+        <v-btn
+          class="bg-red-darken-1"
+          rounded="pill"
+          @click="Hotel.getOccupied"
+        >
+          OCCUPIED
+        </v-btn>
+        <v-btn class="mx-4 bg-info" rounded="pill" @click="Hotel.getUnoccupied">
+          UNOCCUPIED
+        </v-btn>
         <v-btn class="mx-4 bg-info" rounded="pill">Create</v-btn>
       </v-col>
     </v-row>
@@ -30,7 +38,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="room in rooms" :key="room.name">
+        <tr v-for="room in Hotel.rooms" :key="room.name">
           <td>{{ room.number }}</td>
           <td>{{ room.name }}</td>
           <td>{{ room.status }}</td>
@@ -59,36 +67,15 @@
   </v-container>
 </template>
 <script>
-import api from "@/routes/api";
+import { useHotelStore } from "@/store/HotelStore.js";
+import { reactive } from "vue";
 export default {
-  data() {
-    return {
-      rooms: {},
-    };
+  setup() {
+    const Hotel = reactive(useHotelStore());
+    return { Hotel };
   },
   beforeMount() {
-    // Solution : https://www.w3schools.blog/get-cookie-by-name-javascript-js
-    function getCookie(cookieName) {
-      let cookie = {};
-      document.cookie.split(";").forEach(function (el) {
-        let [key, value] = el.split("=");
-        cookie[key.trim()] = value;
-      });
-      return cookie[cookieName];
-    }
-    api.api_base
-      .get("/hotel/rooms", {
-        headers: {
-          Authorization: `Bearer ${getCookie("access_token")}`,
-        },
-      })
-      .then((res) => {
-        console.log(res.data.data);
-        this.rooms = res.data.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.Hotel.getRooms();
   },
 };
 </script>

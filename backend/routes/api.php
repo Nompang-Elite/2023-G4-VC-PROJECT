@@ -28,22 +28,16 @@ Route::get('/hotel/search', [HotelController::class, 'search']);
 
 
 // ------------- Route hotel owner--------------
-Route::get('/hotel/rooms', [RoomsController::class, 'index']);
+Route::get('/all/rooms', [RoomsController::class, 'index']);
 
 //Room_Type
-Route::get('/hotel/room_types' , [RoomTypesController::class, 'index']);
+Route::get('/hotel/room_types', [RoomTypesController::class, 'index']);
 
-//Occupied Room
-Route::get('/hotel/occupied' , [OccupiedRoomsController::class, 'index']);
+//Occupied Room 
+Route::get('/hotel/occupied', [OccupiedRoomsController::class, 'index']);
 
 //HotelRoom
-Route::get('/hotel/hotelRoom' , [HotelController::class, 'HotelRoom']);
-
-
-
-
-
-
+Route::get('/hotel/rooms', [HotelController::class, 'HotelRoom']);
 
 
 
