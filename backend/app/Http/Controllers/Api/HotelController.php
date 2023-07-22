@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ShowHotelResource;
 use App\Models\Hotel;
+use App\Models\Reviews;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,5 +42,14 @@ class HotelController extends Controller
         }
         // Error if no result
         return $this->error("not match!");
+    }
+
+    // Hotel reveiews
+    public function getHotelReviews(Request $req)
+    {
+        if (count($reviews = Reviews::where("hotel_id", (int)$req->input("hotel_id"))->get()) >= 1) {
+            return $this->success($reviews, "reviews");
+        }
+        return $this->error("no reviews", 404);
     }
 };
