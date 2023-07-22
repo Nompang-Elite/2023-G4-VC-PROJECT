@@ -60,7 +60,16 @@ export const useGuestStore = defineStore("Guest", {
         .then((res) => {
           console.log(res);
           this.getHotelReviews(id);
-          this.isPosted = true;
+          // Reset input
+          this.review = {
+            reviewDialog: false,
+            reviewsInfo: {
+              rate: 0,
+              comment: null,
+            },
+          };
+          // Display success message
+          this.review.isPosted = true;
         })
         .catch((err) => {
           console.log(err);

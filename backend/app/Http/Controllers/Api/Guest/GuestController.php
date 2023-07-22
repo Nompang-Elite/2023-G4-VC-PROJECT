@@ -58,7 +58,7 @@ class GuestController extends Controller
 
             $reviews["user_id"] = auth()->user()->id;
 
-            $this->calRating($reviews->hotel_id);
+            $this->calRating($reviews["hotel_id"]);
 
             return $this->success(
                 Reviews::create(
