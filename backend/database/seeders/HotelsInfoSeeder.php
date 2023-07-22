@@ -41,25 +41,7 @@ class HotelsInfoSeeder extends Seeder
                 "phone" => "0123456789",
                 "email" => "angkorpalacehotels@gmail.com",
                 "hotel_id" => 2,
-            ],
-            [
-                "address" => "duan penh",
-                "city" => "phnom penh",
-                "country" => "cambodia",
-                "postal_code" => "000000",
-                "phone" => "0123456789",
-                "email" => "angkorriverhotels@gmail.com",
-                "hotel_id" => 3,
-            ],
-            [
-                "address" => "duan penh",
-                "city" => "phnom penh",
-                "country" => "cambodia",
-                "postal_code" => "000000",
-                "phone" => "0123456789",
-                "email" => "angkorglowhotels@gmail.com",
-                "hotel_id" => 4,
-            ],
+            ]
         ];
         foreach ($hotelInfo as $info) {
             HotelInfo::create($info);
