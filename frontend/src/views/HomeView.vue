@@ -2,15 +2,13 @@
   <Carousel :slides="topHotels" />
   <!-- Using the items props to pass down the data list for card -->
   <Card :items="hotels" container-name="Top Reviews" />
-  <ReviewsSection />
 </template>
 <script>
 import Carousel from "@/components/Others/CarouselCover.vue";
 import Card from "@/components/Cards/HotelCard.vue";
-import ReviewsSection from "@/components/Sections/ReviewsSection.vue";
 import api from "@/routes/api";
 export default {
-  components: { Carousel, Card, ReviewsSection },
+  components: { Carousel, Card },
   data() {
     return {
       hotels: [],
