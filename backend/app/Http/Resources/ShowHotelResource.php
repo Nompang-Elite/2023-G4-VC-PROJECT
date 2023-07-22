@@ -15,11 +15,11 @@ class ShowHotelResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' =>$this -> id,
-            'name' =>$this -> name,
-            'image' =>$this -> image,
-            'location' =>$this -> location,
-            'description' =>$this -> description,
+            'id' => $this->id,
+            'name' => $this->name,
+            'rate' => $this->rate,
+            'location' => $this->location,
+            'description' => $this->description,
         ];
     }
 }
