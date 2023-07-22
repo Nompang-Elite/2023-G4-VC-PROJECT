@@ -11,13 +11,30 @@ export const useGuestStore = defineStore("Guest", {
         isValidReview: false,
         reviewDialog: false,
         reviewsInfo: {
-          ratingVal: 0,
+          rate: 0,
           comment: null,
         },
       },
+      hotelReviews: [],
     };
   },
   actions: {
+    //getCookie Code from: https://www.w3schools.com/js/js_cookies.asp
+    getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(";");
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
     // Searching
     getSearchData(input) {
       api.api_base
@@ -31,9 +48,46 @@ export const useGuestStore = defineStore("Guest", {
     },
 
     // Posting reviews
-    postReview() {
-      const userReviewData = this.review.reviewsInfo;
-      return userReviewData;
+    postReview(id) {
+      let userReviewData = this.review.reviewsInfo;
+      userReviewData["hotel_id"] = id;
+      api.api_base
+        .post("/guest/post/review", userReviewData, {
+          headers: {
+            Authorization: "Bearer" + this.getCookie("access_token"),
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          this.getHotelReviews(id);
+          this.isPosted = true;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      console.log(userReviewData, id);
+    },
+
+    getHotelReviews(id) {
+      api.api_base
+        .post("/hotel/reviews", { hotel_id: id })
+        .then((res) => {
+          this.hotelReviews = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    isLoggedIn() {
+      if (JSON.parse(sessionStorage.getItem("user_logged"))) {
+        if (
+          JSON.parse(sessionStorage.getItem("user_data")).user_type === "guest"
+        ) {
+          return true;
+        }
+        return false;
+      }
+      return false;
     },
   },
 });

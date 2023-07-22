@@ -1,11 +1,5 @@
 <template>
   <!--How to use v-rating:  https://codingbeautydev.com/blog/vuetify-rating/ -->
-  <v-btn
-    @click.prevent="Guest.review.reviewDialog = !Guest.review.reviewDialog"
-  >
-    Reviews
-  </v-btn>
-
   <!-- Review dialog -->
   <v-dialog
     width="auto"
@@ -19,7 +13,7 @@
       </v-card-title>
       <v-card-subtitle>
         <!-- Rate -->
-        <v-rating v-model="Guest.review.reviewsInfo.ratingVal"></v-rating>
+        <v-rating v-model="Guest.review.reviewsInfo.rate"></v-rating>
       </v-card-subtitle>
       <v-card-text>
         <v-form v-model="Guest.review.isValidReview">
@@ -45,6 +39,7 @@
           variant="elevated"
           rounded="xl"
           :disabled="!Guest.review.isValidReview"
+          @click.prevent="Guest.postReview(1)"
           >submit</v-btn
         >
       </v-card-actions>

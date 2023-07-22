@@ -24,6 +24,7 @@ class GuestController extends Controller
         $validate = Validator::make(
             $req->input(),
             [
+                "rate" => "required|numeric",
                 "hotel_id" => "required",
                 "comment" => "required|min:10|string|",
             ]
