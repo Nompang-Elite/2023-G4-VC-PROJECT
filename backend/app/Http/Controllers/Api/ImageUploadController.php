@@ -8,7 +8,6 @@ use App\Models\Images;
 use App\Models\RoomImages;
 use App\Models\UserImages;
 use App\Http\Resources\Hotels\HotelImages as HotelImagesResource;
-use App\Models\Hotel;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -107,6 +106,8 @@ class ImageUploadController extends Controller
 
     public function getHotelImages(Request $req)
     {
+        // NOTE: To use the base64 has in img src, the "data:image/*;base64," need to be included.
+        // References : https://stackoverflow.com/questions/7650587/using-javascript-to-display-a-blob
         $hotelImages = HotelImagesResource::collection(HotelImages::where("hotel_id", $req->hotel_id)->get());
         return $this->success(
             $hotelImages
