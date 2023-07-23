@@ -17,11 +17,16 @@
               <v-col cols="6">
                 <v-card-title> {{ Hotel.hotelInfo.name }}</v-card-title>
                 <v-card-subtitle>
-                  <v-rating size="20" v-model="Hotel.hotelInfo.rate"></v-rating>
+                  <v-rating
+                    disabled
+                    color="yellow"
+                    size="20"
+                    v-model="Hotel.hotelInfo.rate"
+                  ></v-rating>
                 </v-card-subtitle>
-                <span>
+                <v-sheet class="ma-4 text-justify">
                   {{ Hotel.hotelInfo.description }}
-                </span>
+                </v-sheet>
               </v-col>
             </v-row>
           </v-card-text>
@@ -35,9 +40,13 @@
             >
           </v-card-actions>
         </v-card>
-        <v-card class="my-4" rounded="xl">
+        <v-card class="my-4" rounded="lg">
+          <v-card-title> Hotel images </v-card-title>
+          <v-card-subtitle>{{ Hotel.hotelInfo.name }}</v-card-subtitle>
           <v-card-text>
-            <CarouselCover rounded="xl" :slides="Hotel.hotelImgs" />
+            <v-sheet rounded="xl">
+              <CarouselCover :slides="Hotel.hotelImgs" />
+            </v-sheet>
           </v-card-text>
         </v-card>
       </v-col>
