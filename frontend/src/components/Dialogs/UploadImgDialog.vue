@@ -19,6 +19,7 @@
           variant="solo"
           label="Select your image"
           v-model="Hotel.imgFiles"
+          :rules="Hotel.imgRules"
         ></v-file-input>
       </v-card-text>
       <v-card-actions class="mx-4 mb-4">

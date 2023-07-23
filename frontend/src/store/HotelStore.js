@@ -10,6 +10,14 @@ export const useHotelStore = defineStore("Hotel", {
       imgFiles: [],
       imgDecoder: "data:image/*;base64,",
       hotelId: null,
+      //Rules validation from: https://stackoverflow.com/questions/60108629/how-can-i-validate-the-maximum-file-size-is-2-mb-per-file-for-multiple-files-v
+      imgRules: [
+        (files) =>
+          !files ||
+          // Using some() function to test each files, while form is multi-file
+          !files.some((file) => file.size > 2_097_152) ||
+          "Images size should be less than 2 MB!",
+      ],
     };
   },
   actions: {
@@ -36,7 +44,6 @@ export const useHotelStore = defineStore("Hotel", {
     },
     uploadHotelImg() {
       this.imgFiles.forEach((file) => {
-        console.log({ hotel_id: this.hotelId, image: file }, file.type);
         api.api_base
           .post(
             "/hotel/upload/image",
