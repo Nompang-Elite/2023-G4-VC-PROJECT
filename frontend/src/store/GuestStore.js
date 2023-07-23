@@ -98,5 +98,6 @@ export const useGuestStore = defineStore("Guest", {
       }
       return false;
     },
+    getAllHotel() {},
   },
 });
