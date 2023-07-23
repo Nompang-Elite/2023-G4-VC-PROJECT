@@ -9,6 +9,6 @@ class Images extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "hash_name"
+        "image_hash"
     ];
 }

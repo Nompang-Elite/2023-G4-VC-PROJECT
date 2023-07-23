@@ -28,8 +28,8 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::get('/', [HotelController::class, 'index']);
     Route::get('/search', [HotelController::class, 'search']);
 
-    Route::post('/upload/image/{id}', [ImageUploadController::class, 'roomImageUpload']);
-
+    Route::post('/upload/image', [ImageUploadController::class, 'hotelImageUpload']);
+    Route::post('/get/images', [ImageUploadController::class, "getHotelImages"]);
     Route::post('/reviews', [HotelController::class, "getHotelReviews"]);
     // Hotel routes goes here...
 });

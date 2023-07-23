@@ -7,6 +7,8 @@ use App\Models\HotelImages;
 use App\Models\Images;
 use App\Models\RoomImages;
 use App\Models\UserImages;
+use App\Http\Resources\Hotels\HotelImages as HotelImagesResource;
+use App\Models\Hotel;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +19,7 @@ class ImageUploadController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth:api'])->except(['roomImageUpload']);
+        $this->middleware(['auth:api'])->except(['getHotelImages', 'roomImageUpload', 'hotelImageUpload']);
     }
 
     public function  uploadImage($req)
@@ -27,7 +29,6 @@ class ImageUploadController extends Controller
         // $req->validate([
         //     "image" => "required|image|mimes:png,jpg|max:2048"
         // ]);
-
         $validate = Validator::make(
             ["image" => $req->image],
             [
@@ -35,17 +36,21 @@ class ImageUploadController extends Controller
             ]
         );
 
+        // dd(base64_encode(file_get_contents($req->image)));
+
         if (!$validate->fails()) {
 
             $file = $req->image;
-
-            $filename = $file->hashName();
-
-            $file->move(storage_path('\images'), $filename);
+            // Solution: https://stackoverflow.com/questions/71292454/how-can-i-store-the-images-as-blob-file-in-database-using-laravel-8
+            // Decode blob file to base64:
+            $ecodedToBase64 = base64_encode(
+                // Get file as blob:
+                file_get_contents($file)
+            );
 
             $img = Images::create(
                 [
-                    'hash_name' => $filename
+                    'image_hash' => $ecodedToBase64
                 ]
             );
             return $img;
@@ -97,6 +102,14 @@ class ImageUploadController extends Controller
                 ]
             ),
             "hotel image uploaded"
+        );
+    }
+
+    public function getHotelImages(Request $req)
+    {
+        $hotelImages = HotelImagesResource::collection(HotelImages::where("hotel_id", $req->hotel_id)->get());
+        return $this->success(
+            $hotelImages
         );
     }
 }
