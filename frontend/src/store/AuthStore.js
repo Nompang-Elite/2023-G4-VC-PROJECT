@@ -118,6 +118,10 @@ export const useAuthStore = defineStore("Auth", {
     convertToArray(t) {
       return JSON.parse(JSON.stringify(t));
     },
+    // Get logged user
+    getUser() {
+      return JSON.parse(sessionStorage.getItem("user_data"));
+    },
   },
 });
 

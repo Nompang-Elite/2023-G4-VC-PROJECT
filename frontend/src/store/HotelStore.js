@@ -1,11 +1,23 @@
+import api from "@/routes/api";
 import { defineStore } from "pinia";
-export const useHotelStore = defineStore("Auth", {
+export const useHotelStore = defineStore("Hotel", {
   state() {
     return {
-      hotelInfo: null,
+      hotelInfo: {},
+      hotelId: null,
     };
   },
   actions: {
-    getHotelInfo() {},
+    getHotelInfo() {
+      api.api_base
+        .post("/hotel/info", { hotel_id: this.hotelId })
+        .then((result) => {
+          console.log(result.data.data.name);
+          this.hotelInfo = result.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 });

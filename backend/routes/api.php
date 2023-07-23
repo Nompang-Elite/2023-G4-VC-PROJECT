@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Guest\GuestController;
 use App\Http\Controllers\Api\HotelController;
+use App\Http\Controllers\Api\Hotels\HotelController as HotelsHotelController;
 use App\Http\Controllers\Api\ImageUploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,8 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::post('/upload/image', [ImageUploadController::class, 'hotelImageUpload']);
     Route::post('/get/images', [ImageUploadController::class, "getHotelImages"]);
     Route::post('/reviews', [HotelController::class, "getHotelReviews"]);
+
+    Route::post('/info', [HotelsHotelController::class, "getHotelInfo"]);
     // Hotel routes goes here...
 });
 
