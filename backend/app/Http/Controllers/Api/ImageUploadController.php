@@ -71,13 +71,13 @@ class ImageUploadController extends Controller
         );
     }
 
-    public function roomImageUpload(Request $req, $roomId)
+    public function roomImageUpload(Request $req)
     {
         $img =  $this->uploadImage($req);
         return $this->success(
             RoomImages::create(
                 [
-                    "room_id" => $roomId,
+                    "room_id" => $req->room_type,
                     "image_id" => $img->id
                 ]
             ),
@@ -86,13 +86,13 @@ class ImageUploadController extends Controller
         );
     }
 
-    public function hotelImageUpload(Request $req, $hotelId)
+    public function hotelImageUpload(Request $req)
     {
         $img =  $this->uploadImage($req);
         return $this->success(
             HotelImages::create(
                 [
-                    "hotel_id" => $hotelId,
+                    "hotel_id" => $req->hotel_id,
                     "image_id" => $img->id
                 ]
             ),
