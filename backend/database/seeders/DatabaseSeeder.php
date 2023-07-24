@@ -45,5 +45,8 @@ class DatabaseSeeder extends Seeder
         OccupiedRooms::factory(4)->create();
         // Reviews
         Reviews::factory(4)->create();
+        // Image
+        $this->call(ImagesSeeder::class);
+        $this->call(HotelImagesSeeder::class);
     }
 }
