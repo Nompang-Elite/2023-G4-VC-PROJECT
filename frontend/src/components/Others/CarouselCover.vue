@@ -10,21 +10,6 @@
       </v-img>
     </v-carousel-item>
   </v-carousel>
-  <v-carousel
-    hide-delimiters
-    show-arrows="hover"
-    height="260"
-    class="rounded-xl"
-    interval="3000"
-  >
-    <v-carousel-item
-      v-for="(roomImg, i) in roomImgs"
-      :key="i"
-      cover
-      :src="roomImg.img"
-    >
-    </v-carousel-item>
-  </v-carousel>
 </template>
 <script>
 export default {

@@ -1,90 +1,87 @@
 <template>
-    <v-dialog v-model="dialog">
-      <template v-slot:activator="{ props }">
-        <v-btn color="primary" v-bind="props"> Show Dtail </v-btn>
-      </template>
-      <v-sheet width="800" class="mx-auto pa-10 spacing-playground rounded-xl">
-        <v-card flat>
-          <v-card-text>
-            <v-row class="mb-2">
-              <v-col cols="3">
-                <v-img
-                  src="https://picsum.photos/300/300"
-                  class="rounded-xl"
-                ></v-img>
-              </v-col>
-              <v-col cols="9">
-                <v-card-title> Cards title </v-card-title>
-                <v-card-subtitle> Description </v-card-subtitle>
-              </v-col>
-            </v-row>
-  
-            <v-sheet elevation="4" rounded="xl">
-              <v-carousel
-                hide-delimiters
-                show-arrows="hover"
-                height="260"
-                class="rounded-xl"
-                interval="3000"
-              >
-                <v-carousel-item
-                  v-for="(roomImg, i) in roomImgs"
-                  :key="i"
-                  cover
-                  :src="roomImg.img"
-                >
-                </v-carousel-item>
-              </v-carousel>
+  <v-btn @click.prevent="Guest.bookingDialog = !Guest.bookingDialog"
+    >Booking</v-btn
+  >
+  <v-dialog v-model="Guest.bookingDialog" width="auto">
+    <v-card width="50rem" rounded="xl" class="pa-4">
+      <v-card-text>
+        <v-row>
+          <v-col cols="4"> </v-col>
+          <v-col cols="8">
+            <v-card-title> Card name </v-card-title>
+            <v-card-subtitle> Card name </v-card-subtitle>
+            <v-sheet class="pa-4 text-justify">
+              <span>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
+                illum officia doloremque at? In totam ratione nihil tenetur
+                debitis, dolorem suscipit qui quod ab iste harum laudantium
+                dolor, voluptates tempora?
+              </span>
             </v-sheet>
-  
-            <v-row class="mt-3">
-              <v-col cols="3">
-                <VueDatePicker
-                  v-model="checkInDate"
-                  placeholder="Check In"
-                ></VueDatePicker>
-              </v-col>
-              <v-col cols="3">
-                <VueDatePicker
-                  v-model="checkOutDate"
-                  placeholder="Check Out"
-                ></VueDatePicker>
-              </v-col>
-                <v-spacer></v-spacer>
-              <v-card-actions>
-                <v-btn variant="elevated" width="100" rounded="pill" color="info">Book</v-btn>
-              </v-card-actions>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-sheet>
-    </v-dialog>
-  </template>
-  <script>
-  import VueDatePicker from "@vuepic/vue-datepicker";
-  export default {
-    components: { VueDatePicker },
-    data() {
-      return {
-        checkInDate: null,
-        checkOutDate: null,
-        dialog: false,
-        roomImgs: [
-          {
-            img: "https://picsum.photos/600/300",
-            count: 1,
-          },
-          {
-            img: "https://picsum.photos/600/300",
-            count: 2,
-          },
-          {
-            img: "https://picsum.photos/600/300",
-            count: 3,
-          },
-        ],
-      };
-    },
-  };
-  </script>
-  
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12">
+            <v-carousel height="300" hide-delimiters cycle interval="3500">
+              <!-- Carousel Item -->
+              <v-carousel-item v-for="(room, i) in Guest.roomImgs" :key="i">
+                <v-img aspect-ratio="16/9" cover>
+                  <!-- :src="'data:image/*;base64,' + room.image_hash" -->
+                </v-img>
+                <v-sheet color="black" height="100%">
+                  {{ room.image_hash }}
+                </v-sheet>
+              </v-carousel-item>
+            </v-carousel>
+          </v-col>
+        </v-row>
+
+        <v-card-actions class="mt-4">
+          <v-row>
+            <v-col cols="8">
+              <VueDatePicker
+                disable-year-select
+                placeholder="From : To Date"
+                model-type="dd.MM.yyyy"
+                v-model="Guest.date"
+                :min-date="Guest.date.startDate"
+                range
+              />
+            </v-col>
+            <v-col cols="4">
+              <v-btn
+                @click.prevent="Guest.bookRoomType"
+                block
+                variant="elevated"
+                color="info"
+                rounded="xl"
+              >
+                Booking
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-card-actions>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
+</template>
+
+<script>
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+import { useGuestStore } from "@/store/GuestStore";
+import { ref } from "vue";
+export default {
+  components: { VueDatePicker },
+  setup() {
+    const Guest = ref(useGuestStore());
+    return { Guest };
+  },
+  onMount() {
+    // Set end date to 7 day max
+    this.Guest.date.endDate = new Date(
+      new Date().setDate(this.Guest.startDate.getDate() + 7)
+    );
+  },
+};
+</script>

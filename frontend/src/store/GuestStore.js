@@ -18,6 +18,26 @@ export const useGuestStore = defineStore("Guest", {
         },
       },
       hotelReviews: [],
+      // Booking section ===========================
+      // Room Imgs slide
+      roomImgs: [
+        {
+          image_hash: 1,
+        },
+        {
+          image_hash: 2,
+        },
+        {
+          image_hash: 3,
+        },
+      ],
+      // Dialog activator
+      bookingDialog: true,
+      // Date
+      date: {
+        startDate: new Date(),
+        endDate: null,
+      },
     };
   },
   actions: {
@@ -102,5 +122,12 @@ export const useGuestStore = defineStore("Guest", {
       return false;
     },
     getAllHotel() {},
+    // Booking ================================
+    bookRoomType() {
+      if (this.date[0] < this.date[1]) {
+        console.log("Correct");
+      }
+      console.log("Incorrect date");
+    },
   },
 });
