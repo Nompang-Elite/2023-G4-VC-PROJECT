@@ -15,6 +15,7 @@ import AdminLoginDialog from "./components/Dialogs/AdminLoginDialog.vue";
 import { useAuthStore } from "./store/AuthStore";
 import { reactive } from "vue";
 export default {
+  title: "Home",
   created() {
     if (JSON.parse(sessionStorage.getItem("adminSecret"))) {
       this.Auth.adminLog = true;
