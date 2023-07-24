@@ -1,5 +1,5 @@
 <template>
-  <Carousel :slides="topHotels" />
+  <Carousel :slides="hotels" />
   <!-- Using the items props to pass down the data list for card -->
   <Card :items="hotels" container-name="Top Reviews" />
 </template>
