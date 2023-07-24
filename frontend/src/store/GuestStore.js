@@ -4,6 +4,8 @@ import { defineStore } from "pinia";
 export const useGuestStore = defineStore("Guest", {
   state() {
     return {
+      // Loading
+      loading: false,
       // Reviews options
       review: {
         isPosted: false,
@@ -49,6 +51,7 @@ export const useGuestStore = defineStore("Guest", {
 
     // Posting reviews
     postReview(id) {
+      this.loading = true;
       let userReviewData = this.review.reviewsInfo;
       userReviewData["hotel_id"] = id;
       api.api_base
@@ -57,9 +60,9 @@ export const useGuestStore = defineStore("Guest", {
             Authorization: "Bearer" + this.getCookie("access_token"),
           },
         })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           this.getHotelReviews(id);
+          this.loading = false;
           // Reset input
           this.review = {
             reviewDialog: false,

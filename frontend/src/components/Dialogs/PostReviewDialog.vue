@@ -40,6 +40,7 @@
           rounded="xl"
           :disabled="!Guest.review.isValidReview"
           @click.prevent="Guest.postReview(1)"
+          :loading="Guest.loading"
           >submit</v-btn
         >
       </v-card-actions>
