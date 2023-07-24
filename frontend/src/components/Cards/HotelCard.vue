@@ -2,7 +2,7 @@
   <!-- Card container -->
   <v-container class="mb-8">
     <header class="py-4 text-h6">{{ containerName }}</header>
-    <v-row>
+    <v-row v-if="items.length > 1">
       <v-col cols="4" v-for="(item, i) in items" :key="i">
         <!-- Set card hovering effect -->
         <v-hover v-slot="{ isHovering, props }">
@@ -18,11 +18,12 @@
             <v-img
               class="align-end text-white"
               height="200"
-              :src="item.image"
+              :src="'data:image/*;base64,' + item.image_hash"
               cover
             >
-              <v-card-title>{{ item.name }}</v-card-title>
             </v-img>
+
+            <v-card-title>{{ item.name }}</v-card-title>
 
             <v-card-subtitle class="pt-4">
               {{ item.location }}
@@ -34,9 +35,12 @@
 
             <v-card-actions class="ma-2">
               <!-- Rating point -->
-              <div v-for="i in item.rate" :key="i">
-                <v-icon color="yellow">mdi-star</v-icon>
-              </div>
+              <v-rating
+                color="yellow"
+                size="20"
+                v-model="item.rate"
+                disabled
+              ></v-rating>
               <v-spacer></v-spacer>
               <v-btn rounded="xl" color="info" variant="elevated" class="px-4">
                 Details

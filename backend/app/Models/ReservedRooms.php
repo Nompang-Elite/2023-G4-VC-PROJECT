@@ -13,7 +13,6 @@ class ReservedRooms extends Model
         "number_of_room",
         "status",
         "reservation_id",
-        "reservation_id",
         "room_type_id",
     ];
 }

@@ -24,7 +24,64 @@
 
     <v-spacer></v-spacer>
     <!-- Buttons Options -->
-    <div v-if="!checkUser()">
+    <div v-if="Auth.userLogged()">
+      <v-btn
+        variant="elevated"
+        color="info"
+        prepend-icon="mdi-history"
+        class="mr-2"
+        rounded="xl"
+        text="History"
+      >
+      </v-btn>
+      <v-btn
+        variant="elevated"
+        color="info"
+        prepend-icon="mdi-cart"
+        class="mr-2"
+        rounded="xl"
+        text="Booking"
+      >
+      </v-btn>
+      <!-- <v-btn
+        variant="elevated"
+        color="red"
+        icon="mdi-logout"
+        class="mr-2"
+        size="44"
+        @click.prevent="Auth.logout()"
+      >
+      </v-btn> -->
+
+      <v-menu>
+        <template v-slot:activator="{ props }">
+          <v-btn
+            class="mr-2"
+            color="info"
+            size="38"
+            variant="elevated"
+            v-bind="props"
+            icon="mdi-menu"
+          >
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            to=""
+            prepend-icon="mdi-cog"
+            title="Setting"
+          >
+          </v-list-item>
+          <v-list-item
+            @click.prevent="Auth.logout()"
+            prepend-icon="mdi-logout"
+            title="Logout"
+          >
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </div>
+    <div v-else>
       <v-btn
         text="Login"
         variant="elevated"
@@ -32,7 +89,7 @@
         prepend-icon="mdi-account-circle-outline"
         class="mr-2"
         rounded="xl"
-        @click.prevent="login = !login"
+        @click.prevent="Auth.loginDialog = !Auth.loginDialog"
       >
       </v-btn>
       <v-btn
@@ -42,23 +99,10 @@
         prepend-icon="mdi-account-plus"
         class="mr-6"
         rounded="xl"
-        @click.prevent="register = !register"
+        @click.prevent="Auth.registerDialog = !Auth.registerDialog"
       >
       </v-btn>
     </div>
-    <div v-else>
-      <v-btn
-        text="Logout"
-        variant="elevated"
-        color="info"
-        prepend-icon="mdi-logout"
-        class="mr-6"
-        rounded="xl"
-        @click.prevent="logout"
-      >
-      </v-btn>
-    </div>
-
     <!-- Add more options here! with v-if checkUserData().role -->
 
     <!-- Toolbar for cutomers -->
@@ -77,11 +121,11 @@
 
 <script>
 import { useAuthStore } from "@/store/AuthStore";
-import { toRefs } from "vue";
+import { reactive } from "vue";
 export default {
   setup() {
-    const Auth = useAuthStore();
-    return toRefs(Auth);
+    const Auth = reactive(useAuthStore());
+    return { Auth };
   },
   // Search bar loading
   data: () => ({

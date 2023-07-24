@@ -18,26 +18,61 @@ class RoomTypesSeeder extends Seeder
                 "name" => "vip",
                 "max_capacity" => 4,
                 "bed_count" => 2,
+                "hotel_id" => 1,
             ],
             [
                 "name" => "normal_single_bed",
                 "max_capacity" => 2,
                 "bed_count" => 1,
+                "hotel_id" => 1,
             ],
             [
                 "name" => "normal_double_bed",
                 "max_capacity" => 4,
                 "bed_count" => 2,
+                "hotel_id" => 1,
             ],
             [
                 "name" => "famliy_small",
                 "max_capacity" => 6,
                 "bed_count" => 2,
+                "hotel_id" => 1,
             ],
             [
                 "name" => "famliy_big",
                 "max_capacity" => 6,
                 "bed_count" => 3,
+                "hotel_id" => 1,
+            ],
+            [
+                "name" => "vip",
+                "max_capacity" => 4,
+                "bed_count" => 2,
+                "hotel_id" => 2,
+            ],
+            [
+                "name" => "normal_single_bed",
+                "max_capacity" => 2,
+                "bed_count" => 1,
+                "hotel_id" => 2,
+            ],
+            [
+                "name" => "normal_double_bed",
+                "max_capacity" => 4,
+                "bed_count" => 2,
+                "hotel_id" => 2,
+            ],
+            [
+                "name" => "famliy_small",
+                "max_capacity" => 6,
+                "bed_count" => 2,
+                "hotel_id" => 2,
+            ],
+            [
+                "name" => "famliy_big",
+                "max_capacity" => 6,
+                "bed_count" => 3,
+                "hotel_id" => 2,
             ],
         ];
         foreach ($roomType as $type) {

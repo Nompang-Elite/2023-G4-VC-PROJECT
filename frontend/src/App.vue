@@ -1,67 +1,67 @@
 <template>
   <v-app>
-    <NavBar @search-input="search" />
-    <!-- Login and register dialog container  -->
-    <v-container v-if="!Auth.checkUser()">
-      <login />
-      <Register />
-    </v-container>
-    <v-main>
-      <!--Router transition: https://www.youtube.com/watch?v=gAwKhi7Huhc -->
-      <router-view v-slot="{ Component, route }">
-        <Transition name="main" mode="out-in">
-          <!-- Solution from : https://stackoverflow.com/questions/65553121/vue-3-transition-renders-non-element-root-node-that-cannot-be-animated -->
-          <div :key="route.name">
-            <component :is="Component" />
-          </div>
-        </Transition>
-      </router-view>
-    </v-main>
-
-    <Footer />
+    <AdminLoginDialog v-if="Auth.adminLog" />
+    <GuestsViews v-if="Auth.guestView" />
+    <HotelViews v-if="Auth.hotelView" />
+    <AdminViews v-if="Auth.adminView" />
   </v-app>
 </template>
 
 <script>
-import NavBar from "@/components/Navigations/NavBar.vue";
-import Footer from "@/components/Navigations/FooterNav.vue";
-import Login from "@/components/Dialogs/LoginDialog.vue";
-import Register from "@/components/Dialogs/RegisterDialog.vue";
-import { useAuthStore } from "@/store/AuthStore";
-import { useUserStore } from "@/store/UserStore";
-// import api from "@/routes/api";
+import GuestsViews from "./views/Guests/GuestsViews.vue";
+import HotelViews from "./views/Hotels/HotelViews.vue";
+import AdminViews from "./views/Admin/AdminViews.vue";
+import AdminLoginDialog from "./components/Dialogs/AdminLoginDialog.vue";
+import { useAuthStore } from "./store/AuthStore";
+import { reactive } from "vue";
 export default {
+  title: "Home",
+  created() {
+    if (JSON.parse(sessionStorage.getItem("adminSecret"))) {
+      this.Auth.adminLog = true;
+    } else if (JSON.parse(sessionStorage.getItem("admin_logged"))) {
+      sessionStorage.removeItem("user_logged");
+      this.Auth.adminView = true;
+      this.Auth.guestView = !this.Auth.adminView;
+    } else if (JSON.parse(sessionStorage.getItem("owner_logged"))) {
+      this.Auth.hotelView = true;
+      this.Auth.guestView = !this.Auth.hotelView;
+    } else if (
+      !JSON.parse(sessionStorage.getItem("user_logged")) &&
+      !JSON.parse(sessionStorage.getItem("owner_logged"))
+    ) {
+      this.Auth.clearUserData();
+    }
+  },
   setup() {
-    const Auth = useAuthStore();
-    const User = useUserStore();
-    return { Auth, User };
+    const Auth = reactive(useAuthStore());
+    return {
+      Auth,
+    };
   },
-  components: { NavBar, Footer, Login, Register },
-  data: () => ({}),
-  methods: {
-    search(e) {
-      if (!(e === null) && e !== "" && this.User.getSearchData(e)) {
-        this.$router.push("/search");
-      } else {
-        // redirect to not found if no result
-        this.$router.push("/search/not_found");
-      }
-    },
-  },
+  components: { GuestsViews, HotelViews, AdminViews, AdminLoginDialog },
 };
 </script>
 
-<style scoped>
-/* Setting the time for the transition */
-.main-enter-active,
-.main-leave-active {
-  transition: 100ms ease all;
+<style>
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-/* Transtion activity */
-.main-enter-from,
-.main-leave-to {
-  opacity: 0;
-  transform: translateY(65px);
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+/* Scroll bar style from: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar */
 </style>
