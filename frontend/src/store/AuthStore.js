@@ -64,6 +64,8 @@ export const useAuthStore = defineStore("Auth", {
           }
         })
         .catch((err) => {
+          this.loading = false;
+          this.loginDialog = false;
           console.log(err);
         });
     },
