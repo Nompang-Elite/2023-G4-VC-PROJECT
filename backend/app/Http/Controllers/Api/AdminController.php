@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\UserTypes;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
@@ -59,5 +60,11 @@ class AdminController extends Controller
         }
         // Return true if the validation is true
         return true;
+    }
+    public function getAllUsers()
+    {
+        $users = User::where("user_type", 2)->orWhere("user_type", 3)->get();
+
+        return  $this->success($users, "Get user");
     }
 }
