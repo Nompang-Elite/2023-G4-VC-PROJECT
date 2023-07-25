@@ -46,6 +46,37 @@ class HotelController extends Controller
         $filters = OccupiedRoomsRes::collection($rooms);
         return $this->success($filters);
     }
+    // Recovered code start from here
+    //----------get only one hotel------------
+    public function show($id)
+    {
+        $hotel = Hotel::find($id);
+        $hotel = new ShowHotelResource($hotel);
+        return response()->json(['success' => true, 'data' => $hotel], 200);
+    }
+
+    //-------delete hotel by id-------
+    public function destroy(string $id)
+    {
+        $hotel = Hotel::find($id);
+        $hotel->delete();
+        return response()->json(['success' => true, 'data' => $hotel], 200);
+    }
+
+    //---------Show room in hotel-------------
+    public function HotelRoom()
+    {
+        $hotel = Hotel::with(['rooms'])->get();
+        return response()->json(['success' => true, 'data' => $hotel], 200);
+    }
+
+    //---------Show room in each hotel-------------
+    public function HotelRoomId($id)
+    {
+        $hotel = Hotel::with(['rooms'])->find($id);
+        return response()->json(['success' => true, 'data' => $hotel], 200);
+    }
+    // Recovered code end from here
 
     /**
      * 

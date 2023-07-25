@@ -63,6 +63,13 @@ export default {
       ],
     };
   },
+//========= Navigate to the detail page with the selected hotel's ID as a parameter==========
+  methods: {
+    goToDetail(id) {
+      console.log(id);
+      this.$router.push(`/hotel/${id}`);
+    }
+  },
   mounted() {
     api.api_base
       .get("/hotel")

@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\OccupiedRoomsController;
 use App\Http\Controllers\Api\RoomsController;
 use App\Http\Controllers\Api\RoomTypesController;
 use App\Models\RoomType;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\RoomController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -29,6 +29,8 @@ Route::group(['prefix' => 'guest'], function () {
 });
 
 Route::get('/hotel', [HotelController::class, 'index']);
+Route::get('/hotel/{id}/details', [HotelController::class, 'show']);
+Route::delete('/hotel/{id}/delete', [HotelController::class, 'destroy']);
 Route::get('/hotel/search', [HotelController::class, 'search']);
 
 
@@ -63,3 +65,9 @@ Route::group(['prefix' => 'admin'], function () {
 
     // Admin routes goes here...
 });
+
+
+
+//room controller route
+Route::get('/rooms', [RoomController::class, 'index']);
+Route::get('/rooms/{id}/details', [RoomController::class, 'show']);
