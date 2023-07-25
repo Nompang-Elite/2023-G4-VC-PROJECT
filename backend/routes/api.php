@@ -2,10 +2,8 @@
 
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Guest\GuestController;
 use App\Http\Controllers\Api\HotelController;
-use App\Http\Controllers\Api\HotelInfoController;
-use App\Http\Controllers\Api\RoomsController;
-use App\Http\Controllers\Api\RoomTypesController;
 use App\Http\Controllers\Api\ImageUploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +17,7 @@ Route::group(['prefix' => 'guest'], function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
     // More here...
 });
@@ -45,8 +44,6 @@ Route::group(['prefix' => 'hotel'], function () {
     //======Search Routes=======
     Route::get('/search', [HotelController::class, 'search']);
 
-    //==========Images Routes =============
-    Route::get('/rooms/images', [RoomTypesController::class, "getAllRoomTypeImg"]);
     Route::post('/upload/image/{id}', [ImageUploadController::class, 'roomImageUpload']);
     // Hotel routes goes here...
 });

@@ -4,6 +4,8 @@ export const useAuthStore = defineStore("Auth", {
   // Stated Data for the authentication
   state() {
     return {
+      // Loading
+      loading: false,
       // Views activate
       guestView: true,
       hotelView: false,
@@ -52,11 +54,13 @@ export const useAuthStore = defineStore("Auth", {
 
     // Guest post request for auth
     async guestAuthPostRequest(path, form) {
+      this.loading = true;
       api.api_base
         .post(path, form)
         .then((res) => {
           if (this.checkIf(res, "guest") || this.checkIf(res, "hotel_owner")) {
             this.authorize(res.data.data);
+            this.loading = false;
           }
         })
         .catch((err) => {
@@ -66,7 +70,6 @@ export const useAuthStore = defineStore("Auth", {
 
     // Guest account login:
     guestLogin(userData) {
-      console.log(userData);
       this.guestAuthPostRequest("/guest/login", userData);
     },
 
@@ -79,6 +82,7 @@ export const useAuthStore = defineStore("Auth", {
 
     // Admin account login
     adminLogin(userData) {
+      this.loading = true;
       api.api_base
         .post("/admin/login", userData)
         .then((res) => {
@@ -87,6 +91,7 @@ export const useAuthStore = defineStore("Auth", {
             sessionStorage.clear("adminSecret");
             sessionStorage.setItem("admin_logged", true);
             this.authorize(res.data.data);
+            this.loading = false;
           }
         })
         .catch((err) => {
@@ -117,6 +122,10 @@ export const useAuthStore = defineStore("Auth", {
     // Convert to array object
     convertToArray(t) {
       return JSON.parse(JSON.stringify(t));
+    },
+    // Get logged user
+    getUser() {
+      return JSON.parse(sessionStorage.getItem("user_data"));
     },
   },
 });

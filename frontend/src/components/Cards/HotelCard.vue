@@ -18,7 +18,7 @@
             <v-img
               class="align-end text-white"
               height="200"
-              :src="item.image"
+              :src="'data:image/*;base64,' + item.image_hash"
               cover
             >
             </v-img>
@@ -35,9 +35,12 @@
 
             <v-card-actions class="ma-2">
               <!-- Rating point -->
-              <div v-for="i in item.rate" :key="i">
-                <v-icon color="yellow">mdi-star</v-icon>
-              </div>
+              <v-rating
+                color="yellow"
+                size="20"
+                v-model="item.rate"
+                disabled
+              ></v-rating>
               <v-spacer></v-spacer>
               <v-btn rounded="xl" color="info" variant="elevated" class="px-4" @click="goToDetail(item.id)">
                 Details

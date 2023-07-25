@@ -12,5 +12,6 @@ class Reviews extends Model
         "user_id",
         "hotel_id",
         "comment",
+        "rate"
     ];
 }
