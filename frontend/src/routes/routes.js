@@ -67,6 +67,13 @@ const routes = [
           },
         ],
       },
+      {
+        /**
+         * Route to the detail views
+         * */
+        path: '/hotel/:id',
+        component: () => import("@/views/Guests/DetailHotel.vue"),
+      },
     ],
     meta: { isGuest: true },
   },
@@ -75,7 +82,7 @@ const routes = [
     path: "/admin",
     children: [
       {
-        path: "",
+        path: "/",
         component: () => import("@/views/Admin/AdminHomeView.vue"),
       },
     ],

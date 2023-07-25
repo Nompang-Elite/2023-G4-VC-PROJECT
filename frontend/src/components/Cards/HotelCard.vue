@@ -1,7 +1,7 @@
 <template>
   <!-- Card container -->
   <v-container class="mb-8">
-    <header class="py-4 text-h6">{{ containerName }}</header>
+    <header class="py-4 text-h5">{{ containerName }}</header>
     <v-row v-if="items.length > 1">
       <v-col cols="4" v-for="(item, i) in items" :key="i">
         <!-- Set card hovering effect -->
@@ -42,7 +42,7 @@
                 disabled
               ></v-rating>
               <v-spacer></v-spacer>
-              <v-btn rounded="xl" color="info" variant="elevated" class="px-4">
+              <v-btn rounded="xl" color="info" variant="elevated" class="px-4" @click="goToDetail(item.id)">
                 Details
               </v-btn>
             </v-card-actions>
@@ -57,6 +57,13 @@
 export default {
   // Proping the items list
   props: ["items", "container-name"],
+  methods: {
+    goToDetail(id) { 
+      console.log(id);
+      // Navigate to the detail page with the selected hotel's ID as a parameter
+      this.$router.push(`/hotel/${id}`);
+    }
+  },
 };
 </script>
 <style scoped>

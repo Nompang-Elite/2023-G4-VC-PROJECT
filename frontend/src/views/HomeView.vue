@@ -74,9 +74,14 @@ export default {
     api.api_base
       .get("/hotel")
       .then((res) => {
+        // console.log(this.hotels = res.data.data);
         this.hotels = res.data.data;
       })
       .catch((err) => console.log(err));
   },
 };
 </script>
+
+
+
+

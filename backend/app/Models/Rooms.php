@@ -17,9 +17,12 @@ class Rooms extends Model
         "room_type_id",
         "hotel_id",
     ];
-
-    public function hotel(): BelongsTo
+    public function hotel():BelongsTo
     {
         return $this->belongsTo(Hotel::class);
+    }
+    public function RoomType():BelongsTo
+    {
+        return $this->belongsTo(RoomType::class);
     }
 }

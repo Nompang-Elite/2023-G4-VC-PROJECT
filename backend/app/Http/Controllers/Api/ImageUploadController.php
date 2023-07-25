@@ -45,6 +45,10 @@ class ImageUploadController extends Controller
 
         if ($validate) {
             $file = $req->image;
+
+            $filename = $file->hashName();
+
+            $file->move(storage_path('\images'), $filename);
             // Solution: https://stackoverflow.com/questions/71292454/how-can-i-store-the-images-as-blob-file-in-database-using-laravel-8
             // Decode blob file to base64:
             $ecodedToBase64 = base64_encode(

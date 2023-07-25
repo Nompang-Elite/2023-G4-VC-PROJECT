@@ -11,16 +11,22 @@ class Hotel extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'name',    
+        'name',
+        'rate',
         'description',
         'rate',
     ];
- 
-     //user one to many post
-     public function rooms():HasMany
-     {
-         return $this->hasMany(Room::class);
-     }
-  
- }
- 
+
+    public function HotelInfos():HasMany
+    {
+        return $this->hasMany(HotelInfo::class);
+    }
+    public function Rooms():HasMany
+    {
+        return $this->hasMany(Rooms::class);
+    }
+    public function RoomsType():HasMany
+    {
+        return $this->hasMany(RoomType::class);
+    }
+}
