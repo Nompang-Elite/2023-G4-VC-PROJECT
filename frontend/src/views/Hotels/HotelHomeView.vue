@@ -8,9 +8,9 @@
             <v-row>
               <v-col cols="6">
                 <v-img
-                  height="300"
-                  width="600"
+                  height="100%"
                   cover
+                  class="rounded-lg"
                   :src="Hotel.imgDecoder + Hotel.hotelImg"
                 ></v-img>
               </v-col>
@@ -40,12 +40,12 @@
             >
           </v-card-actions>
         </v-card>
-        <v-card class="my-4" rounded="lg">
+        <v-card class="my-4" rounded="xl">
           <v-card-title> Hotel images </v-card-title>
           <v-card-subtitle>{{ Hotel.hotelInfo.name }}</v-card-subtitle>
           <v-card-text>
             <v-sheet rounded="xl">
-              <CarouselCover :slides="Hotel.hotelImgs" />
+              <CarouselCover class="rounded-lg" :slides="Hotel.hotelImgs" />
             </v-sheet>
           </v-card-text>
         </v-card>
