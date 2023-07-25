@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\Guest\GuestController;
 use App\Http\Controllers\Api\HotelController;
 use App\Http\Controllers\Api\ImageUploadController;
 use App\Http\Controllers\Api\Hotels\HotelController as HotelsHotelController;
-use App\Http\Controllers\Api\RoomsController;
 use App\Http\Controllers\Api\RoomTypesController;
 use App\Http\Controllers\Api\RoomController;
 use Illuminate\Support\Facades\Route;
@@ -46,8 +45,6 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::get('/info/{id}', [HotelController::class, 'HotelsInfoId']);
 
     //=============Rooms in hotel==========
-    Route::get('/room/all', [RoomsController::class, 'index']);
-    //=============Rooms in hotel==========
     Route::get('/room_types/type', [RoomTypesController::class, 'index']);
 
 
@@ -59,8 +56,6 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::post('/reviews', [HotelController::class, "getHotelReviews"]);
 
     // ------------- Route hotel owner--------------
-    Route::get('/all/rooms', [RoomsController::class, 'index']);
-
     //Room_Type
     Route::get('/room_types', [RoomTypesController::class, 'index']);
 
@@ -68,7 +63,7 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::get('/rooms/{status}', [HotelController::class, 'filterRooms']);
 
     //HotelRoom
-    Route::get('/rooms', [HotelController::class, 'hotelRooms']);
+    Route::get('/rooms/all', [HotelController::class, 'hotelRooms']);
 
     Route::post('/info', [HotelsHotelController::class, "getHotelInfo"]);
     // Hotel routes goes here...

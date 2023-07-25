@@ -65,7 +65,7 @@ export const useHotelStore = defineStore("Hotel", {
     },
     // Get Rooms
     getRooms() {
-      api.api_base.get("/hotel/rooms").then((res) => {
+      api.api_base.get("/hotel/rooms/all").then((res) => {
         this.rooms = res.data.data;
       });
     },
