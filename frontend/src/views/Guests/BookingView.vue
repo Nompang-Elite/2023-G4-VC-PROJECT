@@ -38,7 +38,7 @@
 
         <v-card-actions class="mt-4">
           <v-row>
-            <v-col cols="8">
+            <v-col cols="6">
               <VueDatePicker
                 disable-year-select
                 placeholder="From : To Date"
@@ -48,7 +48,17 @@
                 range
               />
             </v-col>
-            <v-col cols="4">
+
+            <v-col cols="3">
+              <v-text-field
+                variant="solo"
+                rounded="xl"
+                label="Rooom count"
+                type="number"
+              >
+              </v-text-field>
+            </v-col>
+            <v-col cols="3">
               <v-btn
                 @click.prevent="Guest.bookRoomType"
                 block
