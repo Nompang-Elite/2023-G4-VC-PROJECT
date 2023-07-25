@@ -32,17 +32,7 @@ Route::get('/hotel', [HotelController::class, 'index']);
 Route::get('/hotel/search', [HotelController::class, 'search']);
 
 
-// ------------- Route hotel owner--------------
-Route::get('/all/rooms', [RoomsController::class, 'index']);
 
-//Room_Type
-Route::get('/hotel/room_types', [RoomTypesController::class, 'index']);
-
-//Occupied Room 
-Route::get('/hotel/rooms/{status}', [HotelController::class, 'filterRooms']);
-
-//HotelRoom
-Route::get('/hotel/rooms', [HotelController::class, 'hoteRooms']);
 
 
 
@@ -55,6 +45,18 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::post('/upload/image', [ImageUploadController::class, 'hotelImageUpload']);
     Route::post('/get/images', [ImageUploadController::class, "getHotelImages"]);
     Route::post('/reviews', [HotelController::class, "getHotelReviews"]);
+
+    // ------------- Route hotel owner--------------
+    Route::get('/all/rooms', [RoomsController::class, 'index']);
+
+    //Room_Type
+    Route::get('/room_types', [RoomTypesController::class, 'index']);
+
+    //Occupied Room 
+    Route::get('/rooms/{status}', [HotelController::class, 'filterRooms']);
+
+    //HotelRoom
+    Route::get('/rooms', [HotelController::class, 'hotelRooms']);
 
     Route::post('/info', [HotelsHotelController::class, "getHotelInfo"]);
     // Hotel routes goes here...
