@@ -7,6 +7,7 @@ use App\Models\UserTypes;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -59,5 +60,11 @@ class AdminController extends Controller
         }
         // Return true if the validation is true
         return true;
+    }
+    //<-------------- Get Userimage and username ----------------------->//
+    public function getUsersInfo($type)
+    {
+        $user = User::where("user_type", UserTypes::where("type", (string)$type)->first()->id)->get();
+        return $this->success($user, "User information");
     }
 }

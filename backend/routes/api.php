@@ -44,4 +44,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/info', [AdminController::class, 'info']);
 
     // Admin routes goes here...
+    
+    Route::get('/users/{type}', [AdminController::class, 'getUsersInfo']);
 });
