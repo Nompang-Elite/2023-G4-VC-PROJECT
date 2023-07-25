@@ -27,7 +27,7 @@ const routes = [
          * */
         path: "hotels",
         name: "Hotels",
-        component: () => import("@/views/Hotels/HotelViews.vue"),
+        component: () => import("@/views/Guests/HotelViews.vue"),
       },
       {
         /**
@@ -71,7 +71,7 @@ const routes = [
         /**
          * Route to the detail views
          * */
-        path: '/hotel/:id',
+        path: "/hotel/:id",
         component: () => import("@/views/Guests/DetailHotel.vue"),
       },
     ],
