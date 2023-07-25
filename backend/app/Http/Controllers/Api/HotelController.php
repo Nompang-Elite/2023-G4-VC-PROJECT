@@ -11,6 +11,7 @@ use App\Models\Rooms;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\Rooms\OccupiedRooms as OccupiedRoomsRes;
 
 class HotelController extends Controller
 {
@@ -30,12 +31,20 @@ class HotelController extends Controller
         return $this->error("list is empty", 404);
     }
     // -------------Relation hotel with room---------------
-    public function HotelRoom()
+    public function hotelRooms()
     {
         // --------------Access to hotel and hotel access to room---------
         $hotel = Hotel::where("user_id", auth()->user()->id)->first();
         $rooms = Rooms::where("hotel_id", $hotel->id)->get();
         return $this->success($rooms, "hotel lists", 200);
+    }
+
+    // -------------Filter hotel with room---------------
+    public function filterRooms($status = "unoccupied")
+    {
+        $rooms = Rooms::where("hotel_id", Hotel::where("user_id", auth()->user()->id)->first()->id)->where("status", $status)->get();
+        $filters = OccupiedRoomsRes::collection($rooms);
+        return $this->success($filters);
     }
 
     /**

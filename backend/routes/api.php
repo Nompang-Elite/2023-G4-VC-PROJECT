@@ -39,10 +39,10 @@ Route::get('/all/rooms', [RoomsController::class, 'index']);
 Route::get('/hotel/room_types', [RoomTypesController::class, 'index']);
 
 //Occupied Room 
-Route::get('/hotel/occupied', [OccupiedRoomsController::class, 'index']);
+Route::get('/hotel/rooms/{status}', [HotelController::class, 'filterRooms']);
 
 //HotelRoom
-Route::get('/hotel/rooms', [HotelController::class, 'HotelRoom']);
+Route::get('/hotel/rooms', [HotelController::class, 'hoteRooms']);
 
 
 
