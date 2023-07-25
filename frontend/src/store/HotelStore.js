@@ -63,12 +63,13 @@ export const useHotelStore = defineStore("Hotel", {
           });
       });
     },
-    // Rooms
+    // Get Rooms
     getRooms() {
       api.api_base.get("/hotel/rooms").then((res) => {
         this.rooms = res.data.data;
       });
     },
+    //Function Filter status rooms
     filterRooms(status) {
       console.log(status);
       api.api_base

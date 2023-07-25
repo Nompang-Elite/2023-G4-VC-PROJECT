@@ -26,7 +26,7 @@
         >
           UNOCCUPIED
         </v-btn>
-        <v-btn class="mx-4 bg-info" rounded="pill">Create</v-btn>
+        <v-btn class="mx-4 bg-info" rounded="pill">+ Add Room </v-btn>
       </v-col>
     </v-row>
 
@@ -74,6 +74,7 @@
 import { useHotelStore } from "@/store/HotelStore.js";
 import { reactive } from "vue";
 export default {
+  //operation api of pinia
   setup() {
     const Hotel = reactive(useHotelStore());
     return { Hotel };

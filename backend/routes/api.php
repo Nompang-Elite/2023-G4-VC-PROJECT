@@ -33,11 +33,6 @@ Route::get('/hotel/search', [HotelController::class, 'search']);
 
 
 
-
-
-
-
-
 Route::group(['prefix' => 'hotel'], function () {
     Route::get('/', [HotelController::class, 'index']);
     Route::get('/search', [HotelController::class, 'search']);
@@ -61,8 +56,6 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::post('/info', [HotelsHotelController::class, "getHotelInfo"]);
     // Hotel routes goes here...
 });
-
-
 
 Route::group(['prefix' => 'admin'], function () {
     Route::post('/login', [AdminController::class, 'login']);
