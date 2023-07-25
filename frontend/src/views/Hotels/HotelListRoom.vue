@@ -4,6 +4,7 @@
     <v-row class="mt-5" style="margin-left: 11%">
       <v-col cols="5">
         <v-text-field
+          v-model="Hotel.search"
           placeholder="Search"
           density="compact"
           variant="solo"
@@ -42,7 +43,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="room in Hotel.rooms" :key="room.name">
+        <tr v-for="room in filteredRooms" :key="room.name">
           <td>{{ room.number }}</td>
           <td>{{ room.name }}</td>
           <td>{{ room.status }}</td>
@@ -72,7 +73,7 @@
 </template>
 <script>
 import { useHotelStore } from "@/store/HotelStore.js";
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
 export default {
   //operation api of pinia
   setup() {

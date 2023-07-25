@@ -11,24 +11,22 @@ use Illuminate\Http\Request;
 class RoomsController extends Controller
 {
     use HttpResponse;
-    // ---------------get all rooms---------------
-    // public function index()
-    // {
-    //     $room = Rooms::all();
-    //     $room = ShowRoomsResource::collection($room);
-    //     if ($room)
-    //         return $this->success($room, "list of rooms");
-            
-    //     return $this->error("list is empty", 404);
-    // }
+
+    // -------------Function status (Buttons occupied and unoccupied)---------------
     public function index()
     {
-        $room = Rooms::where('status','=','unoccupied')->get();
+        $room = Rooms::where('status', '=', 'unoccupied')->get();
         $room = ShowRoomsResource::collection($room);
         if ($room)
             return $this->success($room, "list of rooms");
-            
         return $this->error("list is empty", 404);
     }
-
+    
+    // ---------------Function for search name of room--------------
+    public function searchRoom(Request $request)
+    {
+        $search = $request->input('search');
+        $room = Rooms::where('name', 'like', '%' . $search . '%')->get();
+        return response()->json(['rooms' => $room]);
+    }
 }
