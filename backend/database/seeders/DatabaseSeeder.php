@@ -48,5 +48,6 @@ class DatabaseSeeder extends Seeder
         // Image
         $this->call(ImagesSeeder::class);
         $this->call(HotelImagesSeeder::class);
+        $this->call(RoomImagesSeeder::class);
     }
 }

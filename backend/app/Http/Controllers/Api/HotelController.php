@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Hotels\HotelDetailImages as HotelDetailImagesRes;
 use App\Http\Resources\Hotels\HotelReviews as HotelReviewsResource;
+use App\Http\Resources\Hotels\RoomsTypeHashImages as RoomsTypeHashImagesRes;
 use App\Http\Resources\ShowHotelResource;
 use App\Models\Hotel;
+use App\Models\HotelImages;
+use App\Models\HotelInfo;
+use App\Models\Images;
 use App\Models\Reviews;
+use App\Models\RoomType;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,11 +27,11 @@ class HotelController extends Controller
         $hotel = ShowHotelResource::collection($hotel);
         if ($hotel)
             return $this->success($hotel, "list of hotels");
-            
+
         return $this->error("list is empty", 404);
     }
 
-     /**
+    /**
      *get hotel id
      */
     public function show($id)
@@ -35,16 +41,16 @@ class HotelController extends Controller
         $hotel = Hotel::find($id);
         $hotel = new ShowhotelResource($hotel);
         if ($hotel)
-        return $this->success($hotel, "list of hotel");
+            return $this->success($hotel, "list of hotel");
 
-    return $this->error("list is empty", 404);
-
+        return $this->error("list is empty", 404);
     }
 
-// -------------Relation hotel with room---------------
-    public function HotelRoom(){
+    // -------------Relation hotel with room---------------
+    public function HotelRoom()
+    {
         $hotel = Hotel::with(['rooms'])->get();
-        return response()->json(['success' => true, 'data' => $hotel],200);
+        return response()->json(['success' => true, 'data' => $hotel], 200);
     }
 
     /**
@@ -66,24 +72,32 @@ class HotelController extends Controller
         return $this->error("not match!");
     }
 
-//====get all hotel with info==========
-    public function HotelsInfo(){
-        $hotel = Hotel::with(['HotelInfos','Rooms','RoomsType'])->get();
+    //====get all hotel with info==========
+    public function HotelsInfo()
+    {
+        $hotel = Hotel::with(['HotelInfos', 'Rooms', 'RoomsType'])->get();
         if ($hotel)
-        return $this->success($hotel, "list of hotels with hotels info");
+            return $this->success($hotel, "list of hotels with hotels info");
 
-    return $this->error("list is empty", 404);
+        return $this->error("list is empty", 404);
     }
 
     //====get only one hotel with info==========
 
-    public function HotelsInfoId($id){
-        $hotel = Hotel::with(['HotelInfos','Rooms','RoomsType'])->find($id);
-        if ($hotel)
-        return $this->success($hotel, "list of hotel");
+    public function HotelsInfoId($id)
+    {
+        $hotel = Hotel::find($id);
 
-    return $this->error("list is empty", 404);
+        $hotelInfo = HotelInfo::where("hotel_id", $hotel->id)->get();
 
+        $hotel->images = HotelDetailImagesRes::collection(HotelImages::where("hotel_id", $hotel->id)->get());
+        $hotel->info = $hotelInfo;
+
+        $hotel->room_type = RoomsTypeHashImagesRes::collection(RoomType::where("hotel_id", $hotel->id)->get());
+
+        $result = $hotel;
+
+        return $this->success($result, "list of hotel");
     }
 
     // Hotel reveiews
