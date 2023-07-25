@@ -1,49 +1,65 @@
 import api from "@/routes/api";
 import { defineStore } from "pinia";
-
 export const useHotelStore = defineStore("Hotel", {
   state() {
     return {
-      rooms: [],
+      uploadDialog: false,
+      hotelInfo: {},
+      hotelImgs: [],
+      hotelImg: null,
+      imgFiles: [],
+      imgDecoder: "data:image/*;base64,",
+      hotelId: null,
+      //Rules validation from: https://stackoverflow.com/questions/60108629/how-can-i-validate-the-maximum-file-size-is-2-mb-per-file-for-multiple-files-v
+      imgRules: [
+        (files) =>
+          !files ||
+          // Using some() function to test each files, while form is multi-file
+          !files.some((file) => file.size > 2_097_152) ||
+          "Images size should be less than 2 MB!",
+      ],
     };
   },
   actions: {
-    getCookie(cookieName) {
-      // Solution : https://www.w3schools.blog/get-cookie-by-name-javascript-js
-      let cookie = {};
-      document.cookie.split(";").forEach(function (el) {
-        let [key, value] = el.split("=");
-        cookie[key.trim()] = value;
-      });
-      return cookie[cookieName];
-    },
-    getRooms() {
+    getHotelInfo() {
       api.api_base
-        .get("/hotel/rooms", {
-          headers: {
-            Authorization: `Bearer ${this.getCookie("access_token")}`,
-          },
-        })
-        .then((res) => {
-          console.log(res.data.data);
-          this.rooms = res.data.data;
+        .post("/hotel/info", { hotel_id: this.hotelId })
+        .then((result) => {
+          this.hotelInfo = result.data.data;
         })
         .catch((err) => {
           console.log(err);
         });
-      return this.rooms.length != 0;
     },
-
-    filterStatus(type) {
-      return this.rooms.filter((room) => room.status === type);
+    getHotelImage() {
+      api.api_base
+        .post("/hotel/get/images", { hotel_id: this.hotelId })
+        .then((res) => {
+          this.hotelImgs = res.data.data;
+          this.hotelImg = this.hotelImgs[0]["image_hash"];
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-
-    async getOccupied() {
-      await this.getRooms();
-      this.rooms = this.filterStatus("occupied");
-    },
-    getUnoccupied() {
-      this.rooms = this.filterStatus("unoccupied");
+    uploadHotelImg() {
+      this.imgFiles.forEach((file) => {
+        api.api_base
+          .post(
+            "/hotel/upload/image",
+            { hotel_id: this.hotelId, image: file },
+            //Solution for multi form data:
+            //  https://stackabuse.com/axios-multipart-form-data-sending-file-through-a-form-with-javascript/
+            { headers: { "Content-Type": "multipart/form-data" } }
+          )
+          .then(() => {
+            this.uploadDialog = false;
+            this.imgFiles = [];
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
     },
   },
 });
