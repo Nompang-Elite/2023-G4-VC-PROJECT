@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Hotel;
 use App\Models\User;
 use App\Models\UserTypes;
 use Illuminate\Http\Request;
@@ -82,6 +83,9 @@ class AuthController extends Controller
                 $usr = auth()->user();
                 // Get user type via ID
                 $usr->user_type = UserTypes::find($usr->user_type)->type;
+                if ($usr->user_type == "hotel_owner") {
+                    $usr->hotel_id = Hotel::where("user_id", $usr->id)->first()->id;
+                }
                 $usr->access_token = $token;
 
                 return $this->success(

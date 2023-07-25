@@ -9,6 +9,7 @@ use App\Models\Hotel;
 use App\Models\OccupiedRooms;
 use App\Models\Reservations;
 use App\Models\ReservedRooms;
+use App\Models\Reviews;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -46,5 +47,16 @@ class DatabaseSeeder extends Seeder
         OccupiedRooms::factory(10)->create();
         HostedAt::factory(10)->create();
         ReservedRooms::factory(10)->create();
+        // Reservation
+        Reservations::factory(4)->create();
+        // Reserved room
+        ReservedRooms::factory(4)->create();
+        // Occupied room
+        OccupiedRooms::factory(4)->create();
+        // Reviews
+        Reviews::factory(4)->create();
+        // Image
+        $this->call(ImagesSeeder::class);
+        $this->call(HotelImagesSeeder::class);
     }
 }

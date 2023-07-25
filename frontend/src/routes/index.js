@@ -28,8 +28,6 @@ router.beforeEach((to, from, next) => {
     next();
   } else if (!uOwner && !uAdmin && to.meta.isGuest) {
     next();
-  } else {
-    next("/not_found");
   }
 });
 

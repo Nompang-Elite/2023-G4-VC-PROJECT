@@ -49,34 +49,29 @@ class RoomsSeeder extends Seeder
             ],
             [
                 "number" => "AKP-01",
-                "room_type_id" => 2,
+                "room_type_id" => 1,
                 "hotel_id" => 2,
             ],
             [
                 "number" => "AKP-02",
+                "room_type_id" => 2,
+                "hotel_id" => 2,
+            ],
+            [
+                "number" => "AKP-03",
+                "room_type_id" => 2,
+                "hotel_id" => 2,
+            ],
+            [
+                "number" => "AKP-04",
                 "room_type_id" => 3,
                 "hotel_id" => 2,
             ],
             [
-                "number" => "AKR-01",
-                "room_type_id" => 2,
-                "hotel_id" => 3,
-            ],
-            [
-                "number" => "AKR-02",
+                "number" => "AKP-05",
                 "room_type_id" => 3,
-                "hotel_id" => 3,
-            ],
-            [
-                "number" => "AKG-01",
-                "room_type_id" => 2,
-                "hotel_id" => 4,
-            ],
-            [
-                "number" => "AKG-02",
-                "room_type_id" => 3,
-                "hotel_id" => 4,
-            ],
+                "hotel_id" => 2,
+            ]
 
         ];
         foreach ($rooms as $room) {

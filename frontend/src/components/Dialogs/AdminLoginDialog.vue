@@ -33,14 +33,8 @@
               class="mx-auto w-100 bg-info rounded-xl"
               type="submit"
               @click.prevent="Auth.adminLogin(form)"
+              :loading="Auth.loading"
               >Login
-              <v-progress-circular
-                v-if="loading"
-                class="position-fixed"
-                indeterminate
-                width="3"
-                color="success"
-              ></v-progress-circular>
             </v-btn>
           </v-form>
         </v-card>

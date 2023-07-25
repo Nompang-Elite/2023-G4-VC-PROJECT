@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Rooms;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,7 @@ class OccupiedRoomsFactory extends Factory
         return [
             "check_in" => $this->faker->dateTime(),
             "check_out" => $this->faker->dateTime(),
-            "room_id" => $this->faker->numberBetween(1, 4),
+            "room_id" => $this->faker->numberBetween(1, count(Rooms::all())),
         ];
     }
 }
