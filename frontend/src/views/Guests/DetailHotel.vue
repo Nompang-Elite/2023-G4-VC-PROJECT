@@ -17,18 +17,25 @@
             </v-img>
           </v-col>
           <v-col cols="8">
-            <v-card-title>
-              {{ hotels.name }}
+            <v-card-title >
+            <h3>{{ hotels.name }}</h3>  
             </v-card-title>
             <v-card-subtitle>
               <v-rating size="20" disabled color="yellow" v-model="hotels.rate"></v-rating>
             </v-card-subtitle>
-            <v-sheet class="text-wrap pa-4 text-justify font-weight-light">
+            <v-sheet class="text-wrap pa-2 text-justify font-weight-light" v-for="(item, i) in  hotels.info " :key="i">
+              <span>
+              Address:  {{ item.address }}, {{ item.city }}, {{ item.country }}
+              </span>
+
+            </v-sheet>
+            <v-sheet class="text-wrap pa-2 text-justify font-weight-light">
               <span>
                 {{ hotels.description }}
               </span>
 
             </v-sheet>
+            
           </v-col>
         </v-row>
       </v-card-title>

@@ -51,8 +51,5 @@ export default {
 };
 </script>
 <style>
-h3 {
-  color: red;
-  font-weight: bold;
-}
+
 </style>
