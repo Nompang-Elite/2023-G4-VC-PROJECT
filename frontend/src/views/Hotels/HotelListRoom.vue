@@ -15,11 +15,15 @@
         <v-btn
           class="bg-red-darken-1"
           rounded="pill"
-          @click="Hotel.getOccupied"
+          @click="Hotel.filterRooms('occupied')"
         >
           OCCUPIED
         </v-btn>
-        <v-btn class="mx-4 bg-info" rounded="pill" @click="Hotel.getUnoccupied">
+        <v-btn
+          class="mx-4 bg-info"
+          rounded="pill"
+          @click="Hotel.filterRooms('unoccupied')"
+        >
           UNOCCUPIED
         </v-btn>
         <v-btn class="mx-4 bg-info" rounded="pill">Create</v-btn>

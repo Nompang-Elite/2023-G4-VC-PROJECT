@@ -18,6 +18,8 @@ export const useHotelStore = defineStore("Hotel", {
           !files.some((file) => file.size > 2_097_152) ||
           "Images size should be less than 2 MB!",
       ],
+      // Hotel rooms
+      rooms: null,
     };
   },
   actions: {
@@ -60,6 +62,23 @@ export const useHotelStore = defineStore("Hotel", {
             console.log(err);
           });
       });
+    },
+    // Rooms
+    getRooms() {
+      api.api_base.get("/hotel/rooms").then((res) => {
+        this.rooms = res.data.data;
+      });
+    },
+    filterRooms(status) {
+      console.log(status);
+      api.api_base
+        .get("/hotel/rooms/" + status)
+        .then((res) => {
+          this.rooms = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 });
