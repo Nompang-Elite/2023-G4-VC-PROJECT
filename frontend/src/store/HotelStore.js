@@ -73,7 +73,7 @@ export const useHotelStore = defineStore("Hotel", {
     filterRooms(status) {
       console.log(status);
       api.api_base
-        .get("/hotel/rooms/" + status)
+        .get("/hotel/rooms/filter/" + status)
         .then((res) => {
           this.rooms = res.data.data;
         })

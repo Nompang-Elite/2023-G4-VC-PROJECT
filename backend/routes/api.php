@@ -60,7 +60,7 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::get('/room_types', [RoomTypesController::class, 'index']);
 
     //Occupied Room 
-    Route::get('/rooms/{status}', [HotelController::class, 'filterRooms']);
+    Route::get('/rooms/filter/{status}', [HotelController::class, 'filterRooms']);
 
     //HotelRoom
     Route::get('/rooms/all', [HotelController::class, 'hotelRooms']);
