@@ -46,6 +46,10 @@ const routes = [
         component: () => import("@/views/HomeView.vue"),
       },
       {
+        path:"dashboard",
+        component: () => import("@/views/Admin/AdminDashboardView.vue"),
+      },
+      {
         path: "search",
         name: "Search",
         children: [
@@ -78,6 +82,13 @@ const routes = [
         path: "",
         component: () => import("@/views/Admin/AdminHomeView.vue"),
       },
+      /** 
+       * Route to the admin dashboard
+       * */ 
+      {
+        path:"dashboard",
+        component: () => import("@/views/Admin/AdminDashboardView.vue"),
+      }
     ],
     meta: {
       isAdmin: true,
