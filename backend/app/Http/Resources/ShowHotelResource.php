@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\HotelImages;
+use App\Models\Images;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 

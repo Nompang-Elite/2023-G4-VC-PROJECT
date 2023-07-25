@@ -10,13 +10,13 @@ use App\Http\Resources\ShowHotelResource;
 use App\Models\Hotel;
 use App\Models\HotelImages;
 use App\Models\HotelInfo;
-use App\Models\Images;
 use App\Models\Reviews;
 use App\Models\RoomType;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\Rooms\OccupiedRooms as OccupiedRoomsRes;
+use App\Models\Rooms;
 
 class HotelController extends Controller
 {
@@ -24,7 +24,7 @@ class HotelController extends Controller
     // ---------------get all hotels---------------
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['index', 'search']);
+        $this->middleware('auth:api')->except(['index', 'search', 'HotelsInfoId']);
     }
     public function index()
     {

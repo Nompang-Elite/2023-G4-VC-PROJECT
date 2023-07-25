@@ -5,13 +5,9 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Guest\GuestController;
 use App\Http\Controllers\Api\HotelController;
 use App\Http\Controllers\Api\ImageUploadController;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Hotels\HotelController as HotelsHotelController;
-use App\Http\Controllers\Api\ImageUploadController;
-use App\Http\Controllers\Api\OccupiedRoomsController;
 use App\Http\Controllers\Api\RoomsController;
 use App\Http\Controllers\Api\RoomTypesController;
-use App\Models\RoomType;
 use App\Http\Controllers\Api\RoomController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +38,7 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::get('/{id}', [HotelController::class, 'show']);
 
     //====HotelInfo Routes========
-    Route::get('/hotelInfo', [HotelInfoController::class, 'index']);
+    // Route::get('/hotelInfo', [HotelInfoController::class, 'index']);
     // Route::get('/hotel/{id}', [HotelController::class, 'show']);
 
 
