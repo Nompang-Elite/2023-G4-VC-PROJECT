@@ -82,7 +82,7 @@ const routes = [
     path: "/admin",
     children: [
       {
-        path: "/",
+        path: "",
         component: () => import("@/views/Admin/AdminHomeView.vue"),
       },
     ],
