@@ -82,6 +82,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/hotelInfo', [HotelInfoController::class, 'hotelInfo']);
     // HotelInfo route delete
     Route::delete('hotelInfo/{id}', [HotelInfoController::class, 'deletHotelInfo']);
+    // hotelInfo Update
+    Route::put('/hotelInfoUpdate/{id}', [HotelInfoController::class, 'update']);
+
     // Admin routes goes here...
 });
 

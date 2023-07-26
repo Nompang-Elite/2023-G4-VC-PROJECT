@@ -46,7 +46,13 @@ class HotelInfoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+            $HotelInfo = hotelInfo::store($request, $id);
+            if ($HotelInfo)
+                return $this->success($HotelInfo, "list of hotelInfo");
+
+            return $this->error("list is empty", 404);
+            
+    
     }
 
     /**
