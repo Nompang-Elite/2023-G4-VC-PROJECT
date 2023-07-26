@@ -81,5 +81,20 @@ export const useHotelStore = defineStore("Hotel", {
           console.log(err);
         });
     },
+
+    //Function Filter rating review
+    filterReviews(rate){
+      console.log(rate);
+
+      api.api_base
+      .get('/hotel/reviews' + rate)
+      .then((res)=> {
+        this.reviews = res.data.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+    
   },
 });

@@ -2,9 +2,10 @@
   <v-container>
     <!-- //Button -->
     <v-btn class="mx-4 bg-info" rounded="pill" style="margin: 3%"
+      @click="highestRating()"
       >HIGHGEST
     </v-btn>
-    <v-btn class="bg-red-darken-1" rounded="pill">LOWEST</v-btn>
+    <v-btn class="bg-red-darken-1" rounded="pill" @click="lowestRating(review)">LOWEST</v-btn>
     <v-table>
       <thead class="bg-info">
         <tr>
@@ -18,7 +19,6 @@
           <td>{{ review.user.firstname + " " + review.user.lastname }}</td>
           <td>{{ review.comment }}</td>
           <td>
-            {{ review.rate }}
             <v-rating
               disabled
               color="yellow"
@@ -42,6 +42,9 @@ export default {
     const Hotel = ref(useHotelStore());
     const Guest = ref(useGuestStore());
     const Auth = ref(useAuthStore());
+
+    // const filteredReviews = ref
+    
     return { Hotel, Guest, Auth };
   },
   //Function user_id rating

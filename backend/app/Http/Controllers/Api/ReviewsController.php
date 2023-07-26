@@ -9,5 +9,10 @@ use Illuminate\Http\Request;
 
 class ReviewsController extends Controller
 {
-   //
+    use HttpResponse;
+
+    public function filterReviews(Request $request)
+    {
+        
+    }
 }

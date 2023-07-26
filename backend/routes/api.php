@@ -62,12 +62,8 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::post('/reviews', [HotelController::class, "getHotelReviews"]);
 
     // ------------- Route hotel owner--------------
-    //Reviews rating 
-    Route::get('/reviews', [ReviewsController::class, 'getReviews']);
-
-
-
-
+    //Filter Reviews rating 
+    Route::get('/reviews/filter/{rate}', [ReviewsController::class, 'filterReviews']);
 
 
     //search name in room
