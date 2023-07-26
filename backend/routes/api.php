@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\HotelController;
+use App\Http\Controllers\Api\Hotels\HotelGuestController;
+use App\Http\Controllers\Api\OccupiedRoomsControll;
 use App\Http\Controllers\Api\Guest\GuestController;
 use App\Http\Controllers\Api\HotelController;
 use App\Http\Controllers\Api\ImageUploadController;
@@ -50,6 +53,9 @@ Route::group(['prefix' => 'hotel'], function () {
 
     //======Search Routes=======
     Route::get('/search', [HotelController::class, 'search']);
+
+    Route::get('/{id}/guests', [HotelGuestController::class, 'getHotelGuests']);
+    Route::get('/{id}/guests/reserved', [HotelGuestController::class, 'reservedGuestAtHotel']);
 
     Route::post('/upload/image', [ImageUploadController::class, 'hotelImageUpload']);
     Route::post('/get/images', [ImageUploadController::class, "getHotelImages"]);

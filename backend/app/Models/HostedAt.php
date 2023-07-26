@@ -13,4 +13,14 @@ class HostedAt extends Model
         "occupied_id",
         "user_id",
     ];
+    // Relationship between user and hostedAt
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+     // Relationship between occupiedRoom and hostedAt
+    public function occupiedRoom()
+    {
+        return $this->belongsTo(OccupiedRooms::class);
+    }
 }
