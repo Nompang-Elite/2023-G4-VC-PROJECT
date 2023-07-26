@@ -62,4 +62,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/info', [AdminController::class, 'info']);
 
     // Admin routes goes here...
+    Route::get('/users/all', [AdminController::class, 'getAllUsers']);
+    Route::get('/users/guests', [AdminController::class, 'getGuest']);
+    Route::get('/users/owners', [AdminController::class, 'getOwner']);
 });

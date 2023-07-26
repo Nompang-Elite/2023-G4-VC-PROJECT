@@ -61,10 +61,24 @@ class AdminController extends Controller
         // Return true if the validation is true
         return true;
     }
+    // Get all user 
     public function getAllUsers()
     {
         $users = User::where("user_type", 2)->orWhere("user_type", 3)->get();
 
         return  $this->success($users, "Get user");
+    }
+    // Get all guests
+    public function getGuest()
+    {
+        $guests = User::where("user_type", 3)->get();
+
+        return $this->success($guests, "Get Guest");
+    }
+    public function getOwner()
+    {
+        $guests = User::where("user_type", 2)->get();
+
+        return $this->success($guests, "Get Owner");
     }
 }
