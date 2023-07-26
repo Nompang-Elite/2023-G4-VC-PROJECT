@@ -64,13 +64,16 @@ Route::group(['prefix' => 'hotel'], function () {
     // ------------- Route hotel owner--------------
     //Reviews rating 
     Route::get('/reviews', [ReviewsController::class, 'getReviews']);
-    // ---------test-----------
-    // Route::get('/reviews', [ReviewsController::class, 'index']);
 
 
 
 
 
+
+    //search name in room
+    Route::get('/search_room', [RoomController::class, "searchRoom"]);
+
+    // ------------- Route hotel owner--------------
     //Room_Type
     Route::get('/room_types', [RoomTypesController::class, 'index']);
 
@@ -89,6 +92,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/info', [AdminController::class, 'info']);
 
     // Admin routes goes here...
+    Route::get('/users/all', [AdminController::class, 'getAllUsers']);
+    Route::get('/users/guests', [AdminController::class, 'getGuest']);
+    Route::get('/users/owners', [AdminController::class, 'getOwner']);
 });
 
 
