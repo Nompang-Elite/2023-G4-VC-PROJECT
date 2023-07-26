@@ -28,8 +28,8 @@
       </tr>
     </thead>
     <tbody >
-      <tr v-for="(hotel, index) in hotels" :key="index">
-        <td>{{ hotel.id }}</td>
+      <tr v-for="hotel in hotels" :key="hotel.id">
+        <td>{{ hotel.hotel_id }}</td>
         <td>{{ hotel.postal_code}}</td>
         <td>{{ hotel.email}}</td>
         <td>{{ hotel.city}}</td>
@@ -59,7 +59,7 @@
                       cols="6"
                     >
                       <v-text-field
-                        label="Hotel_id"
+                        label="Hotel Id"
                         required
                         density="compact"
                         variant="solo"
@@ -98,7 +98,7 @@
                     </v-col>
                     <v-col cols="6">
                       <v-text-field
-                        label="city"
+                        label="City"
                         density="compact"
                         variant="solo"
                         rounded="pill"
@@ -150,13 +150,13 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-      
-        <v-btn  
+          <v-btn
+
           rounded="pill"  
           color="white"
           variant="text" 
           style="background-color: red;"
-          @click="removeHotelInfo(hotel.id)">Remove</v-btn>
+          @click="removeHotelInfo(hotel.id)">Remove</v-btn> 
                 
         </td>
       </tr>
@@ -186,23 +186,21 @@ import api from "@/routes/api";
       })
       .catch((err) => console.log(err));
     },
-  },
-  removeHotelInfo(id){
+    
+    removeHotelInfo(id){
     if(confirm('Are you sure, you want to delete this data?')){
       api.api_base
       .delete(`/admin/hotelInfo/${id}`)
       .then(response =>{
-        alert(response.data.message);
+        response.data.data
         this.getHotels();
       })
-      .catch(function(error){
-          if(error.response){
-            if(error.response.status == 404){
-               alert(error.response.data.message);
-            }
-          }
+      .catch((error) =>{
+        console.log(error);
       });
     }
   }
+  },
+ 
 }
 </script>
