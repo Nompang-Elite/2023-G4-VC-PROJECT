@@ -79,7 +79,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/info', [AdminController::class, 'info']);
 
     // Admin routes goes here...
-    Route::post('/register/hotel', [AdminController::class, 'registerHotel']);
+    Route::post('/hotels/register', [AdminController::class, 'registerHotel']);
 });
 
 
