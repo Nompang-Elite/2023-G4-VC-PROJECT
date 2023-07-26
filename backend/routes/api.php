@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\HotelController;
 use App\Http\Controllers\Api\Hotels\HotelGuestController;
 use App\Http\Controllers\Api\OccupiedRoomsControll;
 use App\Http\Controllers\Api\Guest\GuestController;
-use App\Http\Controllers\Api\HotelController;
 use App\Http\Controllers\Api\ImageUploadController;
 use App\Http\Controllers\Api\Hotels\HotelController as HotelsHotelController;
 use App\Http\Controllers\Api\RoomTypesController;
