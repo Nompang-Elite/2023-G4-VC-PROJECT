@@ -104,10 +104,12 @@ const routes = [
       },
       {
         path: "/users",
-        component: () => import('@/views/Admin/AdminListUserView.vue'),
-        path: "hotels",
-        component: () => import("@/views/Admin/AdminHotelView.vue"),
+        component: () => import('@/views/Admin/AdminListUserView.vue')
       },
+      // {
+      //   path: "hotels",
+      //   component: () => import("@/views/Admin/AdminHotelView.vue"),
+      // }
     ],
     meta: {
       isAdmin: true,
