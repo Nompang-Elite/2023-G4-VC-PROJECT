@@ -1,7 +1,4 @@
 <template>
-  <v-btn @click.prevent="Guest.bookingDialog = !Guest.bookingDialog"
-    >Booking</v-btn
-  >
   <v-dialog v-model="Guest.bookingDialog" width="auto">
     <v-card width="50rem" rounded="xl" class="pa-4">
       <v-card-text>
@@ -40,6 +37,7 @@
           <v-row>
             <v-col cols="6">
               <VueDatePicker
+                :clearable="false"
                 disable-year-select
                 placeholder="From : To Date"
                 model-type="dd.MM.yyyy"
@@ -90,7 +88,7 @@ export default {
   onMount() {
     // Set end date to 7 day max
     this.Guest.date.endDate = new Date(
-      new Date().setDate(this.Guest.startDate.getDate() + 7)
+      new Date().setDate(this.Guest.date.startDate.getDate() + 7)
     );
   },
 };

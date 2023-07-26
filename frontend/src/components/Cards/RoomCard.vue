@@ -51,7 +51,7 @@
                   color="info"
                   variant="elevated"
                   class="mr-4 px-4"
-                  @click="goToDetailRoom(item.id)"
+                  @click="Guest.goToDetailRoom(item.id)"
                 >
                   Details
                 </v-btn>
@@ -62,10 +62,18 @@
       </v-hover>
     </v-col>
   </v-row>
+  <BookingView />
 </template>
-
 <script>
+import BookingView from "@/views/Guests/BookingView.vue";
+import { useGuestStore } from "@/store/GuestStore";
+import { ref } from "vue";
 export default {
+  components: { BookingView },
+  setup() {
+    const Guest = ref(useGuestStore());
+    return { Guest };
+  },
   // Proping the items list
   props: ["hotel"],
 

@@ -20,6 +20,12 @@ export const useGuestStore = defineStore("Guest", {
       hotelReviews: [],
       // Search Results,
       results: [],
+      // Booking
+      bookingDialog: false,
+      date: {
+        startDate: new Date(),
+        endDate: new Date(),
+      },
     };
   },
   actions: {
@@ -108,8 +114,18 @@ export const useGuestStore = defineStore("Guest", {
     bookRoomType() {
       if (this.date[0] < this.date[1]) {
         console.log("Correct");
-      }
-      console.log("Incorrect date");
+      } else console.log("Incorrect date");
+    },
+    goToDetailRoom(id) {
+      this.bookingDialog = true;
+      api.api_base
+        .get("" + id)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 });
