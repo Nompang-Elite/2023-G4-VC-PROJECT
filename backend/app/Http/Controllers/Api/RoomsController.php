@@ -21,12 +21,12 @@ class RoomsController extends Controller
             return $this->success($room, "list of rooms");
         return $this->error("list is empty", 404);
     }
-    
+
     // ---------------Function for search name of room--------------
     public function searchRoom(Request $request)
     {
         $search = $request->input('search');
         $room = Rooms::where('name', 'like', '%' . $search . '%')->get();
         return response()->json(['rooms' => $room]);
-    }
+    } 
 }

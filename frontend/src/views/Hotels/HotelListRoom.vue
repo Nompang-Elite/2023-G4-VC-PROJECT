@@ -75,11 +75,21 @@
 import { useHotelStore } from "@/store/HotelStore.js";
 import { reactive, computed } from "vue";
 export default {
-  //operation api of pinia
   setup() {
     const Hotel = reactive(useHotelStore());
-    return { Hotel };
+    // ------------Use for search name in rooms ------------------------
+    const filteredRooms = computed(() => {
+      if (Hotel.search) {
+        return Hotel.rooms.filter((room) =>
+          room.name.toLowerCase().includes(Hotel.search.toLowerCase())
+        );
+      } else {
+        return Hotel.rooms;
+      }
+    });
+    return { Hotel, filteredRooms };
   },
+
   beforeMount() {
     this.Hotel.getRooms();
   },
