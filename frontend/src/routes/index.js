@@ -21,7 +21,6 @@ router.beforeEach((to, from, next) => {
   const uAdmin = JSON.parse(sessionStorage.getItem("admin_logged"));
   const uOwner = JSON.parse(sessionStorage.getItem("owner_logged"));
   // Admin route gaurd:
-  console.log(uOwner, to.meta.isOwner);
   if (uOwner && to.meta.isOwner) {
     next();
   } else if (uAdmin && to.meta.isAdmin) {

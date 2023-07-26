@@ -39,7 +39,7 @@
           variant="elevated"
           rounded="xl"
           :disabled="!Guest.review.isValidReview"
-          @click.prevent="Guest.postReview(1)"
+          @click.prevent="Guest.postReview(hotelId)"
           :loading="Guest.loading"
           >submit</v-btn
         >
@@ -60,6 +60,7 @@
 import { useGuestStore } from "@/store/GuestStore";
 import { ref } from "vue";
 export default {
+  props: ['hotel-id'],
   setup() {
     const Guest = ref(useGuestStore());
     return { Guest };

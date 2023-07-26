@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("description")->default('no descriptions');
             $table->integer("max_capacity")->default(0);
             $table->integer("bed_count")->default(0);
+            $table->integer("price")->default(0);
             $table->unsignedBigInteger("hotel_id");
             $table->foreign("hotel_id")->references("id")->on("hotels");
         });

@@ -12,7 +12,7 @@
             ></v-img>
             <h1>Login</h1>
           </v-card-text>
-          <v-form @submit.prevent="login">
+          <v-form>
             <v-text-field
               label="Email"
               v-model="form.email"

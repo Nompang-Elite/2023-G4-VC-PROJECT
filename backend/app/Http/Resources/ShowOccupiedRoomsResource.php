@@ -15,10 +15,11 @@ class ShowOccupiedRoomsResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' =>$this -> id,
-            'check_in' =>$this -> check_in,
-            'check_out' =>$this -> check_out,
-            'room_id' => $this -> room_id,
+            'id' => $this->id,
+            'room_id' => $this->room_id,
+            'check_in' => $this->check_in,
+            'check_out' => $this->check_out,
+            
         ];
     }
 }

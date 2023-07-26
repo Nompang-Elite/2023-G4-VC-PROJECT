@@ -1,9 +1,13 @@
 <template>
   <v-container>
+    <v-sheet class="py-4 text-uppercase">
+      <h3>Reviews</h3>
+    </v-sheet>
     <v-row v-if="Guest.isLoggedIn()">
       <v-col>
         <v-btn
           rounded="xl"
+          color="info"
           @click.prevent="
             Guest.review.reviewDialog = !Guest.review.reviewDialog
           "
@@ -51,7 +55,7 @@
       </v-col>
     </v-row>
   </v-container>
-  <PostReviewDialog />
+  <PostReviewDialog :hotel-id="this.$route.params.id" />
 </template>
 <script>
 import PostReviewDialog from "../Dialogs/PostReviewDialog.vue";
@@ -64,7 +68,7 @@ export default {
   },
   components: { PostReviewDialog },
   beforeMount() {
-    this.Guest.getHotelReviews(1);
+    this.Guest.getHotelReviews(this.$route.params.id);
   },
 };
 </script>
