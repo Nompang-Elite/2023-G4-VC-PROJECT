@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <!-- ----------------Room Tolbar---------------------- -->
-    <v-row class="mt-5" style="margin-left: 11%">
+    <v-row class="mt-5">
       <v-col cols="5">
         <v-text-field
           v-model="Hotel.search"
@@ -12,7 +12,7 @@
         ></v-text-field>
       </v-col>
 
-      <v-col cols="2" class="mt-1 d-flex" style="margin: 5%">
+      <v-col cols="4" class="mt-1 d-flex">
         <v-btn
           class="bg-red-darken-1"
           rounded="pill"
@@ -27,7 +27,7 @@
         >
           UNOCCUPIED
         </v-btn>
-        <v-btn class="mx-4 bg-info" rounded="pill">+ Add Room </v-btn>
+        <v-btn class="bg-info" rounded="pill">+ Add Room </v-btn>
       </v-col>
     </v-row>
 
@@ -80,8 +80,10 @@ export default {
     // ------------Use for search name in rooms ------------------------
     const filteredRooms = computed(() => {
       if (Hotel.search) {
-        return Hotel.rooms.filter((room) =>
-          room.name.toLowerCase().includes(Hotel.search.toLowerCase())
+        return Hotel.rooms.filter(
+          (room) =>
+            room.name.toLowerCase().includes(Hotel.search.toLowerCase()) ||
+            room.number.toLowerCase().includes(Hotel.search.toLowerCase())
         );
       } else {
         return Hotel.rooms;
