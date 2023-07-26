@@ -28,14 +28,16 @@
       </tr>
     </thead>
     <tbody >
-      <tr v-for="(hotel, index) in hotels" :key="index">
-        <td>{{ hotel.id }}</td>
+      <tr v-for="hotel in hotels" :key="hotel.id">
+        <td>{{ hotel.hotel_id }}</td>
         <td>{{ hotel.postal_code}}</td>
         <td>{{ hotel.email}}</td>
         <td>{{ hotel.city}}</td>
         <td>{{ hotel.country}}</td>
         <td>{{ hotel.address}}</td>
         <td class="d-flex mt-5">
+        
+        <!-- =============Edit hotel info dialog=============== -->
           <v-dialog
             v-model="dialog"
             persistent
@@ -46,83 +48,29 @@
               color="white"
               variant="text"  
               rounded="pill" 
-              style="background-color: blue;">Manage</v-btn>
+              style="background-color: blue;"
+              @click="editHotel(hotel.id)"
+              >Manage</v-btn>
             </template>
             <v-card>
                 <v-card-title>
-                  <span class="text-h5">Edit Hotel</span>
+                  <span class="text-h5">Update Hotel</span>
                 </v-card-title>
               <v-card-text >
                 <v-container >
                   <v-row>
-                    <v-col
-                      cols="6"
-                    >
-                      <v-text-field
-                        label="Hotel_id"
-                        required
-                        density="compact"
-                        variant="solo"
-                        rounded="pill"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col
-                      cols="6"
-                    >
-                      <v-text-field
-                        label="Postal code"
-                        density="compact"
-                        variant="solo"
-                        rounded="pill"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col
-                      cols="6"
-                    >
-                      <v-text-field
-                        label="Phone Number"
-                        density="compact"
-                        variant="solo"
-                        rounded="pill"
-                        required
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                      <v-text-field
-                        label="Email"
-                        density="compact"
-                        variant="solo"
-                        rounded="pill"
-                        required
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                      <v-text-field
-                        label="city"
-                        density="compact"
-                        variant="solo"
-                        rounded="pill"
-                        required
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                      <v-text-field
-                        label="Country"
-                        density="compact"
-                        variant="solo"
-                        rounded="pill"
-                        required
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12">
-                      <v-text-field
-                        label="Address"
-                        density="compact"
-                        variant="solo"
-                        rounded="pill"
-                        required
-                      ></v-text-field>
-                    </v-col>
+                   
+                      <v-card-text>
+                        <v-form ref="form" v-model="valid">
+                          <v-text-field v-model="editedHotel.hotel_id" label="Hotel ID"></v-text-field>
+                          <v-text-field v-model="editedHotel.postal_code" label="Postal Code"></v-text-field>
+                          <v-text-field v-model="editedHotel.email" label="Email"></v-text-field>
+                          <v-text-field v-model="editedHotel.city" label="City"></v-text-field>
+                          <v-text-field v-model="editedHotel.country" label="Country"></v-text-field>
+                          <v-text-field v-model="editedHotel.address" label="Address"></v-text-field>
+                        </v-form>
+                      </v-card-text>
+
                  
                   </v-row>
                 </v-container>
@@ -134,7 +82,7 @@
                   rounded="pill"
                   color="white"
                   variant="text"
-                  @click="dialog = false"
+                  @click="updateHotel(hotel.id)" 
                 >
                   Save
                 </v-btn>
@@ -170,6 +118,7 @@ import api from "@/routes/api";
     data () {
       return {
         dialog: false,
+        editedHotel:[],
         hotels: [],
       }
     },
@@ -186,23 +135,45 @@ import api from "@/routes/api";
       })
       .catch((err) => console.log(err));
     },
-  },
-  removeHotelInfo(id){
-    if(confirm('Are you sure, you want to delete this data?')){
+
+// ================edit=============
+
+    editHotel(id) {
+    this.editedIndex = id;
+    this.editedHotel = Object.assign({}, this.hotels[id]);
+    this.dialog = true;
+    },
+
+    updateHotel() {
+      const hotel = this.editedHotel;
       api.api_base
-      .delete(`/admin/hotelInfo/${id}`)
-      .then(response =>{
+      .put(`/admin/hotelInfoUpdate`, hotel)
+      .then(response => {
         alert(response.data.message);
-        this.getHotels();
+        this.hotels.splice(this.editedIndex, 1, Object.assign({}, hotel));
+        this.dialog = false;
       })
-      .catch(function(error){
-          if(error.response){
-            if(error.response.status == 404){
-               alert(error.response.data.message);
-            }
-          }
+      .catch(error => {
+      console.log(error);
       });
-    }
+    },
+    removeHotelInfo(id){
+      if(confirm('Are you sure, you want to delete this data?')){
+        api.api_base
+        .delete(`/admin/hotelInfo/${id}`)
+        .then(response =>{
+          alert(response.data.message);
+          this.getHotels();
+        })
+        .catch(function(error){
+            if(error.response){
+              if(error.response.status == 404){
+                alert(error.response.data.message);
+              }
+            }
+        });
+      }
+    },
   }
 }
 </script>
