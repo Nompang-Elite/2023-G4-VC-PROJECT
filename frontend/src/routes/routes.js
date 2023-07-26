@@ -125,6 +125,12 @@ const routes = [
         path: "rooms",
         component: () => import("@/views/Hotels/HotelListRoom.vue"),
       },
+
+       // ----------------Route Review of hotel owner-----------
+       {
+        path: "reviews",
+        component: () => import("@/views/Hotels/HotelReviews.vue"),
+      },
     ],
     meta: {
       isOwner: true,
