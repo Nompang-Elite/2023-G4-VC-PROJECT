@@ -52,8 +52,21 @@ class HotelInfoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function deletHotelInfo($id)
     {
-        //
+        $hotelInfo =HotelInfo::find($id);
+        if($hotelInfo){
+            $hotelInfo -> delete();  
+            return response()->json([
+                'status' => 200,
+                'message'=> 'HotelInfo Deleted Successfully'
+            ], 200);  
+        }
+        else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'No HotelInfo ID Found'
+            ], 404);
+        }
     }
 }

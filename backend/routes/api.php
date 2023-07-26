@@ -74,8 +74,10 @@ Route::group(['prefix' => 'hotel'], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::post('/login', [AdminController::class, 'login']);
     Route::get('/info', [AdminController::class, 'info']);
+    //HotelInfo route 
     Route::get('/hotelInfo', [HotelInfoController::class, 'hotelInfo']);
-
+    // HotelInfo route delete
+    Route::delete('hotelInfo/{id}', [HotelInfoController::class, 'deletHotelInfo']);
     // Admin routes goes here...
 });
 
