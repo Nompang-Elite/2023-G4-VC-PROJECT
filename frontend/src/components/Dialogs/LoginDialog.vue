@@ -12,13 +12,14 @@
             ></v-img>
             <h1>Login</h1>
           </v-card-text>
-          <v-form @submit.prevent="login">
+          <v-form>
             <v-text-field
               label="Email"
               v-model="form.email"
               variant="solo"
               density="compact"
               rounded="xl"
+              :rules="emailRule"
             ></v-text-field>
             <v-text-field
               label="Password"
@@ -44,14 +45,8 @@
               class="mx-auto w-100 bg-info rounded-xl"
               type="submit"
               @click.prevent="Auth.guestLogin(form)"
+              :loading="Auth.loading"
               >Login
-              <v-progress-circular
-                v-if="loading"
-                class="position-fixed"
-                indeterminate
-                width="3"
-                color="success"
-              ></v-progress-circular>
             </v-btn>
           </v-form>
         </v-card>
@@ -69,19 +64,18 @@ export default {
         email: "",
         password: "",
       },
+      emailRule: [
+        // Regex pattern: https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
+        (v) =>
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+            v
+          ) || "Email required",
+      ],
       loading: false,
       error: "",
     };
   },
-  methods: {
-    login() {
-      this.loading = true;
-      // perform login logic here
-      setTimeout(() => {
-        this.loading = false;
-      }, 3000);
-    },
-  },
+  methods: {},
   setup() {
     const Auth = reactive(useAuthStore());
     return { Auth };

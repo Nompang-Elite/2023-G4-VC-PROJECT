@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string("made_by", 40)->default("unknown");
             $table->unsignedBigInteger("user_id");
             $table->foreign("user_id")->references("id")->on("users");
+            $table->unsignedBigInteger("hotel_id");
+            $table->foreign("hotel_id")->references("id")->on("hotels");
             $table->timestamps();
         });
     }

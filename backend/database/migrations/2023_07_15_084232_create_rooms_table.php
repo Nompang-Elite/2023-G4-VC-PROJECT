@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("number")->default("not define");
             $table->string("name")->default("untitled");
-            $table->string("status")->default("unknown");
+            $table->string("status")->default("unoccupied");
             $table->unsignedBigInteger("room_type_id");
             $table->unsignedBigInteger("hotel_id");
             $table->foreign("room_type_id")->references("id")->on("room_types");

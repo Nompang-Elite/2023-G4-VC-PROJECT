@@ -11,13 +11,14 @@ const routes = [
 
   {
     path: "/",
+    name: "Home",
     children: [
       {
         /**
          * Route to the hotel views
          * */
         path: "",
-        name: "Home",
+        name: "Home Main",
         component: () => import("@/views/HomeView.vue"),
       },
       {
@@ -26,7 +27,7 @@ const routes = [
          * */
         path: "hotels",
         name: "Hotels",
-        component: () => import("@/views/HotelsView.vue"),
+        component: () => import("@/views/Guests/HotelViews.vue"),
       },
       {
         /**
@@ -66,7 +67,15 @@ const routes = [
           },
         ],
       },
+      {
+        /**
+         * Route to the detail views
+         * */
+        path: "/hotel/:id",
+        component: () => import("@/views/Guests/DetailHotel.vue"),
+      },
     ],
+    meta: { isGuest: true },
   },
 
   {
@@ -74,6 +83,59 @@ const routes = [
     // Vue 3 need to use /:pathMatch(.*)*
     path: "/:pathMatch(.*)*",
     name: "Not Found",
+    component: () => import("@/components/Errors/NotFound.vue"),
+  },
+  {
+    path: "/hotel",
+    children: [
+      {
+        path: "guests",
+        component: () => import("@/views/Hotels/HotelGuestsView.vue"),
+      },
+    ],
+    meta: { isHotel: true },
+  },
+  {
+    path: "/admin",
+    children: [
+      {
+        path: "",
+        component: () => import("@/views/Admin/AdminHomeView.vue"),
+      },
+    ],
+    meta: {
+      isAdmin: true,
+    },
+  },
+
+  {
+    path: "/owner",
+    name: "Owner",
+    children: [
+      {
+        path: "",
+        component: () => import("@/views/Hotels/HotelHomeView.vue"),
+      },
+      {
+        path: "guests",
+        component: () => import("@/views/Hotels/HotelGuestsView.vue"),
+      },
+      // ----------------Route List room of hotel owner-----------
+      {
+        path: "rooms",
+        component: () => import("@/views/Hotels/HotelListRoom.vue"),
+      },
+    ],
+    meta: {
+      isOwner: true,
+    },
+  },
+
+  {
+    //Solution Redirection: https://stackoverflow.com/questions/50961082/vue-js-how-to-redirect-to-a-common-route-if-route-isnt-found
+    // Vue 3 need to use /:pathMatch(.*)*
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
     component: () => import("@/components/Errors/NotFound.vue"),
   },
 

@@ -43,7 +43,7 @@
         text="Booking"
       >
       </v-btn>
-      <v-btn
+      <!-- <v-btn
         variant="elevated"
         color="red"
         icon="mdi-logout"
@@ -51,7 +51,35 @@
         size="44"
         @click.prevent="Auth.logout()"
       >
-      </v-btn>
+      </v-btn> -->
+
+      <v-menu>
+        <template v-slot:activator="{ props }">
+          <v-btn
+            class="mr-2"
+            color="info"
+            size="38"
+            variant="elevated"
+            v-bind="props"
+            icon="mdi-menu"
+          >
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            to=""
+            prepend-icon="mdi-cog"
+            title="Setting"
+          >
+          </v-list-item>
+          <v-list-item
+            @click.prevent="Auth.logout()"
+            prepend-icon="mdi-logout"
+            title="Logout"
+          >
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </div>
     <div v-else>
       <v-btn
@@ -101,7 +129,7 @@ export default {
   },
   // Search bar loading
   data: () => ({
-    searchInput: null,
+    searchInput: "",
   }),
 
   methods: {
