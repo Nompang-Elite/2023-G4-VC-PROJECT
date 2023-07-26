@@ -1,9 +1,10 @@
 <template>
   <v-container>
     <!-- ----------------Room Tolbar---------------------- -->
-    <v-row class="mt-5" style="margin-left: 11%">
+    <v-row class="mt-5">
       <v-col cols="5">
         <v-text-field
+          v-model="Hotel.search"
           placeholder="Search"
           density="compact"
           variant="solo"
@@ -42,7 +43,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="room in Hotel.rooms" :key="room.name">
+        <tr v-for="room in filteredRooms" :key="room.name">
           <td>{{ room.number }}</td>
           <td>{{ room.name }}</td>
           <td>{{ room.status }}</td>
@@ -72,13 +73,26 @@
 </template>
 <script>
 import { useHotelStore } from "@/store/HotelStore.js";
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
 export default {
   //operation api of pinia
   setup() {
     const Hotel = reactive(useHotelStore());
-    return { Hotel };
+    // ------------Use for search name in rooms ------------------------
+    const filteredRooms = computed(() => {
+      if (Hotel.search) {
+        return Hotel.rooms.filter(
+          (room) =>
+            room.name.toLowerCase().includes(Hotel.search.toLowerCase()) ||
+            room.number.toLowerCase().includes(Hotel.search.toLowerCase())
+        );
+      } else {
+        return Hotel.rooms;
+      }
+    });
+    return { Hotel, filteredRooms };
   },
+
   beforeMount() {
     this.Hotel.getRooms();
   },

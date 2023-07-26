@@ -61,6 +61,10 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::post('/reviews', [HotelController::class, "getHotelReviews"]);
 
     // ------------- Route hotel owner--------------
+    //search name in room
+    Route::get('/search_room', [RoomController::class, "searchRoom"]);
+
+    // ------------- Route hotel owner--------------
     //Room_Type
     Route::get('/room_types', [RoomTypesController::class, 'index']);
 
