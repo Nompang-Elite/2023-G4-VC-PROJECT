@@ -14,7 +14,7 @@ class HotelInfoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function hotelInfo()
     {
         // dd(HotelInfo::all());
         $HotelInfo = HotelInfo::all();
@@ -46,14 +46,33 @@ class HotelInfoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+            $HotelInfo = hotelInfo::store($request, $id);
+            if ($HotelInfo)
+                return $this->success($HotelInfo, "list of hotelInfo");
+
+            return $this->error("list is empty", 404);
+            
+    
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function deletHotelInfo($id)
     {
-        //
+        $hotelInfo =HotelInfo::find($id);
+        if($hotelInfo){
+            $hotelInfo -> delete();  
+            return response()->json([
+                'status' => 200,
+                'message'=> 'HotelInfo Deleted Successfully'
+            ], 200);  
+        }
+        else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'No HotelInfo ID Found'
+            ], 404);
+        }
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\HotelController;
 use App\Http\Controllers\Api\Hotels\HotelGuestController;
 use App\Http\Controllers\Api\OccupiedRoomsControll;
 use App\Http\Controllers\Api\Guest\GuestController;
+use App\Http\Controllers\Api\HotelInfoController;
 use App\Http\Controllers\Api\ImageUploadController;
 use App\Http\Controllers\Api\Hotels\HotelController as HotelsHotelController;
 use App\Http\Controllers\Api\RoomTypesController;
@@ -37,10 +38,6 @@ Route::get('/hotel/search', [HotelController::class, 'search']);
 Route::group(['prefix' => 'hotel'], function () {
     Route::get('/', [HotelController::class, 'index']);
     Route::get('/{id}', [HotelController::class, 'show']);
-
-    //====HotelInfo Routes========
-    // Route::get('/hotelInfo', [HotelInfoController::class, 'index']);
-    // Route::get('/hotel/{id}', [HotelController::class, 'show']);
 
 
     Route::get('/info/all', [HotelController::class, 'HotelsInfo']);
@@ -81,6 +78,12 @@ Route::group(['prefix' => 'hotel'], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::post('/login', [AdminController::class, 'login']);
     Route::get('/info', [AdminController::class, 'info']);
+    //HotelInfo route 
+    Route::get('/hotelInfo', [HotelInfoController::class, 'hotelInfo']);
+    // HotelInfo route delete
+    Route::delete('hotelInfo/{id}', [HotelInfoController::class, 'deletHotelInfo']);
+    // hotelInfo Update
+    Route::put('/hotelInfoUpdate/{id}', [HotelInfoController::class, 'update']);
 
     // Admin routes goes here...
     Route::post('/hotels/register', [AdminController::class, 'registerHotel']);

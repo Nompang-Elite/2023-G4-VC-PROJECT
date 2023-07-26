@@ -19,6 +19,13 @@ class HotelInfo extends Model
         "email",
         "hotel_id",
     ];
+    public static function store($request,$id = null)
+    {
+        //request values
+        $HotelInfos = $request->only(['phone','address', 'city','country','postal_code','email','hotel_id']);
+        $HotelInfo = self::updateOrCreate(['id'=> $id], $HotelInfos);
+        return $HotelInfo;
+    }
     public function hotel():BelongsTo
     {
         return $this->belongsTo(Hotel::class);
