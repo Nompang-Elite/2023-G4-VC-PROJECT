@@ -27,9 +27,9 @@
         <th class="text-left">Actions</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody >
       <tr v-for="(hotel, index) in hotels" :key="index">
-        <td>{{ hotel.hotel_id }}</td>
+        <td>{{ hotel.id }}</td>
         <td>{{ hotel.postal_code}}</td>
         <td>{{ hotel.email}}</td>
         <td>{{ hotel.city}}</td>
@@ -59,7 +59,7 @@
                       cols="6"
                     >
                       <v-text-field
-                        label="Hotel_name"
+                        label="Hotel_id"
                         required
                         density="compact"
                         variant="solo"
@@ -130,22 +130,22 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
-                  style="background-color: red;"
-                  rounded="pill"
-                  color="white"
-                  variant="text"
-                  @click="dialog = false"
-                >
-                  Close
-                </v-btn>
-                <v-btn
-                  style="background-color: blue;"
+                  style="background-color:blue;"
                   rounded="pill"
                   color="white"
                   variant="text"
                   @click="dialog = false"
                 >
                   Save
+                </v-btn>
+                <v-btn
+                  style="background-color:red;"
+                  rounded="pill"
+                  color="white"
+                  variant="text"
+                  @click="dialog = false"
+                >
+                  Close
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -155,7 +155,8 @@
           rounded="pill"  
           color="white"
           variant="text" 
-          style="background-color: red;">Remove</v-btn>
+          style="background-color: red;"
+          @click="removeHotelInfo(hotel.id)">Remove</v-btn>
                 
         </td>
       </tr>
@@ -178,14 +179,30 @@ import api from "@/routes/api";
   },
   methods: {
     getHotels() {
-        api.api_base
-      .get("/admin/hotelInfo")
+      api.api_base
+      .get(`/admin/hotelInfo`)
       .then((res) => {
-        console.log(this.hotels = res.data.data);
         this.hotels = res.data.data;
       })
       .catch((err) => console.log(err));
     },
   },
+  removeHotelInfo(id){
+    if(confirm('Are you sure, you want to delete this data?')){
+      api.api_base
+      .delete(`/admin/hotelInfo/${id}`)
+      .then(response =>{
+        alert(response.data.message);
+        this.getHotels();
+      })
+      .catch(function(error){
+          if(error.response){
+            if(error.response.status == 404){
+               alert(error.response.data.message);
+            }
+          }
+      });
+    }
   }
+}
 </script>
