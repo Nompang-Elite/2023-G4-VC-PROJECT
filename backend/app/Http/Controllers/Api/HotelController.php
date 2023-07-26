@@ -24,7 +24,7 @@ class HotelController extends Controller
     // ---------------get all hotels---------------
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['index', 'search', 'HotelsInfoId']);
+        $this->middleware('auth:api')->except(['index', 'search', 'HotelsInfoId', 'getHotelReviews']);
     }
     public function index()
     {

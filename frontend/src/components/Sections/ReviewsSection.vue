@@ -1,9 +1,13 @@
 <template>
   <v-container>
+    <v-sheet class="py-4 text-uppercase">
+      <h3>Reviews</h3>
+    </v-sheet>
     <v-row v-if="Guest.isLoggedIn()">
       <v-col>
         <v-btn
           rounded="xl"
+          color="info"
           @click.prevent="
             Guest.review.reviewDialog = !Guest.review.reviewDialog
           "

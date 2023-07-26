@@ -18,6 +18,8 @@ export const useGuestStore = defineStore("Guest", {
         },
       },
       hotelReviews: [],
+      // Search Results,
+      results: [],
     };
   },
   actions: {
@@ -44,7 +46,7 @@ export const useGuestStore = defineStore("Guest", {
         .then((res) => {
           this.results = JSON.parse(JSON.stringify(res.data.data));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err.response.data.errors));
       // Return true if there is data
       return this.results.length > 1;
     },

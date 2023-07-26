@@ -1,13 +1,13 @@
 <template>
   <!-- ===================Contain-card==================== -->
   <v-container v-if="hotels !== null">
-    <v-btn to="/" class="ma-4" color="blue darken-2" dark>
+    <v-btn rounded="xl" to="/" class="ma-4" color="blue darken-2" dark>
       <v-icon size="large">mdi-chevron-double-left</v-icon>
       Back
     </v-btn>
 
     <!-- ======Card hotel======== -->
-    <v-card rounded="xl" class="pa-4 px-2 mb-4">
+    <v-card rounded="xl" class="pa-2 mb-8" elevation="4">
       <v-card-title>
         <v-row>
           <v-col cols="4">
@@ -19,9 +19,9 @@
             >
             </v-img>
           </v-col>
-          <v-col cols="8">
-            <v-card-title>
-              <h3>{{ hotels.name }}</h3>
+          <v-col cols="8" class="pr-8">
+            <v-card-title class="text-h4 mb-4">
+              {{ hotels.name }}
             </v-card-title>
             <v-card-subtitle>
               <v-rating
@@ -36,7 +36,7 @@
               v-for="(item, i) in hotels.info"
               :key="i"
             >
-              <span>
+              <span class="text-grey text-capitalize">
                 Address: {{ item.address }}, {{ item.city }}, {{ item.country }}
               </span>
             </v-sheet>
@@ -51,7 +51,7 @@
     </v-card>
     <!-- ============slind Image hotel======================== 
       -->
-    <v-sheet elevation="2" max-width="1300" class="mx-auto rounded-xl">
+    <v-sheet elevation="4" max-width="auto" class="mx-auto my-4 rounded-xl">
       <v-carousel
         hide-delimiters
         show-arrows="hover"
@@ -68,6 +68,7 @@
       </v-carousel>
     </v-sheet>
     <CardRoom :hotel="hotels" />
+    <ReviewsSection />
   </v-container>
   <!-- ============Card Room======================== -->
 </template>
@@ -76,9 +77,9 @@
 //=========Card hotel==== //
 import CardRoom from "@/components/Cards/RoomCard.vue";
 import api from "@/routes/api";
-
+import ReviewsSection from "@/components/Sections/ReviewsSection.vue";
 export default {
-  components: { CardRoom },
+  components: { CardRoom, ReviewsSection },
   data() {
     return {
       hotels: null,
@@ -90,7 +91,6 @@ export default {
     api.api_base
       .get(`/hotel/info/${this.$route.params.id}`)
       .then((response) => {
-        console.log(response.data.data);
         this.hotels = response.data.data;
         this.hotelImgs = response.data.data.images;
       })

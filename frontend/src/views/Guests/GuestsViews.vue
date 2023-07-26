@@ -39,6 +39,7 @@ export default {
   // Methods
   methods: {
     searchHotel(e) {
+      console.log(e);
       this.Guest.getSearchData(e);
       if (e !== null && String(e).length >= 1) {
         if (this.Guest.results.length >= 1) {
