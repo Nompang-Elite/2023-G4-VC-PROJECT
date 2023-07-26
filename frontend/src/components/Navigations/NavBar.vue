@@ -129,7 +129,7 @@ export default {
   },
   // Search bar loading
   data: () => ({
-    searchInput: null,
+    searchInput: "",
   }),
 
   methods: {

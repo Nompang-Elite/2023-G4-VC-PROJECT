@@ -2,9 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Hotel;
-use App\Models\Reservations;
-use App\Models\RoomType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

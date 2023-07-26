@@ -15,13 +15,25 @@ export default {
       topHotels: [],
     };
   },
+//========= Navigate to the detail page with the selected hotel's ID as a parameter==========
+  methods: {
+    goToDetail(id) {
+      console.log(id);
+      this.$router.push(`/hotel/${id}`);
+    }
+  },
   mounted() {
     api.api_base
       .get("/hotel")
       .then((res) => {
+        // console.log(this.hotels = res.data.data);
         this.hotels = res.data.data;
       })
       .catch((err) => console.log(err));
   },
 };
 </script>
+
+
+
+

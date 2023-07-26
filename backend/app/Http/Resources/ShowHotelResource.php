@@ -24,6 +24,12 @@ class ShowHotelResource extends JsonResource
             'location' => $this->location,
             'description' => $this->description,
             'image_hash' => Images::find($imgId)->image_hash
+            // 'id' => $this->id,
+            // 'name' => $this->name,
+            // 'image' => $this->image,
+            // 'location' => $this->location,
+            // 'description' => $this->description,
+            // 'rooms' => Rooms::where("hotel_id", $this->id)->get()
         ];
     }
 }

@@ -18,26 +18,8 @@ export const useGuestStore = defineStore("Guest", {
         },
       },
       hotelReviews: [],
-      // Booking section ===========================
-      // Room Imgs slide
-      roomImgs: [
-        {
-          image_hash: 1,
-        },
-        {
-          image_hash: 2,
-        },
-        {
-          image_hash: 3,
-        },
-      ],
-      // Dialog activator
-      bookingDialog: true,
-      // Date
-      date: {
-        startDate: new Date(),
-        endDate: null,
-      },
+      // Search Results,
+      results: [],
     };
   },
   actions: {
@@ -64,7 +46,7 @@ export const useGuestStore = defineStore("Guest", {
         .then((res) => {
           this.results = JSON.parse(JSON.stringify(res.data.data));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err.response.data.errors));
       // Return true if there is data
       return this.results.length > 1;
     },

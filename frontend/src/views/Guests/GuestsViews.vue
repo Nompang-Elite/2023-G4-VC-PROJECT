@@ -27,6 +27,7 @@ import { useAuthStore } from "@/store/AuthStore";
 import { useGuestStore } from "@/store/GuestStore";
 // Reactive package from vue
 import { reactive } from "vue";
+
 export default {
   // Composition setup
   setup() {
@@ -35,10 +36,11 @@ export default {
     return { Auth, Guest };
   },
   // Components
-  components: { MainViews, NavBar, FooterNav, LoginDialog, RegisterDialog },
+  components: { MainViews, NavBar, FooterNav, LoginDialog, RegisterDialog},
   // Methods
   methods: {
     searchHotel(e) {
+      console.log(e);
       this.Guest.getSearchData(e);
       if (e !== null && String(e).length >= 1) {
         if (this.Guest.results.length >= 1) {
