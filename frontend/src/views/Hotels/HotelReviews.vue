@@ -1,11 +1,16 @@
 <template>
   <v-container>
     <!-- //Button -->
-    <v-btn class="mx-4 bg-info" rounded="pill" style="margin: 3%"
-      @click="highestRating()"
+    <v-btn
+      class="mx-4 bg-info"
+      rounded="pill"
+      style="margin: 3%"
+      @click="filterReviews('desc')"
       >HIGHGEST
     </v-btn>
-    <v-btn class="bg-red-darken-1" rounded="pill" @click="lowestRating(review)">LOWEST</v-btn>
+    <v-btn class="bg-red-darken-1" rounded="pill" @click="filterReviews('asc')"
+      >LOWEST</v-btn
+    >
     <v-table>
       <thead class="bg-info">
         <tr>
@@ -44,12 +49,28 @@ export default {
     const Auth = ref(useAuthStore());
 
     // const filteredReviews = ref
-    
+
     return { Hotel, Guest, Auth };
   },
   //Function user_id rating
   beforeMount() {
     this.Guest.getHotelReviews(this.Auth.getUser().hotel_id);
+  },
+
+  methods: {
+    //Function Filter rating review
+    filterReviews(sortBy) {
+      //Solution from:  https://stackoverflow.com/questions/1063007/how-to-sort-an-array-of-integers-correctly#1063027
+      if (sortBy === "asc") {
+        this.Guest.hotelReviews = this.Guest.hotelReviews.sort(
+          (current, next) => current.rate - next.rate
+        );
+      } else if (sortBy === "desc") {
+        this.Guest.hotelReviews = this.Guest.hotelReviews.sort(
+          (current, next) => next.rate - current.rate
+        );
+      }
+    },
   },
 };
 </script>
