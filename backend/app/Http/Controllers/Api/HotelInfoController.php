@@ -14,7 +14,7 @@ class HotelInfoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function hotelInfo()
     {
         // dd(HotelInfo::all());
         $HotelInfo = HotelInfo::all();

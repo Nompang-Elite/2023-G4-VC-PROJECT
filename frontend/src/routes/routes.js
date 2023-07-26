@@ -102,6 +102,10 @@ const routes = [
         path: "",
         component: () => import("@/views/Admin/AdminHomeView.vue"),
       },
+      {
+        path: "hotels",
+        component: () => import("@/views/Admin/AdminHotelView.vue"),
+      },
     ],
     meta: {
       isAdmin: true,

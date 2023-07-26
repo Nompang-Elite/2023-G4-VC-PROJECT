@@ -28,7 +28,7 @@ export default {
         },
         {
           text: "hotels",
-          to: "/hotels",
+          to: "/admin/hotels",
         },
       ],
     };

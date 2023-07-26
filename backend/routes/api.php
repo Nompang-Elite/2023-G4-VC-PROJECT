@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\HotelController;
 use App\Http\Controllers\Api\Hotels\HotelGuestController;
 use App\Http\Controllers\Api\OccupiedRoomsControll;
 use App\Http\Controllers\Api\Guest\GuestController;
+use App\Http\Controllers\Api\HotelInfoController;
 use App\Http\Controllers\Api\ImageUploadController;
 use App\Http\Controllers\Api\Hotels\HotelController as HotelsHotelController;
 use App\Http\Controllers\Api\RoomTypesController;
@@ -37,10 +38,6 @@ Route::get('/hotel/search', [HotelController::class, 'search']);
 Route::group(['prefix' => 'hotel'], function () {
     Route::get('/', [HotelController::class, 'index']);
     Route::get('/{id}', [HotelController::class, 'show']);
-
-    //====HotelInfo Routes========
-    // Route::get('/hotelInfo', [HotelInfoController::class, 'index']);
-    // Route::get('/hotel/{id}', [HotelController::class, 'show']);
 
 
     Route::get('/info/all', [HotelController::class, 'HotelsInfo']);
@@ -77,6 +74,7 @@ Route::group(['prefix' => 'hotel'], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::post('/login', [AdminController::class, 'login']);
     Route::get('/info', [AdminController::class, 'info']);
+    Route::get('/hotelInfo', [HotelInfoController::class, 'hotelInfo']);
 
     // Admin routes goes here...
 });
