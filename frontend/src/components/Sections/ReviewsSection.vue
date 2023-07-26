@@ -55,7 +55,7 @@
       </v-col>
     </v-row>
   </v-container>
-  <PostReviewDialog />
+  <PostReviewDialog :hotel-id="this.$route.params.id" />
 </template>
 <script>
 import PostReviewDialog from "../Dialogs/PostReviewDialog.vue";
@@ -68,7 +68,7 @@ export default {
   },
   components: { PostReviewDialog },
   beforeMount() {
-    this.Guest.getHotelReviews(1);
+    this.Guest.getHotelReviews(this.$route.params.id);
   },
 };
 </script>
