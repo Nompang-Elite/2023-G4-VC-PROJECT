@@ -61,6 +61,10 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::post('/reviews', [HotelController::class, "getHotelReviews"]);
 
     // ------------- Route hotel owner--------------
+    //search name in room
+    Route::get('/search_room', [RoomController::class, "searchRoom"]);
+
+    // ------------- Route hotel owner--------------
     //Room_Type
     Route::get('/room_types', [RoomTypesController::class, 'index']);
 
@@ -80,6 +84,9 @@ Route::group(['prefix' => 'admin'], function () {
 
     // Admin routes goes here...
     Route::post('/hotels/register', [AdminController::class, 'registerHotel']);
+    Route::get('/users/all', [AdminController::class, 'getAllUsers']);
+    Route::get('/users/guests', [AdminController::class, 'getGuest']);
+    Route::get('/users/owners', [AdminController::class, 'getOwner']);
 });
 
 

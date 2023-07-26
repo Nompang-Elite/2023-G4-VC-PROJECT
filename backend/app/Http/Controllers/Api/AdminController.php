@@ -94,7 +94,7 @@ class AdminController extends Controller
         ];
         $validateHotel = Validator::make($hotel, [
             "name" => "required|unique:hotels|max:500",
-            "description" => "required|min:10" 
+            "description" => "required|min:10"
         ]);
 
         $hotelInfo = [
@@ -137,5 +137,24 @@ class AdminController extends Controller
             $validateHotelInfo->errors()
         ]);
     }
-}
+    // Get all user 
+    public function getAllUsers()
+    {
+        $users = User::where("user_type", 2)->orWhere("user_type", 3)->get();
 
+        return  $this->success($users, "Get user");
+    }
+    // Get all guests
+    public function getGuest()
+    {
+        $guests = User::where("user_type", 3)->get();
+
+        return $this->success($guests, "Get Guest");
+    }
+    public function getOwner()
+    {
+        $guests = User::where("user_type", 2)->get();
+
+        return $this->success($guests, "Get Owner");
+    }
+}
