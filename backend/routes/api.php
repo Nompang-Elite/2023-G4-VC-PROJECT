@@ -79,6 +79,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/login', [AdminController::class, 'login']);
     Route::get('/info', [AdminController::class, 'info']);
     Route::get('/hotelInfo', [HotelInfoController::class, 'hotelInfo']);
+    // hotelInfo Update
+    Route::put('/hotelInfoUpdate/{id}', [HotelInfoController::class, 'update']);
 
     // Admin routes goes here...
 });
