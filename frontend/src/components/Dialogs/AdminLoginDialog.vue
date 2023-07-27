@@ -42,6 +42,16 @@
         </v-card>
       </v-sheet>
     </v-dialog>
+    <v-dialog width="auto" v-model="Auth.errorLoginDialog">
+      <v-card color="red">
+        <v-card-text>
+          <v-card-title class="text-center">
+            <v-icon icon="mdi-alert"></v-icon>
+          </v-card-title>
+          Password or Email is incorrect!
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-main>
 </template>
 <script>
