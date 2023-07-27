@@ -31,7 +31,7 @@ class GuestController extends Controller
             $rateCount += $r->rate;
         }
 
-        $average = round($rateCount / count($reviews));
+        $average = round($rateCount / max(count($reviews), 1));
 
         $hotel->rate = $average;
 

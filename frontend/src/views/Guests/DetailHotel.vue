@@ -15,7 +15,10 @@
               class="rounded-lg"
               cover
               height="100%"
-              :src="'data:image/*;base64,' + hotelImgs[0].image_hash"
+              :src="
+                'data:image/*;base64,' +
+                (hotelImgs.length > 0 ? hotelImgs[0].image_hash : null)
+              "
             >
             </v-img>
           </v-col>

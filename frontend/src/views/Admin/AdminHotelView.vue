@@ -146,9 +146,10 @@ export default {
       updateHotel() {
         const hotel = this.editedHotel;
         api.api_base
-        .put(`/admin/hotelInfoUpdate`, hotel)
-        .then(response => {
-          alert(response.data.message);
+        .put(`/admin/hotelInfoUpdate/${id}`, hotel)
+        .then((res) => {
+          let data = res.data.data
+          console.log(data)
           this.hotels.splice(this.editedIndex, 1, Object.assign({}, hotel));
           this.dialog = false;
         })

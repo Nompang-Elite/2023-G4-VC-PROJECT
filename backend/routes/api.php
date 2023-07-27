@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Guest\GuestController;
 use App\Http\Controllers\Api\HotelInfoController;
 use App\Http\Controllers\Api\ImageUploadController;
 use App\Http\Controllers\Api\Hotels\HotelController as HotelsHotelController;
+use App\Http\Controllers\Api\ReviewsController;
 use App\Http\Controllers\Api\RoomTypesController;
 use App\Http\Controllers\Api\RoomController;
 use Illuminate\Support\Facades\Route;
@@ -58,6 +59,10 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::post('/reviews', [HotelController::class, "getHotelReviews"]);
 
     // ------------- Route hotel owner--------------
+    //Filter Reviews rating 
+    Route::get('/reviews/filter/{rate}', [ReviewsController::class, 'filterReviews']);
+
+
     //search name in room
     Route::get('/search_room', [RoomController::class, "searchRoom"]);
 
@@ -86,6 +91,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('/hotelInfoUpdate/{id}', [HotelInfoController::class, 'update']);
 
     // Admin routes goes here...
+    Route::post('/hotels/register', [AdminController::class, 'registerHotel']);
+    Route::get('/users/all', [AdminController::class, 'getAllUsers']);
+    Route::get('/users/guests', [AdminController::class, 'getGuest']);
+    Route::get('/users/owners', [AdminController::class, 'getOwner']);
 });
 
 

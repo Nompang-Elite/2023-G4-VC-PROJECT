@@ -3,6 +3,7 @@
     <v-row>
       <v-col cols="8">
         <v-card rounded="xl">
+          <v-btn @click.prevent="Admin.registerHotelDialog = !Admin.registerHotelDialog">Register Hotel</v-btn>
           <v-card-text>
             <!-- Users -->
             <v-row>
@@ -29,5 +30,18 @@
         </v-card>
       </v-col>
     </v-row>
+    <AdminRegisterHotelDialog />
   </v-container>
 </template>
+<script>
+import AdminRegisterHotelDialog from "@/components/Dialogs/AdminRegisterHotelDialog.vue";
+import { useAdminStore } from "@/store/AdminStore"
+import { ref } from "vue"
+export default {
+  components: { AdminRegisterHotelDialog },
+  setup() {
+    const Admin = ref(useAdminStore());
+    return { Admin }
+  }
+}
+</script>

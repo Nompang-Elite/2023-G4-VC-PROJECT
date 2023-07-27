@@ -14,7 +14,7 @@ class Hotel extends Model
         'name',
         'rate',
         'description',
-        'rate',
+        'user_id'
     ];
 
     public function HotelInfos():HasMany

@@ -16,20 +16,18 @@ class ShowHotelResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $imgId = HotelImages::where("hotel_id", $this->id)->first()->image_id;
+        $imgId = HotelImages::where("hotel_id", $this->id)->first();
+        if ($imgId !==  null) {
+            $hash = Images::find($imgId->image_id)->image_hash;
+        } else
+            $hash = $imgId;
         return [
             'id' => $this->id,
             'name' => $this->name,
             'rate' => $this->rate,
             'location' => $this->location,
             'description' => $this->description,
-            'image_hash' => Images::find($imgId)->image_hash
-            // 'id' => $this->id,
-            // 'name' => $this->name,
-            // 'image' => $this->image,
-            // 'location' => $this->location,
-            // 'description' => $this->description,
-            // 'rooms' => Rooms::where("hotel_id", $this->id)->get()
+            'image_hash' => $hash
         ];
     }
 }

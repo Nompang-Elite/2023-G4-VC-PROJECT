@@ -103,9 +103,13 @@ const routes = [
         component: () => import("@/views/Admin/AdminHomeView.vue"),
       },
       {
+        path: "/users",
+        component: () => import('@/views/Admin/AdminListUserView.vue')
+      },
+      {
         path: "hotels",
         component: () => import("@/views/Admin/AdminHotelView.vue"),
-      },
+      }
     ],
     meta: {
       isAdmin: true,
@@ -129,6 +133,12 @@ const routes = [
         path: "rooms",
         component: () => import("@/views/Hotels/HotelListRoom.vue"),
       },
+
+       // ----------------Route Review of hotel owner-----------
+       {
+        path: "reviews",
+        component: () => import("@/views/Hotels/HotelReviews.vue"),
+      },
     ],
     meta: {
       isOwner: true,
@@ -142,7 +152,6 @@ const routes = [
     name: "NotFound",
     component: () => import("@/components/Errors/NotFound.vue"),
   },
-
   // More route goes here!!!
 ];
 

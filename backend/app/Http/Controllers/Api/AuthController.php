@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Hotel;
+use App\Models\HotelInfo;
 use App\Models\User;
 use App\Models\UserTypes;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class AuthController extends Controller
     public function __construct()
     {
         // Route filtering wit middleware:
-        $this->middleware('auth:api')->except(['login', 'register', 'error']);
+        $this->middleware('auth:api')->except(['login', 'register', 'error', 'registerHotel']);
     }
     /**
      * 
