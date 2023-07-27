@@ -25,8 +25,8 @@
 
             <v-card-title>{{ item.name }}</v-card-title>
 
-            <v-card-subtitle class="pt-4">
-              {{ item.location }}
+            <v-card-subtitle class="pt-4 text-capitalize">
+              {{ item.info.city + ", " + item.info.country }}
             </v-card-subtitle>
 
             <v-card-text class="card-text">
