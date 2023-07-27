@@ -77,6 +77,9 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::get('/rooms/all', [HotelController::class, 'hotelRooms']);
 
     Route::post('/info', [HotelsHotelController::class, "getHotelInfo"]);
+
+    Route::post('/room/type', [HotelsHotelController::class, "getHotelRoomType"]);
+    Route::post('/room/add', [HotelsHotelController::class, "addRoom"]);
     // Hotel routes goes here...
 });
 
