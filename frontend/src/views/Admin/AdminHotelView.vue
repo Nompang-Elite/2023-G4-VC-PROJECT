@@ -51,6 +51,7 @@
               style="background-color: blue;"
               @click="editHotel(hotel.id)"
               >Manage</v-btn>
+  
             </template>
             <v-card>
                 <v-card-title>
@@ -104,6 +105,7 @@
           variant="text" 
           style="background-color: red;"
           @click="removeHotelInfo(hotel.id)">Remove</v-btn> 
+
                 
         </td>
       </tr>
@@ -118,6 +120,7 @@ export default {
       return {
         dialog: false,
         editedHotel:[],
+        editedId:[],
         hotels: [],
       }
     },
@@ -138,19 +141,19 @@ export default {
       // ================edit=============
 
       editHotel(id) {
-      this.editedIndex = id;
-      this.editedHotel = Object.assign({}, this.hotels[id]);
-      this.dialog = true;
+        this.editedId = this.hotels.findIndex(hotel => hotel.id === id);
+        this.editedHotel = Object.assign({}, this.hotels[this.editedId]);
+        this.dialog = true;
       },
 
-      updateHotel() {
+      updateHotel(id) {
         const hotel = this.editedHotel;
         api.api_base
         .put(`/admin/hotelInfoUpdate/${id}`, hotel)
         .then((res) => {
           let data = res.data.data
           console.log(data)
-          this.hotels.splice(this.editedIndex, 1, Object.assign({}, hotel));
+          this.hotels.splice(this.editedId, 1, Object.assign({}, hotel));
           this.dialog = false;
         })
         .catch(error => {
