@@ -11,8 +11,8 @@
         <!-- Source Idea: https://vuetifyjs.com/en/components/hover/  -->
         <v-card
           style="display: flex"
-          class="mx-auto text-white"
-          color="#1D3557"
+          class="mx-auto"
+          color="#F1FAEE"
           max-width="100%"
           height="200"
           rounded="xl"
@@ -45,7 +45,12 @@
               </v-card-text>
 
               <v-card-actions>
-                <v-btn rounded="xl" variant="outlined" class="mr-4 px-4">
+                <v-btn
+                  rounded="xl"
+                  variant="elevated"
+                  color="info"
+                  class="mr-4 px-4"
+                >
                   Reserve
                 </v-btn>
                 <v-spacer></v-spacer>

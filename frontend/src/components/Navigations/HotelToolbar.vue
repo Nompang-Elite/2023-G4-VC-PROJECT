@@ -1,10 +1,11 @@
 <template>
   <v-container>
-    <v-toolbar rounded="xl" class="mt-4">
+    <v-toolbar rounded="xl" class="mt-4" color="#1D3557">
       <v-btn
         v-for="toolbarBtn in toolbarBtns"
         :key="toolbarBtn"
-        variant="elevated"
+        variant="outlined"
+        color="#F1FAEE"
         rounded="xl"
         class="mr-2"
         :to="toolbarBtn.to"

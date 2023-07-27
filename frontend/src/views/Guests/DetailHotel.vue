@@ -1,13 +1,13 @@
 <template>
   <!-- ===================Contain-card==================== -->
   <v-container v-if="hotels !== null">
-    <v-btn rounded="xl" variant="outlined" to="/" color="info" class="ma-4">
+    <v-btn rounded="xl" variant="elevated" to="/" color="info" class="ma-4">
       <v-icon size="large">mdi-chevron-double-left</v-icon>
       Back
     </v-btn>
 
     <!-- ======Card hotel======== -->
-    <v-card rounded="xl" class="pa-2 mb-8" elevation="4" color="#1D3557">
+    <v-card rounded="xl" class="pa-2 mb-8" elevation="4" color="#F1FAEE">
       <v-card-title>
         <v-row>
           <v-col cols="4">
@@ -23,29 +23,29 @@
             </v-img>
           </v-col>
           <v-col cols="8" class="pr-8">
-            <v-card-title class="text-h4 mb-4 text-white">
+            <v-card-title class="text-h4 mb-4">
               {{ hotels.name }}
             </v-card-title>
             <v-rating
               size="30"
               disabled
-              color="yellow"
+              color="#E63946"
               v-model="hotels.rate"
               class="px-4"
             ></v-rating>
             <v-sheet
-              class="text-wrap pa-4 text-justify font-weight-light text-white"
+              class="text-wrap pa-4 text-justify font-weight-light"
               v-for="(item, i) in hotels.info"
               :key="i"
-              color="#1D3557"
+              color="#F1FAEE"
             >
               <span class="text-grey text-capitalize">
                 Address: {{ item.address }}, {{ item.city }}, {{ item.country }}
               </span>
             </v-sheet>
             <v-sheet
-              class="text-wrap pa-4 pb-8 text-justify font-weight-light text-white"
-              color="#1D3557"
+              class="text-wrap pa-4 pb-8 text-justify font-weight-light"
+              color="#F1FAEE"
             >
               <span>
                 {{ hotels.description }}

@@ -8,16 +8,16 @@
         <v-hover v-slot="{ isHovering, props }">
           <!-- Source Idea: https://vuetifyjs.com/en/components/hover/  -->
           <v-card
-            class="mx-auto text-white"
+            class="mx-auto"
             max-width="400"
             rounded="xl"
             :elevation="isHovering ? 12 : 2"
             :class="{ 'on-hover': isHovering }"
             v-bind="props"
-            color="#1D3557"
+            color="#F1FAEE"
           >
             <v-img
-              class="align-end text-white"
+              class="align-end"
               height="200"
               :src="'data:image/*;base64,' + item.image_hash"
               cover
@@ -30,22 +30,23 @@
               {{ item.info.city + ", " + item.info.country }}
             </v-card-subtitle>
 
-            <v-card-text class="card-text mx-4 text-justify ">
+            <v-card-text class="card-text mx-4 text-justify">
               <div>{{ item.description }}</div>
             </v-card-text>
 
             <v-card-actions class="ma-4 mx-6">
               <!-- Rating point -->
               <v-rating
-                color="yellow"
+                color="#E63946"
                 size="20"
                 v-model="item.rate"
                 disabled
               ></v-rating>
               <v-spacer></v-spacer>
               <v-btn
+                color="info"
                 rounded="xl"
-                variant="outlined"
+                variant="elevated"
                 class="px-4"
                 @click="goToDetail(item.id)"
               >

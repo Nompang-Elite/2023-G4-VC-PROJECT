@@ -98,9 +98,9 @@
       <v-spacer></v-spacer>
       <v-tabs centered>
         <v-tab prepend-icon="mdi-home" to="/">Home</v-tab>
-        <v-tab prepend-icon="mdi-home-city" to="/hotels">Hotels</v-tab>
-        <v-tab prepend-icon="mdi-map-marker" to="/near_me">Near Me</v-tab>
-        <v-tab prepend-icon="mdi-information" to="/abouts">Abouts</v-tab>
+        <!-- <v-tab prepend-icon="mdi-home-city" to="/hotels">Hotels</v-tab> -->
+        <!-- <v-tab prepend-icon="mdi-map-marker" to="/near_me">Near Me</v-tab> -->
+        <!-- <v-tab prepend-icon="mdi-information" to="/abouts">Abouts</v-tab> -->
       </v-tabs>
       <v-spacer></v-spacer>
     </template>
