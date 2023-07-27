@@ -24,6 +24,11 @@ export const useHotelStore = defineStore("Hotel", {
       roomType: [],
       addRoomMsgDialog: false,
       addRoomMsgErrDialog: false,
+      addRoomForm: {
+        name: "",
+        number: "",
+        room_type_id: null,
+      },
     };
   },
   actions: {
@@ -86,12 +91,17 @@ export const useHotelStore = defineStore("Hotel", {
         });
     },
     // Add room to hotel
-    addRoom(form) {
+    addRoom() {
       api.api_base
-        .post("/hotel/room/add", form)
+        .post("/hotel/room/add", this.addRoomForm)
         .then(() => {
           this.addRoomMsgDialog = true;
           this.addRoomDialog = !this.addRoomMsgDialog;
+          this.addRoomForm = {
+            name: "",
+            number: "",
+            room_type_id: null,
+          };
         })
         .catch((err) => {
           this.addRoomMsgErrDialog = true;

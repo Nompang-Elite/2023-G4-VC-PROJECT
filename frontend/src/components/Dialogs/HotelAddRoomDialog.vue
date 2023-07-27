@@ -9,9 +9,9 @@
             variant="outlined"
             density="compact"
             rounded="xl"
-            type="text"
+            type="number"
             :rules="rules"
-            v-model="addRoomForm.number"
+            v-model="Hotel.addRoomForm.number"
           ></v-text-field>
           <v-text-field
             label="Name"
@@ -19,7 +19,7 @@
             density="compact"
             rounded="xl"
             :rules="rules"
-            v-model="addRoomForm.name"
+            v-model="Hotel.addRoomForm.name"
             type="text"
           ></v-text-field>
           <v-select
@@ -30,7 +30,7 @@
             rounded="xl"
             item-title="name"
             item-value="id"
-            v-model="addRoomForm.room_type_id"
+            v-model="Hotel.addRoomForm.room_type_id"
             :rules="[(v) => v !== '' || 'Required']"
           ></v-select>
           <v-btn
@@ -76,18 +76,16 @@ export default {
   },
   data() {
     return {
-      rules: [(v) => !!v || "Must not be empty"],
-      addRoomForm: {
-        name: "",
-        number: "",
-        room_type_id: null,
-      },
+      rules: [(v) => (!!v && String(v).length < 40) || "Incorrect"],
     };
   },
   methods: {
     validAndAdd() {
-      if (this.$refs.form.isValid && this.addRoomForm.room_type_id !== null) {
-        this.Hotel.addRoom(this.addRoomForm);
+      if (
+        this.$refs.form.isValid &&
+        this.Hotel.addRoomForm.room_type_id !== null
+      ) {
+        this.Hotel.addRoom();
         this.Hotel.getRooms();
       } else {
         this.Hotel.addRoomMsgErrDialog = true;
