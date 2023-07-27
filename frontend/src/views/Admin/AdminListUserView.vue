@@ -15,14 +15,14 @@
   </v-row>
   <v-table style="margin-bottom: 12px; width: 85%;margin: auto; background-color: rgb(247, 245, 241);border-radius: 5px;">
     <thead >
-      <tr>
-        <th class="text-left">First Name</th>
-        <th class="text-left">Last Name</th>
-        <th class="text-left">Phone</th>
-        <th class="text-left">Gender</th>
-        <th class="text-left">Email</th>
-        <th class="text-left">User Type</th>
-        <th class="text-left">Actions</th>
+      <tr style="background-color:rgb(84, 122, 247); ">
+        <th class="text-left text-white">First Name</th>
+        <th class="text-left text-white">Last Name</th>
+        <th class="text-left text-white">Phone</th>
+        <th class="text-left text-white">Gender</th>
+        <th class="text-left text-white">Email</th>
+        <th class="text-left text-white">User Type</th>
+        <th class="text-left text-white">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -34,7 +34,7 @@
         <td>{{ user.email}}</td>
         <td>{{ user.user_type}}</td>
         <td class="d-flex mt-5">
-          <v-btn rounded="pill" color="info">Manage</v-btn>
+          <v-btn rounded="pill"  color="white" variant="text"   style="background-color: red;">Delete Account</v-btn>
         </td>
       </tr>
     </tbody>
@@ -83,6 +83,24 @@ import api from "@/routes/api";
           console.log(err);
         });
       },
+      // =========Delete Account=======
+      removeHotelInfo(id){
+        if(confirm('Are you sure, you want to delete this data?')){
+          api.api_base
+          .delete(`/admin/hotelInfo/${id}`)
+          .then(response =>{
+            alert(response.data.message);
+            this.getHotels();
+          })
+          .catch(function(error){
+              if(error.response){
+                if(error.response.status == 404){
+                  alert(error.response.data.message);
+                }
+              }
+          });
+        }
+      }
     }
   }
 </script>
