@@ -183,14 +183,17 @@
 
         <v-row>
           <v-col cols="12">
-            <v-btn
-              block
-              @click.prevent="Hotel.uploadDialog = !Hotel.uploadDialog"
-              rounded="xl"
-              variant="outlined"
-            >
-              Upload images
-            </v-btn>
+            <v-card-text>
+              <v-file-input
+                show-size
+                multiple
+                prepend-icon="mdi-camera"
+                variant="outlined"
+                label="Select your image"
+                v-model="Hotel.imgFiles"
+                :rules="Hotel.imgRules"
+              ></v-file-input>
+            </v-card-text>
           </v-col>
         </v-row>
 
