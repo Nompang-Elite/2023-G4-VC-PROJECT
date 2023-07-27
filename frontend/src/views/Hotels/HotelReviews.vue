@@ -6,7 +6,7 @@
       rounded="pill"
       style="margin: 3%"
       @click="filterReviews('desc')"
-      >HIGHGEST
+      >HIGHEST
     </v-btn>
     <v-btn class="bg-red-darken-1" rounded="pill" @click="filterReviews('asc')"
       >LOWEST</v-btn
@@ -49,7 +49,6 @@ export default {
     const Auth = ref(useAuthStore());
 
     // const filteredReviews = ref
-
     return { Hotel, Guest, Auth };
   },
   //Function user_id rating
