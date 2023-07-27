@@ -190,7 +190,7 @@
                 prepend-icon="mdi-camera"
                 variant="outlined"
                 label="Select your image"
-                v-model="Hotel.imgFiles"
+                v-model="Admin.hotel_imgs"
                 :rules="Hotel.imgRules"
               ></v-file-input>
             </v-card-text>
@@ -204,7 +204,7 @@
               block
               variant="outlined"
               color="info"
-              @click.prevent="registerHotel(Admin.registerHotelForm)"
+              @click.prevent="Admin.registerHotel(Admin.registerHotelForm)"
               >Register</v-btn
             >
           </v-col>
@@ -215,7 +215,6 @@
   </v-dialog>
 </template>
 <script>
-import api from "@/routes/api";
 import { useAdminStore } from "@/store/AdminStore";
 import { useHotelStore } from "@/store/HotelStore";
 import UploadImgDialog from "./UploadImgDialog.vue";
@@ -226,48 +225,6 @@ export default {
     const Admin = ref(useAdminStore());
     const Hotel = ref(useHotelStore());
     return { Admin, Hotel };
-  },
-
-  methods: {
-    registerHotel(form) {
-      if (form.gender === "Male") {
-        form.gender = "M";
-      } else if (form.gender === "Female") {
-        form.gender = "F";
-      }
-      // console.log(form);
-      api.api_base
-        .post("/admin/hotels/register", form)
-        .then(() => {
-          this.Admin.registerHotelForm = {
-            firstname: null,
-            lastname: null,
-            email: null,
-            phone: null,
-            gender: null,
-            password: null,
-            password_confirmation: null,
-            hotel_name: null,
-            description: null,
-            city: null,
-            country: null,
-            address: null,
-            postal_code: null,
-            hotel_phone: null,
-            hotel_email: null,
-          };
-          this.Admin.registerHotelDialog = false;
-        })
-        .catch((error) => {
-          if (error.response) {
-            console.log("Status:", error.response.status);
-            console.log("Data:", error.response.data.errors);
-            alert("Register failed please try again!");
-          } else {
-            console.log("Error:", error.message);
-          }
-        });
-    },
   },
 };
 </script>
