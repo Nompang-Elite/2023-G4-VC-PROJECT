@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 export const useHotelStore = defineStore("Hotel", {
   state() {
     return {
+      addRoomDialog: false,
       uploadDialog: false,
       hotelInfo: {},
       hotelImgs: [],
@@ -20,6 +21,9 @@ export const useHotelStore = defineStore("Hotel", {
       ],
       // Hotel rooms
       rooms: null,
+      roomType: [],
+      addRoomMsgDialog: false,
+      addRoomMsgErrDialog: false,
     };
   },
   actions: {
@@ -76,6 +80,31 @@ export const useHotelStore = defineStore("Hotel", {
         .get("/hotel/rooms/filter/" + status)
         .then((res) => {
           this.rooms = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // Add room to hotel
+    addRoom(form) {
+      api.api_base
+        .post("/hotel/room/add", form)
+        .then(() => {
+          this.addRoomMsgDialog = true;
+          this.addRoomDialog = !this.addRoomMsgDialog;
+        })
+        .catch((err) => {
+          this.addRoomMsgErrDialog = true;
+          console.log(err);
+        });
+    },
+    // Get roomtype
+    getRoomType() {
+      api.api_base
+        .post("/hotel/room/type")
+        .then((res) => {
+          this.roomType = res.data.data;
+          this.addRoomDialog = false;
         })
         .catch((err) => {
           console.log(err);
