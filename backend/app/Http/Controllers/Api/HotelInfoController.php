@@ -61,18 +61,10 @@ class HotelInfoController extends Controller
     public function deletHotelInfo($id)
     {
         $hotelInfo =HotelInfo::find($id);
-        if($hotelInfo){
-            $hotelInfo -> delete();  
-            return response()->json([
-                'status' => 200,
-                'message'=> 'HotelInfo Deleted Successfully'
-            ], 200);  
+        if (!$hotelInfo) {
+            return response()->json(['success' => false, 'message' => 'HotelInfo not found'], 404);
         }
-        else{
-            return response()->json([
-                'status' => 404,
-                'message' => 'No HotelInfo ID Found'
-            ], 404);
-        }
+        $hotelInfo->delete();
+        return response()->json(['success' => true, 'message' => 'HotelInfo deleted successfully'], 200);
     }
 }

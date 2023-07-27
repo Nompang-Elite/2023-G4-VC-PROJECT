@@ -2,7 +2,7 @@
   <v-main>
     <v-dialog v-model="Auth.loginDialog" close-delay="500" open-delay="500">
       <v-sheet width="350" class="mx-auto" rounded="xl">
-        <v-card class="mx-auto pa-8" theme="dark">
+        <v-card class="mx-auto pa-5">
           <v-card-text align="center" justify="center">
             <v-img
               src="https://o.remove.bg/downloads/b04d896c-7c3e-4719-94fb-4adb4a17249a/image-removebg-preview.png"
@@ -16,7 +16,7 @@
             <v-text-field
               label="Email"
               v-model="form.email"
-              variant="outlined"
+              variant="solo"
               density="compact"
               rounded="xl"
               :rules="emailRule"
@@ -24,7 +24,7 @@
             <v-text-field
               label="Password"
               v-model="form.password"
-              variant="outlined"
+              variant="solo"
               density="compact"
               rounded="xl"
               type="password"
@@ -42,10 +42,8 @@
               >
             </v-card-subtitle>
             <v-btn
-              class="mx-auto w-100 rounded-xl"
+              class="mx-auto w-100 bg-info rounded-xl"
               type="submit"
-              variant="outlined"
-              color="info"
               @click.prevent="Auth.guestLogin(form)"
               :loading="Auth.loading"
               >Login
