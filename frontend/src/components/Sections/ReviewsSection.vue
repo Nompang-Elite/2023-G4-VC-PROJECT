@@ -8,6 +8,7 @@
         <v-btn
           rounded="xl"
           color="info"
+          variant="outlined"
           @click.prevent="
             Guest.review.reviewDialog = !Guest.review.reviewDialog
           "
@@ -21,10 +22,12 @@
       <v-col>
         <v-hover v-slot="{ isHovering, props }">
           <v-card
+            color="#1D3557"
             rounded="xl"
             :elevation="isHovering ? 12 : 2"
             :class="{ 'on-hover': isHovering }"
             v-bind="props"
+            class="text-white"
           >
             <v-card-text>
               <v-row align="center">
@@ -33,15 +36,13 @@
                     {{ review.user.firstname + " " + review.user.lastname }}
                   </v-card-title>
                 </v-col>
-                <v-col cols="10">
-                  <v-card-subtitle class="text-right">
-                    <v-rating
-                      color="yellow"
-                      size="20"
-                      v-model="review.rate"
-                      disabled
-                    ></v-rating>
-                  </v-card-subtitle>
+                <v-col cols="10" class="text-right">
+                  <v-rating
+                    color="yellow"
+                    size="20"
+                    v-model="review.rate"
+                    disabled
+                  ></v-rating>
                 </v-col>
               </v-row>
               <v-row>

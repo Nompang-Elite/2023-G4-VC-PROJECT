@@ -26,34 +26,32 @@
       rounded="xl"
       v-model="searchInput"
       @keydown.enter="passSearchInput"
+      :class="Auth.userLogged() ? 'mr-8' : ''"
     ></v-text-field>
 
     <v-spacer></v-spacer>
     <!-- Buttons Options -->
     <div v-if="Auth.userLogged()">
-      <v-btn
+      <!-- <v-btn
         variant="outlined"
-        color="info"
         prepend-icon="mdi-history"
         class="mr-2"
         rounded="xl"
         text="History"
       >
-      </v-btn>
-      <v-btn
+      </v-btn> -->
+      <!-- <v-btn
         variant="outlined"
-        color="info"
         prepend-icon="mdi-cart"
         class="mr-2"
         rounded="xl"
         text="Booking"
       >
-      </v-btn>
+      </v-btn> -->
       <v-menu>
         <template v-slot:activator="{ props }">
           <v-btn
             class="mr-2"
-            color="info"
             size="38"
             variant="outlined"
             v-bind="props"
