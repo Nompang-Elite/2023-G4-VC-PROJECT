@@ -58,8 +58,7 @@
                 </v-card-title>
               <v-card-text >
                 <v-container >
-                  <v-row>
-                   
+                  <v-row>                 
                       <v-card-text>
                         <v-form ref="form" v-model="valid">
                           <v-text-field v-model="editedHotel.hotel_id" label="Hotel ID"></v-text-field>
@@ -98,13 +97,13 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-      
-        <v-btn  
+          <v-btn
+
           rounded="pill"  
           color="white"
           variant="text" 
           style="background-color: red;"
-          @click="removeHotelInfo(hotel.id)">Remove</v-btn>
+          @click="removeHotelInfo(hotel.id)">Remove</v-btn> 
                 
         </td>
       </tr>
@@ -114,7 +113,7 @@
 
 <script>
 import api from "@/routes/api";
-  export default {
+export default {
     data () {
       return {
         dialog: false,
@@ -125,55 +124,56 @@ import api from "@/routes/api";
     mounted() {
     // Call the method on component mount
     this.getHotels(); 
-  },
-  methods: {
-    getHotels() {
-      api.api_base
-      .get(`/admin/hotelInfo`)
-      .then((res) => {
-        this.hotels = res.data.data;
-      })
-      .catch((err) => console.log(err));
     },
-
-// ================edit=============
-
-    editHotel(id) {
-    this.editedIndex = id;
-    this.editedHotel = Object.assign({}, this.hotels[id]);
-    this.dialog = true;
-    },
-
-    updateHotel() {
-      const hotel = this.editedHotel;
-      api.api_base
-      .put(`/admin/hotelInfoUpdate`, hotel)
-      .then(response => {
-        alert(response.data.message);
-        this.hotels.splice(this.editedIndex, 1, Object.assign({}, hotel));
-        this.dialog = false;
-      })
-      .catch(error => {
-      console.log(error);
-      });
-    },
-    removeHotelInfo(id){
-      if(confirm('Are you sure, you want to delete this data?')){
+    methods: {
+      getHotels() {
         api.api_base
-        .delete(`/admin/hotelInfo/${id}`)
-        .then(response =>{
-          alert(response.data.message);
-          this.getHotels();
+        .get(`/admin/hotelInfo`)
+        .then((res) => {
+          this.hotels = res.data.data;
         })
-        .catch(function(error){
-            if(error.response){
-              if(error.response.status == 404){
-                alert(error.response.data.message);
+        .catch((err) => console.log(err));
+      },
+
+      // ================edit=============
+
+      editHotel(id) {
+      this.editedIndex = id;
+      this.editedHotel = Object.assign({}, this.hotels[id]);
+      this.dialog = true;
+      },
+
+      updateHotel() {
+        const hotel = this.editedHotel;
+        api.api_base
+        .put(`/admin/hotelInfoUpdate`, hotel)
+        .then(response => {
+          alert(response.data.message);
+          this.hotels.splice(this.editedIndex, 1, Object.assign({}, hotel));
+          this.dialog = false;
+        })
+        .catch(error => {
+        console.log(error);
+        })
+      },
+      removeHotelInfo(id){
+        if(confirm('Are you sure, you want to delete this data?')){
+          api.api_base
+          .delete(`/admin/hotelInfo/${id}`)
+          .then(response =>{
+            alert(response.data.message);
+            this.getHotels();
+          })
+          .catch(function(error){
+              if(error.response){
+                if(error.response.status == 404){
+                  alert(error.response.data.message);
+                }
               }
-            }
-        });
+          });
+        }
       }
-    },
-  }
+    }
+   
 }
 </script>
