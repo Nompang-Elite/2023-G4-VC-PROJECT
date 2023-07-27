@@ -93,7 +93,7 @@ export default {
     return { Hotel, filteredRooms };
   },
 
-  beforeCreate() {
+  beforeMount() {
     this.Hotel.getRooms();
   },
 };
