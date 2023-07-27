@@ -1,30 +1,24 @@
-// This is a link: https://vuetifyjs.com/en/components/tables/
 <template>
+  <!--======== This is a link: https://vuetifyjs.com/en/components/tables/ -->
+
   <v-row class="mt-1" style="margin-left: 11%;">
-          <v-col cols="6">
-              <v-text-field
-              placeholder="Search"
-              density="compact"
-              variant="solo"
-              rounded="pill"
-              ></v-text-field>
+          <v-col  cols="2" class=" mt-1 d-flex " style="margin-bottom: 2%;">
+            <v-btn class=" mx-6 pa-3 bg-info" rounded="pill" style="font-weight: bold;">+ ADD HOTEL</v-btn>
           </v-col>
-          <v-col cols="2" class="mt-1 d-flex " style="margin: 5%; margin-left: 28%;">
-            <v-btn class="mx-6 bg-info" rounded="pill">+ ADD HOTEL</v-btn>
-          </v-col>
+         
   </v-row>
 
 
-  <v-table style="margin-bottom: 12px; width: 90%;margin: auto; background-color: rgb(247, 245, 241);border-radius: 5px;">
+  <v-table  style="margin-bottom: 12px; width: 80%;margin: auto; background-color: rgb(225, 222, 222);border-radius: 5px;">
     <thead >
-      <tr>
-        <th class="text-left">Hotel ID</th>
-        <th class="text-left">Postal code</th>
-        <th class="text-left">Email</th>
-        <th class="text-left">City</th>
-        <th class="text-left">Country</th>
-        <th class="text-left">Address</th>
-        <th class="text-left">Actions</th>
+      <tr style="background-color:rgb(84, 122, 247); ">
+        <th class="text-left text-white">Hotel ID</th>
+        <th class="text-left text-white">Postal code</th>
+        <th class="text-left text-white">Email</th>
+        <th class="text-left text-white">City</th>
+        <th class="text-left text-white">Country</th>
+        <th class="text-left text-white">Address</th>
+        <th class="text-left text-white">Actions</th>
       </tr>
     </thead>
     <tbody >
@@ -138,10 +132,12 @@ export default {
         .catch((err) => console.log(err));
       },
 
+      // ========== This is function that get from AI========== 
       // ================edit=============
-
       editHotel(id) {
+        console.log(id);
         this.editedId = this.hotels.findIndex(hotel => hotel.id === id);
+
         this.editedHotel = Object.assign({}, this.hotels[this.editedId]);
         this.dialog = true;
       },
