@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="Auth.registerDialog" width="auto" close-delay="0">
-    <v-card width="28rem" rounded="xl" class="spacing-playground pa-4 mx-auto">
+    <v-card width="28rem" rounded="xl" class="spacing-playground pa-4 mx-auto" theme="dark">
       <v-card-title class="text-h4"> Register </v-card-title>
       <v-card-subtitle>
         Already have an account?
@@ -19,7 +19,7 @@
             <v-col cols="14">
               <v-text-field
                 rounded="xl"
-                variant="solo"
+                variant="outlined"
                 density="compact"
                 label="First Name"
                 prepend-inner-icon="mdi-text"
@@ -32,7 +32,7 @@
             <v-col cols="14">
               <v-text-field
                 rounded="xl"
-                variant="solo"
+                variant="outlined"
                 density="compact"
                 label="Last Name"
                 prepend-inner-icon="mdi-text"
@@ -45,7 +45,7 @@
           </v-row>
           <v-text-field
             rounded="xl"
-            variant="solo"
+            variant="outlined"
             density="compact"
             prepend-inner-icon="mdi-email"
             label="Email"
@@ -57,7 +57,7 @@
           </v-text-field>
           <v-text-field
             rounded="xl"
-            variant="solo"
+            variant="outlined"
             density="compact"
             label="Phone"
             prepend-inner-icon="mdi-phone"
@@ -71,7 +71,7 @@
             <v-col cols="14">
               <v-text-field
                 rounded="xl"
-                variant="solo"
+                variant="outlined"
                 density="compact"
                 prepend-inner-icon="mdi-lock"
                 label="Password"
@@ -85,7 +85,7 @@
             <v-col cols="14">
               <v-text-field
                 rounded="xl"
-                variant="solo"
+                variant="outlined"
                 density="compact"
                 prepend-inner-icon="mdi-lock-check"
                 label="Confirm Password"
@@ -100,7 +100,7 @@
           <v-select
             :items="['Male', 'Female']"
             density="compact"
-            variant="solo"
+            variant="outlined"
             label="Gender"
             v-model="Auth.userRegisterInfo.gender"
             :rules="rules.gender"
@@ -109,7 +109,7 @@
           <v-btn
             @click="Auth.guestRegister(Auth.userRegisterInfo)"
             block
-            variant="elevated"
+            variant="outlined"
             height="3rem"
             color="info"
             rounded="xl"
