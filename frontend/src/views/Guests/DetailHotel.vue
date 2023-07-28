@@ -85,6 +85,7 @@ import CardRoom from "@/components/Cards/RoomCard.vue";
 import api from "@/routes/api";
 import ReviewsSection from "@/components/Sections/ReviewsSection.vue";
 export default {
+  title: "Details",
   components: { CardRoom, ReviewsSection },
   data() {
     return {
