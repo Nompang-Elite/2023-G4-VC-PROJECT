@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         // Create rooms data
         $this->call(ReviewsSeeder::class);
         // Create occupiedRoom data
-        $this->call(OccupiedRoomsSeeder::class);
+        // $this->call(OccupiedRoomsSeeder::class);
         
         // Reservations::factory(10)->create();
         // OccupiedRooms::factory(10)->create();

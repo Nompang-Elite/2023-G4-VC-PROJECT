@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use App\Models\HostedAt;
 use App\Models\OccupiedRooms;
-use App\Models\Reservations;
 use App\Models\ReservedRooms;
 use App\Models\Rooms;
 use App\Models\RoomType;
@@ -21,23 +20,24 @@ class GuestResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $hostedAt = HostedAt::find($this->user_id);
-        $occupied = OccupiedRooms::find($hostedAt->occupied_id);
-        $room = Rooms::find($occupied->room_id);
-        $roomType = RoomType::find($room->room_type_id);
+
+        // $res = ReservedRooms::find($this->hotel_id);
+        // $res->room_type = RoomType::find($res->room_type_id);
+
+        $host = HostedAt::where("user_id", $this->user_id)->get();
+        $h = [];
+        foreach ($host as $i) {
+            array_push($h, Rooms::find(OccupiedRooms::find($i->occupied_id)->room_id));        // $occ = OccupiedRooms::find($host->occupied_id);
+        }
         $user = User::find($this->user_id);
         $res = [
             "id" => $this->id,
-            "made_by" => $this->made_by,
-            "user_id" => $this->user_id,
-            "firstname" => $user->firstname,
-            "lastname" => $user->lastname,
-            "gender" => $user->gender,
-            "hotel_id" => $this->hotel_id,
-            "room_status" => $room->number,
-            "room_type" => $roomType->name,
             "date_in" => $this->date_in,
             "date_out" => $this->date_out,
+            "firstname" => $user->firstname,
+            "lastname" => $user->lastname,
+            "hotel_id" => $this->hotel_id,
+            "room" => $h,
         ];
         return  $res;
     }

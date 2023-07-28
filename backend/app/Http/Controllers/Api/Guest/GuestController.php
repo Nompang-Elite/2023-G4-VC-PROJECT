@@ -128,7 +128,7 @@ class GuestController extends Controller
             $hostAt = null;
             $booked = true;
             foreach ($rooms as $room) {
-                if ($room["status"] == "unoccupied" && $booked) {
+                if ($room["status"] == "unoccupied" && $booked && $room["room_type_id"] == (int)$req->input()["room_type_id"]) {
 
                     $occupied = OccupiedRooms::create(
                         [
