@@ -38,11 +38,11 @@ class DatabaseSeeder extends Seeder
         // Create rooms data
         $this->call(RoomsSeeder::class);
         // Create rooms data
-        $this->call(ReviewsSeeder::class);
+        // $this->call(ReviewsSeeder::class);
         // Create occupiedRoom data
         // $this->call(OccupiedRoomsSeeder::class);
-        
-        Reviews::factory(4)->create();
+
+        Reviews::factory(20)->create();
         // Image
         $this->call(ImagesSeeder::class);
         $this->call(HotelImagesSeeder::class);
