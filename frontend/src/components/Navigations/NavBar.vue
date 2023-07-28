@@ -10,7 +10,7 @@
     <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
     <!-- Nav title -->
     <v-app-bar-title>
-      <span class="text-h5">Book</span>
+      <span class="text-h5 text-red">Book</span>
       <span class="font-weight-light text-h5">eeng</span>
     </v-app-bar-title>
     <v-spacer></v-spacer>

@@ -60,12 +60,18 @@ class RoomsController extends Controller
     // ---------------Function Delete room--------------
     public function removeRoom($id)
     {
-
         $room = Rooms::find($id);
         if (!$room) {
             return response()->json(['success' => false, 'message' => 'Room not found'], 404);
         }
         $room->delete();
         return response()->json(['success' => true, 'message' => 'Room deleted successfully'], 200);
+    }
+
+    //------------Function get Room by ID---------------
+    public function getRoomById($id)
+    {
+        $room = Rooms::find($id);
+        return response()->json(['success' => true, 'data' => $room], 200);
     }
 }

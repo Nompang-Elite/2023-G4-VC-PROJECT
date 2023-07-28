@@ -72,7 +72,6 @@ Route::group(['prefix' => 'hotel'], function () {
     //Filter Reviews rating 
     Route::get('/reviews/filter/{rate}', [ReviewsController::class, 'filterReviews']);
 
-
     //search name in room
     Route::get('/search_room', [RoomsController::class, "searchRoom"]);
 
@@ -94,6 +93,7 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::post('/info', [HotelsHotelController::class, "getHotelInfo"]);
 
     Route::post('/room/type', [HotelsHotelController::class, "getHotelRoomType"]);
+
     Route::post('/room/add', [HotelsHotelController::class, "addRoom"]);
     // Hotel routes goes here...
 });
@@ -116,7 +116,8 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 
-
 //room controller route
 Route::get('/room', [RoomController::class, 'index']);
 Route::get('/rooms/{id}/details', [RoomController::class, 'show']);
+//Get room ID
+Route::get('/roomId/{id}', [RoomsController::class, 'getRoomById']);

@@ -58,14 +58,14 @@
               <v-btn
                 class="mx-4 bg-info"
                 rounded="pill"
-                @click="editRoom(room)"
+                @click="getData(room.id)"
               >
                 Edit
               </v-btn>
               <v-btn
                 class="bg-red-darken-1"
                 rounded="pill"
-                @click="deleteRoom(room)"
+                @click="deleteRoom(room.id)"
               >
                 Delete
               </v-btn>
@@ -75,13 +75,79 @@
       </tbody>
     </v-table>
     <HotelAddRoomDialog />
+    <!-- ------------------Dialog edit room---------------- -->
+    <v-dialog width="auto" v-model="dialogShow">
+      <v-card width="20rem" class="pa-4" rounded="xl" theme="dark">
+        <v-card-title class="mx-2"> Add new rooms </v-card-title>
+        <v-card-text>
+          <v-form ref="form">
+            <v-text-field
+              label="Number"
+              variant="outlined"
+              density="compact"
+              rounded="xl"
+              type="text"
+              :rules="rules"
+              v-model="number"
+            ></v-text-field>
+            <v-text-field
+              label="Name"
+              variant="outlined"
+              density="compact"
+              rounded="xl"
+              :rules="rules"
+              v-model="name"
+              type="text"
+            ></v-text-field>
+            <v-select
+              :items="Hotel.roomType"
+              density="compact"
+              variant="outlined"
+              label="Room type"
+              rounded="xl"
+              item-title="name"
+              item-value="id"
+              v-model="roomType"
+              :rules="[(v) => v !== '' || 'Required']"
+            ></v-select>
+
+            <v-btn
+              class="mb-5"
+              @click="cancel()"
+              variant="outlined"
+              color="success"
+              rounded="xl"
+              block
+              >Cancel</v-btn
+            >
+            <v-btn
+              variant="outlined"
+              color="success"
+              rounded="xl"
+              block
+              @click="editData()"
+              >Edit</v-btn
+            >
+          </v-form>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 <script>
 import { useHotelStore } from "@/store/HotelStore.js";
 import HotelAddRoomDialog from "@/components/Dialogs/HotelAddRoomDialog.vue";
 import { reactive, computed } from "vue";
+import axios from "axios";
 export default {
+  data() {
+    return {
+      dialogShow: false,
+      number: null,
+      name: null,
+      roomType: null,
+    };
+  },
   components: { HotelAddRoomDialog },
   //operation api of pinia
   setup() {
@@ -100,10 +166,62 @@ export default {
     });
     return { Hotel, filteredRooms };
   },
-
   beforeCreate() {
     this.Hotel.getRooms();
     this.Hotel.getRoomType();
+  },
+  // ------------Function getRoom  edit ------------------------
+
+  methods: {
+    //Function Get room
+    getData(id) {
+      localStorage.setItem("room_id", id);
+      axios
+        .get(`http://127.0.0.1:8000/api/roomId/${id}`)
+        .then((res) => {
+          console.log(res.data.data);
+          this.name = res.data.data.name;
+          this.roomType = res.data.data.room_type_id;
+          this.number = res.data.data.number;
+          this.dialogShow = true;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    //Function Edit room
+    editData() {
+      const id = localStorage.getItem("room_id");
+      const data = {
+        name: this.name,
+        number: this.number,
+        room_type_id: this.roomType,
+      };
+      axios
+        .put(`http://127.0.0.1:8000/api/hotel/editRoom/${id}`, data)
+        .then((res) => {
+          console.log(res.data.data);
+          this.dialogShow = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    //Function delete room
+    deleteRoom(id) {
+      axios
+        .delete(`http://127.0.0.1:8000/api/hotel/deleteRoom/${id}`)
+        .then((res) => {
+          console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    //Cancle
+    cancel() {
+      this.dialogShow = false;
+    },
   },
 };
 </script>
