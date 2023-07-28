@@ -96,7 +96,7 @@ class HotelController extends Controller
         // Return Data
         if (!count($hotels) <= 0) {
             // Return the result data
-            return $this->success($hotels, "search result", 200);
+            return $this->success(ShowHotelResource::collection($hotels), "search result", 200);
         }
         // Error if no result
         return $this->error("not match!");
