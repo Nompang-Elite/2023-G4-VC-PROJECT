@@ -6,6 +6,9 @@
     </v-app-bar-title>
     <v-spacer></v-spacer>
     <!-- <v-btn variant="elevated" rounded="xl" @click="Auth.logout()">Logout</v-btn> -->
+    <span class="pa-4 text-uppercase">
+      {{ Auth.getUser()["firstname"] + " " + Auth.getUser()["lastname"] }}
+    </span>
     <v-menu>
       <template v-slot:activator="{ props }">
         <v-btn

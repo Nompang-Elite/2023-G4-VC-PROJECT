@@ -48,6 +48,9 @@
         text="Booking"
       >
       </v-btn> -->
+      <span class="pa-4 text-uppercase">
+        {{ Auth.getUser()["firstname"] + " " + Auth.getUser()["lastname"] }}
+      </span>
       <v-menu>
         <template v-slot:activator="{ props }">
           <v-btn
