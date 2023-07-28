@@ -157,4 +157,14 @@ class AdminController extends Controller
 
         return $this->success($guests, "Get Owner");
     }
+    //========= Delete user==========
+    public function deleteUser($id)
+    {
+        $user =User::find($id);
+        if (!$user) {
+            return response()->json(['success' => false, 'message' => 'user not found'], 404);
+        }
+        $user->delete();
+        return response()->json(['success' => true, 'message' => 'user deleted successfully',$user], 200);
+    }
 }

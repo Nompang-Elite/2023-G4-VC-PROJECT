@@ -91,6 +91,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('/hotelInfoUpdate/{id}', [HotelInfoController::class, 'update']);
 
     // Admin routes goes here...
+    Route::delete('/deleteUser/{id}', [AdminController::class, 'deleteUser']);
     Route::post('/hotels/register', [AdminController::class, 'registerHotel']);
     Route::get('/users/all', [AdminController::class, 'getAllUsers']);
     Route::get('/users/guests', [AdminController::class, 'getGuest']);

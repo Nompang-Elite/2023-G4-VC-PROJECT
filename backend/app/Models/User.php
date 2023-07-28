@@ -72,4 +72,8 @@ class User extends Authenticatable implements JWTSubject
     public function hostedAts():HasMany{
         return $this->hasMany(HostedAt::class);
     }
+    public function userTypes()
+    {
+        return $this->belongsTo(UserTypes::class, 'user_types');
+    }
 }
