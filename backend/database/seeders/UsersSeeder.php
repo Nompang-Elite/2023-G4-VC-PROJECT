@@ -14,44 +14,6 @@ class UsersSeeder extends Seeder
     public function run(): void
     {
         $users = [
-            // Users//
-            [
-                "firstname" => "Elena",
-                "lastname" => "Soe",
-                "gender" => "M",
-                "phone" => "0987654321",
-                "user_type" => 3,
-                "email" => "elenasoe@gmail.com",
-                "password" => "!@#123Abc",
-            ],
-            [
-                "firstname" => "Jame",
-                "lastname" => "Smith",
-                "gender" => "M",
-                "phone" => "0876543219",
-                "user_type" => 3,
-                "email" => "jamesmith@gmail.com",
-                "password" => "!@#123Abc",
-            ],
-            [
-                "firstname" => "Marcel",
-                "lastname" => "Atino",
-                "gender" => "M",
-                "phone" => "0876543219",
-                "user_type" => 3,
-                "email" => "marcelatino@gmail.com",
-                "password" => "!@#123Abc",
-            ],
-            [
-                "firstname" => "Sumatra",
-                "lastname" => "Jen",
-                "gender" => "M",
-                "phone" => "081234567",
-                "user_type" => 3,
-                "email" => "sumatrajen@gmail.com",
-                "password" => "!@#123Abc",
-            ],
-
             // Hotel owner//
             [
                 "firstname" => "Matin",
@@ -143,7 +105,43 @@ class UsersSeeder extends Seeder
                 "email" => "jeanhearl@gmail.com",
                 "password" => "!@#123Abc",
             ],
-
+            // Users//
+            [
+                "firstname" => "Elena",
+                "lastname" => "Soe",
+                "gender" => "M",
+                "phone" => "0987654321",
+                "user_type" => 3,
+                "email" => "elenasoe@gmail.com",
+                "password" => "!@#123Abc",
+            ],
+            [
+                "firstname" => "Jame",
+                "lastname" => "Smith",
+                "gender" => "M",
+                "phone" => "0876543219",
+                "user_type" => 3,
+                "email" => "jamesmith@gmail.com",
+                "password" => "!@#123Abc",
+            ],
+            [
+                "firstname" => "Marcel",
+                "lastname" => "Atino",
+                "gender" => "M",
+                "phone" => "0876543219",
+                "user_type" => 3,
+                "email" => "marcelatino@gmail.com",
+                "password" => "!@#123Abc",
+            ],
+            [
+                "firstname" => "Sumatra",
+                "lastname" => "Jen",
+                "gender" => "M",
+                "phone" => "081234567",
+                "user_type" => 3,
+                "email" => "sumatrajen@gmail.com",
+                "password" => "!@#123Abc",
+            ],
             // Admin //
             [
                 "firstname" => "Admin",
