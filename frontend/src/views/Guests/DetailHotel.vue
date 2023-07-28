@@ -1,13 +1,13 @@
 <template>
   <!-- ===================Contain-card==================== -->
   <v-container v-if="hotels !== null">
-    <v-btn rounded="xl" to="/" class="ma-4" color="blue darken-2" dark>
+    <v-btn rounded="xl" variant="elevated" to="/" color="info" class="ma-4">
       <v-icon size="large">mdi-chevron-double-left</v-icon>
       Back
     </v-btn>
 
     <!-- ======Card hotel======== -->
-    <v-card rounded="xl" class="pa-2 mb-8" elevation="4">
+    <v-card rounded="xl" class="pa-2 mb-8" elevation="4" color="#F1FAEE">
       <v-card-title>
         <v-row>
           <v-col cols="4">
@@ -15,7 +15,10 @@
               class="rounded-lg"
               cover
               height="100%"
-              :src="'data:image/*;base64,' + hotelImgs[0].image_hash"
+              :src="
+                'data:image/*;base64,' +
+                (hotelImgs.length > 0 ? hotelImgs[0].image_hash : null)
+              "
             >
             </v-img>
           </v-col>
@@ -23,24 +26,27 @@
             <v-card-title class="text-h4 mb-4">
               {{ hotels.name }}
             </v-card-title>
-            <v-card-subtitle>
-              <v-rating
-                size="20"
-                disabled
-                color="yellow"
-                v-model="hotels.rate"
-              ></v-rating>
-            </v-card-subtitle>
+            <v-rating
+              size="30"
+              disabled
+              color="#E63946"
+              v-model="hotels.rate"
+              class="px-4"
+            ></v-rating>
             <v-sheet
-              class="text-wrap pa-2 text-justify font-weight-light"
+              class="text-wrap pa-4 text-justify font-weight-light"
               v-for="(item, i) in hotels.info"
               :key="i"
+              color="#F1FAEE"
             >
               <span class="text-grey text-capitalize">
                 Address: {{ item.address }}, {{ item.city }}, {{ item.country }}
               </span>
             </v-sheet>
-            <v-sheet class="text-wrap pa-2 text-justify font-weight-light">
+            <v-sheet
+              class="text-wrap pa-4 pb-8 text-justify font-weight-light"
+              color="#F1FAEE"
+            >
               <span>
                 {{ hotels.description }}
               </span>

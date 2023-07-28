@@ -14,37 +14,38 @@
             :elevation="isHovering ? 12 : 2"
             :class="{ 'on-hover': isHovering }"
             v-bind="props"
+            color="#F1FAEE"
           >
             <v-img
-              class="align-end text-white"
+              class="align-end"
               height="200"
               :src="'data:image/*;base64,' + item.image_hash"
               cover
             >
             </v-img>
 
-            <v-card-title>{{ item.name }}</v-card-title>
+            <v-card-title class="mx-4 mt-4">{{ item.name }}</v-card-title>
 
-            <v-card-subtitle class="pt-4">
-              {{ item.location }}
+            <v-card-subtitle class="text-capitalize mx-4">
+              {{ item.info.city + ", " + item.info.country }}
             </v-card-subtitle>
 
-            <v-card-text class="card-text">
+            <v-card-text class="card-text mx-4 text-justify">
               <div>{{ item.description }}</div>
             </v-card-text>
 
-            <v-card-actions class="ma-2">
+            <v-card-actions class="ma-4 mx-6">
               <!-- Rating point -->
               <v-rating
-                color="yellow"
+                color="#E63946"
                 size="20"
                 v-model="item.rate"
                 disabled
               ></v-rating>
               <v-spacer></v-spacer>
               <v-btn
-                rounded="xl"
                 color="info"
+                rounded="xl"
                 variant="elevated"
                 class="px-4"
                 @click="goToDetail(item.id)"

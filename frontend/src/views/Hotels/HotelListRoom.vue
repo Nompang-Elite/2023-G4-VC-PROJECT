@@ -27,7 +27,12 @@
         >
           UNOCCUPIED
         </v-btn>
-        <v-btn class="mx-4 bg-info" rounded="pill">+ Add Room </v-btn>
+        <v-btn
+          @click.prevent="Hotel.addRoomDialog = !Hotel.addRoomDialog"
+          class="mx-4 bg-info"
+          rounded="pill"
+          >+ Add Room
+        </v-btn>
       </v-col>
     </v-row>
 
@@ -69,12 +74,15 @@
         </tr>
       </tbody>
     </v-table>
+    <HotelAddRoomDialog />
   </v-container>
 </template>
 <script>
 import { useHotelStore } from "@/store/HotelStore.js";
+import HotelAddRoomDialog from "@/components/Dialogs/HotelAddRoomDialog.vue";
 import { reactive, computed } from "vue";
 export default {
+  components: { HotelAddRoomDialog },
   //operation api of pinia
   setup() {
     const Hotel = reactive(useHotelStore());
@@ -93,8 +101,9 @@ export default {
     return { Hotel, filteredRooms };
   },
 
-  beforeMount() {
+  beforeCreate() {
     this.Hotel.getRooms();
+    this.Hotel.getRoomType();
   },
 };
 </script>

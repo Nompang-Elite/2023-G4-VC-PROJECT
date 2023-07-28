@@ -7,7 +7,7 @@
     close-delay="500"
     open-delay="500"
   >
-    <v-card rounded="xl" width="30rem">
+    <v-card rounded="xl" width="30rem" theme="dark">
       <v-card-title class="pa-6 text-h5 font-weight-bold text-uppercase">
         Post reviews
       </v-card-title>
@@ -23,7 +23,7 @@
             no-resize
             label="What is your thought?"
             rounded="lg"
-            variant="solo"
+            variant="outlined"
             :rules="[
               (v) =>
                 String(v).length > 10 ||
@@ -36,8 +36,9 @@
       <v-card-actions class="mx-4 mb-4">
         <v-btn
           block
-          variant="elevated"
+          variant="outlined"
           rounded="xl"
+          color="info"
           :disabled="!Guest.review.isValidReview"
           @click.prevent="Guest.postReview(hotelId)"
           :loading="Guest.loading"
@@ -60,7 +61,7 @@
 import { useGuestStore } from "@/store/GuestStore";
 import { ref } from "vue";
 export default {
-  props: ['hotel-id'],
+  props: ["hotel-id"],
   setup() {
     const Guest = ref(useGuestStore());
     return { Guest };

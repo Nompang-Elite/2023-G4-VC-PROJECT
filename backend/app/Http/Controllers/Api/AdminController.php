@@ -127,7 +127,7 @@ class AdminController extends Controller
             $hotelInfo = HotelInfo::create($hotelInfo);
             // Response
             return $this->success([
-                $usr, $hotel, $hotelInfo
+                "owner" => $usr, "hotel" => $hotel, "info" => $hotelInfo
             ], "created");
         };
 

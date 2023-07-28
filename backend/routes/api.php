@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Guest\GuestController;
 use App\Http\Controllers\Api\HotelInfoController;
 use App\Http\Controllers\Api\ImageUploadController;
 use App\Http\Controllers\Api\Hotels\HotelController as HotelsHotelController;
+use App\Http\Controllers\Api\ReviewsController;
 use App\Http\Controllers\Api\RoomTypesController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\RoomsController;
@@ -68,6 +69,10 @@ Route::group(['prefix' => 'hotel'], function () {
 
     //Delete rooms
     Route::delete('/deleteRoom/{id}', [RoomsController::class, 'removeRoom']);
+    //Filter Reviews rating 
+    Route::get('/reviews/filter/{rate}', [ReviewsController::class, 'filterReviews']);
+
+
     //search name in room
     Route::get('/search_room', [RoomsController::class, "searchRoom"]);
 
@@ -87,6 +92,9 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::get('/rooms/all', [HotelController::class, 'hotelRooms']);
 
     Route::post('/info', [HotelsHotelController::class, "getHotelInfo"]);
+
+    Route::post('/room/type', [HotelsHotelController::class, "getHotelRoomType"]);
+    Route::post('/room/add', [HotelsHotelController::class, "addRoom"]);
     // Hotel routes goes here...
 });
 

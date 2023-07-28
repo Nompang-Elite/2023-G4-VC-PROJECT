@@ -13,6 +13,7 @@ export const useAuthStore = defineStore("Auth", {
       adminLog: false,
       // Dialog trigger
       loginDialog: false,
+      errorLoginDialog: false,
       registerDialog: false,
       // User register info
       userRegisterInfo: {
@@ -64,6 +65,8 @@ export const useAuthStore = defineStore("Auth", {
           }
         })
         .catch((err) => {
+          this.loading = false;
+          this.errorLoginDialog = true;
           console.log(err);
         });
     },
@@ -95,6 +98,8 @@ export const useAuthStore = defineStore("Auth", {
           }
         })
         .catch((err) => {
+          this.loading = false;
+          this.errorLoginDialog = true;
           console.log(err);
         });
     },

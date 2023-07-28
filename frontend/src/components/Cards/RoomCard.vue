@@ -12,6 +12,7 @@
         <v-card
           style="display: flex"
           class="mx-auto"
+          color="#F1FAEE"
           max-width="100%"
           height="200"
           rounded="xl"
@@ -28,11 +29,11 @@
               ></v-img>
             </v-col>
             <v-col cols="7">
-              <v-card-title class="text-light text-capitalize">{{
-                item.name.replaceAll("_", " ")
-              }}</v-card-title>
+              <v-card-title class="pt-4 text-light text-capitalize"
+                >{{ item.name.replaceAll("_", " ") }}
+              </v-card-title>
 
-              <v-card-subtitle class="pt-4">
+              <v-card-subtitle>
                 {{ item.description }}
               </v-card-subtitle>
 
@@ -44,17 +45,16 @@
               </v-card-text>
 
               <v-card-actions>
-                <v-spacer></v-spacer>
-                <h3 class="mr-8">${{ item.price }}</h3>
                 <v-btn
                   rounded="xl"
-                  color="info"
                   variant="elevated"
+                  color="info"
                   class="mr-4 px-4"
-                  @click="goToDetailRoom(item.id)"
                 >
-                  Details
+                  Reserve
                 </v-btn>
+                <v-spacer></v-spacer>
+                <h3 class="mr-8">${{ item.price }}</h3>
               </v-card-actions>
             </v-col>
           </v-row>

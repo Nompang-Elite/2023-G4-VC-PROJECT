@@ -1,5 +1,11 @@
 <template>
-  <v-app-bar extended nav flat extension-height="40">
+  <v-app-bar
+    extended
+    nav
+    extension-height="40"
+    color="#1D3557"
+    class="nav-text"
+  >
     <!-- Nav menu icons -->
     <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
     <!-- Nav title -->
@@ -12,7 +18,7 @@
     <!-- Source: https://vuetifyjs.com/en/components/text-fields/ -->
     <v-text-field
       density="compact"
-      variant="solo"
+      variant="outlined"
       label="Search"
       append-inner-icon="mdi-magnify"
       single-line
@@ -20,57 +26,41 @@
       rounded="xl"
       v-model="searchInput"
       @keydown.enter="passSearchInput"
+      :class="Auth.userLogged() ? 'mr-8' : ''"
     ></v-text-field>
 
     <v-spacer></v-spacer>
     <!-- Buttons Options -->
     <div v-if="Auth.userLogged()">
-      <v-btn
-        variant="elevated"
-        color="info"
+      <!-- <v-btn
+        variant="outlined"
         prepend-icon="mdi-history"
         class="mr-2"
         rounded="xl"
         text="History"
       >
-      </v-btn>
-      <v-btn
-        variant="elevated"
-        color="info"
+      </v-btn> -->
+      <!-- <v-btn
+        variant="outlined"
         prepend-icon="mdi-cart"
         class="mr-2"
         rounded="xl"
         text="Booking"
       >
-      </v-btn>
-      <!-- <v-btn
-        variant="elevated"
-        color="red"
-        icon="mdi-logout"
-        class="mr-2"
-        size="44"
-        @click.prevent="Auth.logout()"
-      >
       </v-btn> -->
-
       <v-menu>
         <template v-slot:activator="{ props }">
           <v-btn
             class="mr-2"
-            color="info"
             size="38"
-            variant="elevated"
+            variant="outlined"
             v-bind="props"
             icon="mdi-menu"
           >
           </v-btn>
         </template>
         <v-list>
-          <v-list-item
-            to=""
-            prepend-icon="mdi-cog"
-            title="Setting"
-          >
+          <v-list-item to="" prepend-icon="mdi-cog" title="Setting">
           </v-list-item>
           <v-list-item
             @click.prevent="Auth.logout()"
@@ -84,8 +74,7 @@
     <div v-else>
       <v-btn
         text="Login"
-        variant="elevated"
-        color="info"
+        variant="outlined"
         prepend-icon="mdi-account-circle-outline"
         class="mr-2"
         rounded="xl"
@@ -94,8 +83,7 @@
       </v-btn>
       <v-btn
         text="Register"
-        variant="elevated"
-        color="info"
+        variant="outlined"
         prepend-icon="mdi-account-plus"
         class="mr-6"
         rounded="xl"
@@ -110,9 +98,9 @@
       <v-spacer></v-spacer>
       <v-tabs centered>
         <v-tab prepend-icon="mdi-home" to="/">Home</v-tab>
-        <v-tab prepend-icon="mdi-home-city" to="/hotels">Hotels</v-tab>
-        <v-tab prepend-icon="mdi-map-marker" to="/near_me">Near Me</v-tab>
-        <v-tab prepend-icon="mdi-information" to="/abouts">Abouts</v-tab>
+        <!-- <v-tab prepend-icon="mdi-home-city" to="/hotels">Hotels</v-tab> -->
+        <!-- <v-tab prepend-icon="mdi-map-marker" to="/near_me">Near Me</v-tab> -->
+        <!-- <v-tab prepend-icon="mdi-information" to="/abouts">Abouts</v-tab> -->
       </v-tabs>
       <v-spacer></v-spacer>
     </template>
@@ -139,3 +127,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.nav-text {
+  color: #f1faee !important;
+}
+</style>

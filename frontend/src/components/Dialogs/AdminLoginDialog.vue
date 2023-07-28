@@ -2,7 +2,7 @@
   <v-main>
     <v-dialog v-model="adminLoginActive" close-delay="500" open-delay="500">
       <v-sheet width="350" class="mx-auto" rounded="xl">
-        <v-card class="mx-auto pa-5">
+        <v-card class="mx-auto pa-8" theme="dark">
           <v-card-text align="center" justify="center">
             <v-img
               src="https://o.remove.bg/downloads/b04d896c-7c3e-4719-94fb-4adb4a17249a/image-removebg-preview.png"
@@ -16,22 +16,24 @@
             <v-text-field
               label="Email"
               v-model="form.email"
-              variant="solo"
+              variant="outlined"
               density="compact"
               rounded="xl"
             ></v-text-field>
             <v-text-field
               label="Password"
               v-model="form.password"
-              variant="solo"
+              variant="outlined"
               density="compact"
               rounded="xl"
               type="password"
               :error-messages="error"
             ></v-text-field>
             <v-btn
-              class="mx-auto w-100 bg-info rounded-xl"
+              class="mx-auto w-100 rounded-xl"
               type="submit"
+              color="info"
+              variant="outlined"
               @click.prevent="Auth.adminLogin(form)"
               :loading="Auth.loading"
               >Login
@@ -39,6 +41,16 @@
           </v-form>
         </v-card>
       </v-sheet>
+    </v-dialog>
+    <v-dialog width="auto" v-model="Auth.errorLoginDialog">
+      <v-card color="red">
+        <v-card-text>
+          <v-card-title class="text-center">
+            <v-icon icon="mdi-alert"></v-icon>
+          </v-card-title>
+          Password or Email is incorrect!
+        </v-card-text>
+      </v-card>
     </v-dialog>
   </v-main>
 </template>
