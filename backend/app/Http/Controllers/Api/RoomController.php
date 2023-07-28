@@ -19,8 +19,6 @@ class RoomController extends Controller
         return response()->json(['success' => true, 'data' => $room], 200);
     }
 
-
-
     //-------get only one room------------
     public function show($id)
     {

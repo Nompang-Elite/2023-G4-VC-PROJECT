@@ -18,6 +18,16 @@ class Rooms extends Model
         "room_type_id",
         "hotel_id",
     ];
+// ------------------------Update function---------------
+    public static function store($request,$id = null)
+    {
+        //request values
+        $room = $request->only(['number','name', 'status','room_type_id','hotel_id']);
+        $room = self::updateOrCreate(['id'=> $id], $room);
+        return $room;
+    }
+
+
     public function hotel():BelongsTo
     {
         return $this->belongsTo(Hotel::class);

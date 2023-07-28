@@ -46,13 +46,11 @@ class HotelInfoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-            $HotelInfo = hotelInfo::store($request, $id);
-            if ($HotelInfo)
-                return $this->success($HotelInfo, "list of hotelInfo");
+        $HotelInfo = hotelInfo::store($request, $id);
+        if ($HotelInfo)
+            return $this->success($HotelInfo, "list of hotelInfo");
 
-            return $this->error("list is empty", 404);
-            
-    
+        return $this->error("list is empty", 404);
     }
 
     /**
@@ -60,15 +58,14 @@ class HotelInfoController extends Controller
      */
     public function deletHotelInfo($id)
     {
-        $hotelInfo =HotelInfo::find($id);
-        if($hotelInfo){
-            $hotelInfo -> delete();  
+        $hotelInfo = HotelInfo::find($id);
+        if ($hotelInfo) {
+            $hotelInfo->delete();
             return response()->json([
                 'status' => 200,
-                'message'=> 'HotelInfo Deleted Successfully'
-            ], 200);  
-        }
-        else{
+                'message' => 'HotelInfo Deleted Successfully'
+            ], 200);
+        } else {
             return response()->json([
                 'status' => 404,
                 'message' => 'No HotelInfo ID Found'
