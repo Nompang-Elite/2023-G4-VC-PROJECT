@@ -12,6 +12,13 @@ class ReservedRoomsSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $reservedRoom = [
+            // [
+            //     "number_of_room" =>,
+            //     "status" =>,
+            //     "reservation_id" =>,
+            //     "room_type_id" =>
+            // ]
+        ];
     }
 }
