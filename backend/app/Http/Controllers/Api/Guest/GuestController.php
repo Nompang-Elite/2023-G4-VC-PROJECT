@@ -107,32 +107,34 @@ class GuestController extends Controller
 
         $userId = auth()->user()->id;
         if (!$isValid->fails()) {
-            $rooms = Rooms::where("hotel_id", $req->input()["hotel_id"])->get();
+            $rooms = Rooms::where("hotel_id", $req->input()["hotel_id"])->where("room_type_id", (int)$req->input()["room_type_id"])->where("status", "unoccupied")->get();
             $occupied = null;
             $hostAt = null;
             $booked = true;
-            foreach ($rooms as $room) {
-                if ($room["status"] == "unoccupied" && $booked && $room["room_type_id"] == (int)$req->input()["room_type_id"]) {
+            if (count($rooms) > 0) {
+                foreach ($rooms as $room) {
+                    if ($booked) {
 
-                    $occupied = OccupiedRooms::create(
-                        [
-                            "check_in" => "2023-07-28 00:55:57",
-                            "check_out" => "2023-07-28 00:55:57",
-                            "room_id" => $room["id"],
-                        ]
-                    );
+                        $occupied = OccupiedRooms::create(
+                            [
+                                "check_in" => "2023-07-28 00:55:57",
+                                "check_out" => "2023-07-28 00:55:57",
+                                "room_id" => $room["id"],
+                            ]
+                        );
 
-                    optional(Rooms::find($room['id']))->update(["status" => "occupied"]);
-                    $hostAt = HostedAt::create(
-                        [
-                            "user_id" => $userId,
-                            "occupied_id" => $occupied->id
-                        ]
-                    );
-                    $booked = false;
-                } else if ($room["status"] == "unoccupied" && $booked && $room["room_type_id"]) {
-                    return $this->error("No room available", 404);
+                        optional(Rooms::find($room['id']))->update(["status" => "occupied"]);
+                        $hostAt = HostedAt::create(
+                            [
+                                "user_id" => $userId,
+                                "occupied_id" => $occupied->id
+                            ]
+                        );
+                        $booked = false;
+                    }
                 }
+            } else {
+                return $this->error("No room available!", 404);
             }
             $reservationForm = [
                 "date_in" => $req->input()["date_in"],

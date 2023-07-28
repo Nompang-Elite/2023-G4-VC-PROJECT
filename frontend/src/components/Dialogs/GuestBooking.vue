@@ -52,7 +52,7 @@
             </v-carousel>
           </v-col>
         </v-row>
-        <v-row>
+        <!-- <v-row>
           <v-col cols="12">
             <v-text-field
               variant="outlined"
@@ -63,7 +63,7 @@
             >
             </v-text-field>
           </v-col>
-        </v-row>
+        </v-row> -->
         <v-card-actions class="mt-4">
           <v-row>
             <v-col cols="6">
@@ -99,7 +99,7 @@
         <v-card-title class="text-center">
           <v-icon icon="mdi-alert"></v-icon>
         </v-card-title>
-        Password or Email is incorrect!
+        Something went wrong!
       </v-card-text>
     </v-card>
   </v-dialog>

@@ -125,33 +125,44 @@ export const useGuestStore = defineStore("Guest", {
       if (sessionStorage.getItem("user_logged")) {
         this.bookingForm.date_in = this.date[0];
         this.bookingForm.date_out = this.date[1];
-        this.bookingForm.number_of_room = Number(
-          this.bookingForm.number_of_room
-        );
+        // this.bookingForm.number_of_room = Number(
+        //   this.bookingForm.number_of_room
+        // );
+        this.bookingForm.number_of_room = 1;
         if (this.bookingForm.date_in && this.bookingForm.date_out) {
           api.api_base
             .post("/guest/reserve/room", this.bookingForm)
-            .then((result) => {
-              console.log(result);
+            .then(() => {
               this.getRoomType(
                 this.bookingForm.room_type_id,
                 this.bookingForm.hotel_id
               );
+              this.date = {
+                startDate: new Date(),
+                endDate: new Date(),
+              };
               this.bookingForm = {
-                date_in: "",
-                date_out: "",
                 hotel_id: null,
                 number_of_room: 1,
                 room_type_id: null,
               };
             })
             .catch((err) => {
-              console.log(err);
+              console.log(err.response);
+              this.date = {
+                startDate: new Date(),
+                endDate: new Date(),
+              };
+              this.bookingForm = {
+                hotel_id: null,
+                number_of_room: 1,
+                room_type_id: null,
+              };
+              this.bookingDialog = false;
               this.errorBookingDialog = true;
             });
         }
-      }
-      this.loginAlert = true;
+      } else if (!sessionStorage.getItem("user_logged")) this.loginAlert = true;
     },
     getRoomType(id, hotelId) {
       api.api_base

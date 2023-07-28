@@ -17,32 +17,32 @@ class RoomsSeeder extends Seeder
             // Hotel 1
             [
                 "number" => "ACH-1",
-                "room_type_id" => 2,
+                "room_type_id" => 1,
                 "hotel_id" => 1,
             ],
             [
                 "number" => "ACH-2",
-                "room_type_id" => 2,
+                "room_type_id" => 1,
                 "hotel_id" => 1,
             ],
             [
                 "number" => "ACH-3",
-                "room_type_id" => 3,
+                "room_type_id" => 2,
                 "hotel_id" => 1,
             ],
             [
                 "number" => "ACH-4",
-                "room_type_id" => 3,
+                "room_type_id" => 2,
                 "hotel_id" => 1,
             ],
             [
                 "number" => "ACH-5",
-                "room_type_id" => 1,
+                "room_type_id" => 3,
                 "hotel_id" => 1,
             ],
             [
                 "number" => "ACH-6",
-                "room_type_id" => 1,
+                "room_type_id" => 3,
                 "hotel_id" => 1,
             ],
             // Hotel 2
