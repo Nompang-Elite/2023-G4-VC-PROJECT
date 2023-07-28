@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="Guest.bookingDialog" width="auto">
-    <v-card width="50rem" rounded="xl" class="pa-4" color="#F1FAEE">
+    <v-card width="50rem" rounded="xl" class="pa-4" color="#F0FAFF">
       <v-card-text>
         <v-row>
           <v-col cols="4">
@@ -19,7 +19,7 @@
             <v-card-subtitle
               >Max compacity: {{ Guest.roomType["max_capacity"] }}
             </v-card-subtitle>
-            <v-sheet class="pa-4 text-justify" color="#F1FAEE">
+            <v-sheet class="pa-4 text-justify" color="#F0FAFF">
               <span>Price: {{ Guest.roomType["price"] }}$ <br /> </span>
               <span>Bed: {{ Guest.roomType["bed_count"] }} <br /> </span>
               <span>Avalable: {{ Guest.roomType["count"] }} <br /> </span>
