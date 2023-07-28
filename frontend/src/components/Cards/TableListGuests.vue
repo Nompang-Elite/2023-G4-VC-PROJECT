@@ -19,28 +19,20 @@
     <v-table>
       <thead>
         <tr>
-          <th class="text-left">USER ID</th>
           <th class="text-left">NAME</th>
-          <th class="text-left">GENDER</th>
-          <th class="text-left">STATUS</th>
           <th class="text-left">ID</th>
           <th class="text-left">DATE IN</th>
           <th class="text-left">DATE OUT</th>
           <th class="text-left">ROOM NUMBER</th>
-          <th class="text-left">ROOM TYPE</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(item, index) in items" :key="index">
-          <td>{{ item.user_id }}</td>
           <td>{{ item.firstname + " " + item.lastname }}</td>
-          <td>{{ item.gender }}</td>
-          <td>{{ item.made_by }}</td>
           <td>{{ item.id }}</td>
           <td>{{ item.date_in }}</td>
           <td>{{ item.date_out }}</td>
-          <td>{{ item.room_status }}</td>
-          <td>{{ item.room_type }}</td>
+          <td>{{ item.room[index] }}</td>
         </tr>
       </tbody>
     </v-table>

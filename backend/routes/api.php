@@ -26,6 +26,8 @@ Route::group(['prefix' => 'guest'], function () {
 
     // Post reviews
     Route::post("/post/review", [GuestController::class, "postReview"]);
+    // Booking
+    Route::post("/reserve/room", [GuestController::class, "userBooking"]);
     // More here...
 });
 
