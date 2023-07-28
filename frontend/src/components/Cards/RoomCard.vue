@@ -24,11 +24,12 @@
             <v-col cols="5">
               <v-img
                 cover
+                width="226"
                 height="100%"
                 :src="'data:image/*;base64,' + item.image"
               ></v-img>
             </v-col>
-            <v-col cols="7">
+            <v-col cols="6">
               <v-card-title class="pt-4 text-light text-capitalize"
                 >{{ item.name.replaceAll("_", " ") }}
               </v-card-title>
@@ -39,8 +40,7 @@
                   ><span class="mx-2">{{ item.bed_count }}</span>
                 </div>
               </v-card-subtitle>
-
-              <v-card-text>
+              <v-card-text class="elip">
                 {{ item.description }}
               </v-card-text>
 
@@ -99,4 +99,11 @@ export default {
   },
 };
 </script>
-<style></style>
+<style scoped>
+/*Code from https://stackoverflow.com/questions/65926473/vuetify-card-text-overflow-multiline-text-ellipsis */
+.elip {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+</style>
