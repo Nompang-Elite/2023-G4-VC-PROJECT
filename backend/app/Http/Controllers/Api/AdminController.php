@@ -164,7 +164,7 @@ class AdminController extends Controller
         if (!$user) {
             return response()->json(['success' => false, 'message' => 'user not found'], 404);
         }
-        $user->delete();
-        return response()->json(['success' => true, 'message' => 'user deleted successfully',$user], 200);
+        $user->userTypes()->delete();
+        return response()->json(['success' => true, 'message' => 'user deleted successfully'], 200);
     }
 }

@@ -34,7 +34,7 @@
         <td>{{ user.email}}</td>
         <td>{{ user.user_type}}</td>
         <td class="d-flex mt-5">
-          <v-btn rounded="pill"  color="white" variant="text"   style="background-color: red;">Delete Account</v-btn>
+          <v-btn rounded="pill"  color="white" variant="text"   style="background-color: rgb(186, 19, 19);">Delete Account</v-btn>
         </td>
       </tr>
     </tbody>

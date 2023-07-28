@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar nav>
+  <v-app-bar nav color="#1D3557" class="text-white">
     <v-app-bar-title>
       <span class="text-h6">Dashboard | Book</span>
       <span class="font-weight-light text-h6">eeng</span>
@@ -11,15 +11,15 @@
         <v-btn
           class="mr-2"
           size="38"
-          variant="flat"
+          variant="outlined"
           v-bind="props"
           icon="mdi-menu"
         >
         </v-btn>
       </template>
       <v-list>
-        <v-list-item to="" prepend-icon="mdi-cog" title="Setting">
-        </v-list-item>
+        <!-- <v-list-item to="" prepend-icon="mdi-cog" title="Setting">
+        </v-list-item> -->
         <v-list-item
           @click.prevent="Auth.logout()"
           prepend-icon="mdi-logout"

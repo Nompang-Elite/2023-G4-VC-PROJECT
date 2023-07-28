@@ -3,7 +3,7 @@
     <v-row>
       <!-- Left side -->
       <v-col cols="8">
-        <v-card rounded="xl" class="pa-4">
+        <v-card rounded="xl" class="pa-4" color="#F1FAEE">
           <v-card-text>
             <v-row>
               <v-col cols="6">
@@ -19,12 +19,12 @@
                 <v-card-subtitle>
                   <v-rating
                     disabled
-                    color="yellow"
+                    color="#E63946"
                     size="20"
                     v-model="Hotel.hotelInfo.rate"
                   ></v-rating>
                 </v-card-subtitle>
-                <v-sheet class="ma-4 text-justify">
+                <v-sheet class="ma-4 text-justify" color="#F1FAEE">
                   {{ Hotel.hotelInfo.description }}
                 </v-sheet>
               </v-col>
@@ -35,13 +35,14 @@
               rounded="xl"
               variant="elevated"
               color="info"
+              class="px-4"
               @click.prevent="Hotel.uploadDialog = !Hotel.uploadDialog"
               >Upload image</v-btn
             >
           </v-card-actions>
         </v-card>
-        <v-card class="my-4" rounded="xl">
-          <v-card-title> Hotel images </v-card-title>
+        <v-card color="#F1FAEE" class="my-4" rounded="xl">
+          <v-card-title class="px-4 mt-4"> Hotel images </v-card-title>
           <v-card-subtitle>{{ Hotel.hotelInfo.name }}</v-card-subtitle>
           <v-card-text>
             <v-sheet rounded="xl">
@@ -64,7 +65,7 @@ import UploadDialog from "@/components/Dialogs/UploadImgDialog.vue";
 import { ref } from "vue";
 export default {
   components: { CarouselCover, UploadDialog },
-  beforeMount() {
+  beforeCreate() {
     this.Hotel.hotelId = this.Auth.getUser()["hotel_id"];
     this.Hotel.getHotelInfo();
     this.Hotel.getHotelImage();

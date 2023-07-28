@@ -26,7 +26,7 @@
           <td>
             <v-rating
               disabled
-              color="yellow"
+              color="#E63946"
               size="20"
               v-model="review.rate"
             ></v-rating>

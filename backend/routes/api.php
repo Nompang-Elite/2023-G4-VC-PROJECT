@@ -26,6 +26,8 @@ Route::group(['prefix' => 'guest'], function () {
 
     // Post reviews
     Route::post("/post/review", [GuestController::class, "postReview"]);
+    // Booking
+    Route::post("/reserve/room", [GuestController::class, "userBooking"]);
     // More here...
 });
 
@@ -77,6 +79,9 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::get('/rooms/all', [HotelController::class, 'hotelRooms']);
 
     Route::post('/info', [HotelsHotelController::class, "getHotelInfo"]);
+
+    Route::post('/room/type', [HotelsHotelController::class, "getHotelRoomType"]);
+    Route::post('/room/add', [HotelsHotelController::class, "addRoom"]);
     // Hotel routes goes here...
 });
 
