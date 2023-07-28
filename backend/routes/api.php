@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\ImageUploadController;
 use App\Http\Controllers\Api\Hotels\HotelController as HotelsHotelController;
 use App\Http\Controllers\Api\RoomTypesController;
 use App\Http\Controllers\Api\RoomController;
+use App\Http\Controllers\Api\RoomsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -58,8 +59,22 @@ Route::group(['prefix' => 'hotel'], function () {
     Route::post('/reviews', [HotelController::class, "getHotelReviews"]);
 
     // ------------- Route hotel owner--------------
+
+    //Add rooms
+    Route::post('/add_room', [RoomsController::class, 'addRooms']);
+
+    //Update rooms
+    Route::put('/editRoom/{id}', [RoomsController::class, 'UpdateRooms']);
+
+    //Delete rooms
+    Route::delete('/deleteRoom/{id}', [RoomsController::class, 'removeRoom']);
     //search name in room
-    Route::get('/search_room', [RoomController::class, "searchRoom"]);
+    Route::get('/search_room', [RoomsController::class, "searchRoom"]);
+
+    ////Get Room Status
+    Route::get('/room_status', [RoomsController::class, 'getStatus']);
+
+
 
     // ------------- Route hotel owner--------------
     //Room_Type
@@ -95,5 +110,5 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 //room controller route
-Route::get('/rooms', [RoomController::class, 'index']);
+Route::get('/room', [RoomController::class, 'index']);
 Route::get('/rooms/{id}/details', [RoomController::class, 'show']);
