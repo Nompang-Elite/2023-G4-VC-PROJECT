@@ -7,7 +7,7 @@
     </v-btn>
 
     <!-- ======Card hotel======== -->
-    <v-card rounded="xl" class="pa-2 mb-8" elevation="4" color="#F1FAEE">
+    <v-card rounded="xl" class="pa-2 mb-8" elevation="4" color="#F0FAFF">
       <v-card-title>
         <v-row>
           <v-col cols="4">
@@ -37,7 +37,7 @@
               class="text-wrap pa-4 text-justify font-weight-light"
               v-for="(item, i) in hotels.info"
               :key="i"
-              color="#F1FAEE"
+              color="#F0FAFF"
             >
               <span class="text-grey text-capitalize">
                 Address: {{ item.address }}, {{ item.city }}, {{ item.country }}
@@ -45,7 +45,7 @@
             </v-sheet>
             <v-sheet
               class="text-wrap pa-4 pb-8 text-justify font-weight-light"
-              color="#F1FAEE"
+              color="#F0FAFF"
             >
               <span>
                 {{ hotels.description }}

@@ -1,23 +1,24 @@
 <!-- Source Idea: https://vuetifyjs.com/en/components/tables/ -->
 <template>
   <v-container>
-    <v-row class="mt-5" style="margin-left: 11%">
-      <v-col cols="6">
+    <h1>Guests</h1>
+    <v-row>
+      <!-- <v-col cols="6">
         <v-text-field
           placeholder="Search"
           density="compact"
           variant="solo"
           rounded="pill"
         ></v-text-field>
-      </v-col>
-      <v-col cols="2" class="mt-1 d-flex" style="margin: 5%">
-        <v-btn class="mx-6 bg-info" rounded="pill">Check In</v-btn>
+      </v-col> -->
+      <v-col cols="12" class="py-8">
+        <v-btn class="mr-2 bg-info" rounded="pill">Check In</v-btn>
         <v-btn class="bg-red-darken-1" rounded="pill">Check Out</v-btn>
       </v-col>
     </v-row>
     <!-- ------------Table reserved--------------- -->
-    <v-table>
-      <thead>
+    <v-table theme="dark" class="rounded-xl">
+      <thead class="bg-info">
         <tr>
           <th class="text-left">NAME</th>
           <th class="text-left">ID</th>
@@ -40,6 +41,7 @@
 </template>
 <script>
 export default {
+  title: "Hotel Guests",
   // Proping the items list
   props: ["items"],
 };

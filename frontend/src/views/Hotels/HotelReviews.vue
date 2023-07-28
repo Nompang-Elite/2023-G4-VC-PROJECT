@@ -1,17 +1,24 @@
 <template>
   <v-container>
+    <h1>Reviews</h1>
     <!-- //Button -->
-    <v-btn
-      class="mx-4 bg-info"
-      rounded="pill"
-      style="margin: 3%"
-      @click="filterReviews('desc')"
-      >HIGHGEST
-    </v-btn>
-    <v-btn class="bg-red-darken-1" rounded="pill" @click="filterReviews('asc')"
-      >LOWEST</v-btn
-    >
-    <v-table>
+    <v-row class="py-4">
+      <v-col cols="12">
+        <v-btn
+          class="mr-2 bg-info"
+          rounded="pill"
+          @click="filterReviews('desc')"
+          >HIGHGEST
+        </v-btn>
+        <v-btn
+          class="bg-red-darken-1"
+          rounded="pill"
+          @click="filterReviews('asc')"
+          >LOWEST</v-btn
+        >
+      </v-col>
+    </v-row>
+    <v-table theme="dark" class="rounded-xl">
       <thead class="bg-info">
         <tr>
           <th class="text-white">USER</th>
@@ -43,6 +50,7 @@ import { useGuestStore } from "@/store/GuestStore.js";
 import { useAuthStore } from "@/store/AuthStore.js";
 import { ref } from "vue";
 export default {
+  title: "Hotel Reviews",
   setup() {
     const Hotel = ref(useHotelStore());
     const Guest = ref(useGuestStore());

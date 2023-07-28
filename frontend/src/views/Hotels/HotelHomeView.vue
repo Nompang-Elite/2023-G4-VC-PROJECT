@@ -3,7 +3,7 @@
     <v-row>
       <!-- Left side -->
       <v-col cols="8">
-        <v-card rounded="xl" class="pa-4" color="#F1FAEE">
+        <v-card rounded="xl" class="pa-4" color="#F0FAFF">
           <v-card-text>
             <v-row>
               <v-col cols="6">
@@ -24,7 +24,7 @@
                     v-model="Hotel.hotelInfo.rate"
                   ></v-rating>
                 </v-card-subtitle>
-                <v-sheet class="ma-4 text-justify" color="#F1FAEE">
+                <v-sheet class="ma-4 text-justify" color="#F0FAFF">
                   {{ Hotel.hotelInfo.description }}
                 </v-sheet>
               </v-col>
@@ -41,7 +41,7 @@
             >
           </v-card-actions>
         </v-card>
-        <v-card color="#F1FAEE" class="my-4" rounded="xl">
+        <v-card color="#F0FAFF" class="my-4" rounded="xl">
           <v-card-title class="px-4 mt-4"> Hotel images </v-card-title>
           <v-card-subtitle>{{ Hotel.hotelInfo.name }}</v-card-subtitle>
           <v-card-text>
@@ -64,6 +64,7 @@ import CarouselCover from "@/components/Others/CarouselCover.vue";
 import UploadDialog from "@/components/Dialogs/UploadImgDialog.vue";
 import { ref } from "vue";
 export default {
+  title: "Hotel Home",
   components: { CarouselCover, UploadDialog },
   beforeCreate() {
     this.Hotel.hotelId = this.Auth.getUser()["hotel_id"];

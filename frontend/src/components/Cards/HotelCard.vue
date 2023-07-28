@@ -14,7 +14,7 @@
             :elevation="isHovering ? 12 : 2"
             :class="{ 'on-hover': isHovering }"
             v-bind="props"
-            color="#F1FAEE"
+            color="#F0FAFF"
           >
             <v-img
               class="align-end"

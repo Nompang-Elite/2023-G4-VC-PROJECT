@@ -12,7 +12,7 @@
         <v-card
           style="display: flex"
           class="mx-auto"
-          color="#F1FAEE"
+          color="#F0FAFF"
           max-width="100%"
           height="200"
           rounded="xl"

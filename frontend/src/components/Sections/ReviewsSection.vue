@@ -22,7 +22,7 @@
       <v-col>
         <v-hover v-slot="{ isHovering, props }">
           <v-card
-            color="#F1FAEE"
+            color="#F0FAFF"
             rounded="xl"
             :elevation="isHovering ? 12 : 2"
             :class="{ 'on-hover': isHovering }"

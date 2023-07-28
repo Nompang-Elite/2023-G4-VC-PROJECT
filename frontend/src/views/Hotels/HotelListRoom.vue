@@ -1,7 +1,8 @@
 <template>
   <v-container>
+    <h1 class="mb-4">Rooms</h1>
     <!-- ----------------Room Tolbar---------------------- -->
-    <v-row class="mt-5">
+    <v-row>
       <v-col cols="5">
         <v-text-field
           v-model="Hotel.search"
@@ -12,16 +13,16 @@
         ></v-text-field>
       </v-col>
 
-      <v-col cols="2" class="mt-1 d-flex" style="margin: 5%">
+      <v-col cols="7">
         <v-btn
-          class="bg-red-darken-1"
+          class="bg-red-darken-1 mr-2"
           rounded="pill"
           @click="Hotel.filterRooms('occupied')"
         >
           OCCUPIED
         </v-btn>
         <v-btn
-          class="mx-4 bg-info"
+          class="mr-2 bg-info"
           rounded="pill"
           @click="Hotel.filterRooms('unoccupied')"
         >
@@ -29,7 +30,7 @@
         </v-btn>
         <v-btn
           @click.prevent="Hotel.addRoomDialog = !Hotel.addRoomDialog"
-          class="mx-4 bg-info"
+          class="mr-2 bg-info"
           rounded="pill"
           >+ Add Room
         </v-btn>
@@ -37,14 +38,14 @@
     </v-row>
 
     <!-- ------------Card Rooms--------------- -->
-    <v-table>
-      <thead>
+    <v-table theme="dark" class="rounded-xl">
+      <thead class="bg-info">
         <tr>
-          <th class="text-left">Number</th>
-          <th class="text-left">Name</th>
-          <th class="text-left">Status</th>
-          <th class="text-left">Type</th>
-          <th class="text-center">Action</th>
+          <th class="text-white text-uppercase">Number</th>
+          <th class="text-white text-uppercase">Name</th>
+          <th class="text-white text-uppercase">Status</th>
+          <th class="text-white text-uppercase">Type</th>
+          <!-- <th class="text-center">Action</th> -->
         </tr>
       </thead>
       <tbody>
@@ -53,7 +54,7 @@
           <td>{{ room.name }}</td>
           <td>{{ room.status }}</td>
           <td>{{ room.room_type_id }}</td>
-          <td class="text-center">
+          <!-- <td class="text-center">
             <v-sheet>
               <v-btn
                 class="mx-4 bg-info"
@@ -70,7 +71,7 @@
                 Delete
               </v-btn>
             </v-sheet>
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </v-table>
@@ -82,6 +83,7 @@ import { useHotelStore } from "@/store/HotelStore.js";
 import HotelAddRoomDialog from "@/components/Dialogs/HotelAddRoomDialog.vue";
 import { reactive, computed } from "vue";
 export default {
+  title: "Hotel Rooms",
   components: { HotelAddRoomDialog },
   //operation api of pinia
   setup() {
