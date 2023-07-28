@@ -20,6 +20,23 @@ export const useGuestStore = defineStore("Guest", {
       hotelReviews: [],
       // Search Results,
       results: [],
+      // Date
+      date: {
+        startDate: new Date(),
+        endDate: new Date(),
+      },
+      bookingDialog: false,
+      roomImgs: [],
+      // Booking form
+      bookingForm: {
+        date_in: "",
+        date_out: "",
+        hotel_id: null,
+        number_of_room: 1,
+        room_type_id: null,
+      },
+      roomType: null,
+      errorBookingDialog: false,
     };
   },
   actions: {
@@ -103,6 +120,44 @@ export const useGuestStore = defineStore("Guest", {
       }
       return false;
     },
-    getAllHotel() {},
+    bookRoom() {
+      this.bookingForm.date_in = this.date[0];
+      this.bookingForm.date_out = this.date[1];
+      this.bookingForm.number_of_room = Number(this.bookingForm.number_of_room);
+      if (this.bookingForm.date_in && this.bookingForm.date_out) {
+        api.api_base
+          .post("/guest/reserve/room", this.bookingForm)
+          .then((result) => {
+            console.log(result);
+            this.getRoomType(
+              this.bookingForm.room_type_id,
+              this.bookingForm.hotel_id
+            );
+            this.bookingForm = {
+              date_in: "",
+              date_out: "",
+              hotel_id: null,
+              number_of_room: 1,
+              room_type_id: null,
+            };
+          })
+          .catch((err) => {
+            console.log(err);
+            this.errorBookingDialog = true;
+          });
+      }
+    },
+    getRoomType(id, hotelId) {
+      api.api_base
+        .post("/hotel/room/type/detail", { id: id, hotel_id: hotelId })
+        .then((result) => {
+          this.roomType = result.data.data;
+          console.log(result.data.data);
+          this.bookingDialog = !this.bookingDialog;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 });

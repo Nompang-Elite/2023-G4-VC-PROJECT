@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Api\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\GuestRoomTypeResource;
 use App\Models\HostedAt;
 use App\Models\Hotel;
 use App\Models\OccupiedRooms;
 use App\Models\Reservations;
 use App\Models\ReservedRooms;
 use App\Models\Reviews;
+use App\Models\RoomImages;
 use App\Models\Rooms;
+use App\Models\RoomType;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -21,7 +24,7 @@ class GuestController extends Controller
 
     public function __construct()
     {
-        $this->middleware("auth:api")->except(["calRating"]);
+        $this->middleware("auth:api")->except(["calRating", "getRoomType"]);
     }
 
     // Caculating the rate of hotel
@@ -157,5 +160,12 @@ class GuestController extends Controller
             ]);
         }
         return $this->error($isValid->errors(), "Something went wrong!");
+    }
+    public function getRoomType(Request $req)
+    {
+        $roomType = RoomType::where("id", (int)$req->input()["id"])->where("hotel_id", (int)$req->input()["hotel_id"])->first();
+        $roomType->count = count(Rooms::where("room_type_id", (int)$req->input()["id"])->where("hotel_id", (int)$req->input()["hotel_id"])->where("status", "unoccupied")->get());
+        $roomType->images = GuestRoomTypeResource::collection(RoomImages::where("room_type_id", (int)$roomType->id)->get());
+        return $this->success($roomType);
     }
 }

@@ -31,6 +31,7 @@
             <v-col cols="7">
               <v-card-title class="pt-4 text-light text-capitalize"
                 >{{ item.name.replaceAll("_", " ") }}
+                {{ item.count }}
               </v-card-title>
 
               <v-card-subtitle>
@@ -48,10 +49,12 @@
                 <v-btn
                   rounded="xl"
                   variant="elevated"
-                  color="info"
                   class="mr-4 px-4"
+                  @click.prevent="roomDetail(item.id)"
+                  :disabled="!item.count > 0"
+                  :color="!item.count > 0 ? 'warning' : 'info'"
                 >
-                  Reserve
+                  {{ item.count > 0 ? "Reserve" : "Unavailabe" }}
                 </v-btn>
                 <v-spacer></v-spacer>
                 <h3 class="mr-8">${{ item.price }}</h3>
@@ -62,18 +65,35 @@
       </v-hover>
     </v-col>
   </v-row>
+  <GuestBooking />
 </template>
 
 <script>
+import { useGuestStore } from "@/store/GuestStore";
+import GuestBooking from "../Dialogs/GuestBooking.vue";
+import { ref } from "vue";
 export default {
+  setup() {
+    const Guest = ref(useGuestStore());
+    return { Guest };
+  },
+  components: { GuestBooking },
   // Proping the items list
   props: ["hotel"],
 
   methods: {
     goToDetail(id) {
-      console.log(id);
       // Navigate to the detail page with the selected hotel's ID as a parameter
       this.$router.push(`/hotel/${id}`);
+    },
+
+    roomDetail(id) {
+      this.Guest.getRoomType(id, this.hotel.id);
+      console.log(this.Guest.roomType)
+      this.Guest.bookingForm.hotel_id = this.hotel.id;
+      this.Guest.bookingForm.room_type_id = id;
+
+      console.log(id, this.hotel.id);
     },
   },
 };
