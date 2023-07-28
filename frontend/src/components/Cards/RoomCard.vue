@@ -53,8 +53,7 @@
                 >
                   Reserve
                 </v-btn>
-                <v-spacer></v-spacer>
-                <h3 class="mr-8">${{ item.price }}</h3>
+                <h3 class="mr-3" style="color: rgb(213, 17, 17);">${{ item.price }}</h3>
               </v-card-actions>
             </v-col>
           </v-row>

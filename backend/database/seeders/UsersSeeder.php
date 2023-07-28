@@ -14,6 +14,7 @@ class UsersSeeder extends Seeder
     public function run(): void
     {
         $users = [
+            // Users//
             [
                 "firstname" => "Elena",
                 "lastname" => "Soe",
@@ -50,12 +51,32 @@ class UsersSeeder extends Seeder
                 "email" => "sumatrajen@gmail.com",
                 "password" => "!@#123Abc",
             ],
+
+            // Hotel owner//
+            [
+                "firstname" => "Matin",
+                "lastname" => "Thi",
+                "gender" => "M",
+                "phone" => "097234567",
+                "user_type" => 2,
+                "email" => "matinthi@gmail.com",
+                "password" => "!@#123Abc",
+            ],
+            [
+                "firstname" => "Kimbery",
+                "lastname" => "Mak",
+                "gender" => "M",
+                "phone" => "012876534",
+                "user_type" => 2,
+                "email" => "kimberymak@gmail.com",
+                "password" => "!@#123Abc",
+            ],
             [
                 "firstname" => "Misuma",
                 "lastname" => "June",
                 "gender" => "F",
                 "phone" => "09854325",
-                "user_type" => 3,
+                "user_type" => 2,
                 "email" => "misumajune@gmail.com",
                 "password" => "!@#123Abc",
             ],
@@ -64,7 +85,7 @@ class UsersSeeder extends Seeder
                 "lastname" => "Tom",
                 "gender" => "M",
                 "phone" => "024587589",
-                "user_type" => 3,
+                "user_type" => 2,
                 "email" => "jasmentom@gmail.com",
                 "password" => "!@#123Abc",
             ],
@@ -73,7 +94,7 @@ class UsersSeeder extends Seeder
                 "lastname" => "Sok",
                 "gender" => "F",
                 "phone" => "097234567",
-                "user_type" => 3,
+                "user_type" => 2,
                 "email" => "sovansok@gmail.com",
                 "password" => "!@#123Abc",
             ],
@@ -82,7 +103,7 @@ class UsersSeeder extends Seeder
                 "lastname" => "Leak",
                 "gender" => "F",
                 "phone" => "088765432",
-                "user_type" => 3,
+                "user_type" => 2,
                 "email" => "makaraleak@gmail.com",
                 "password" => "!@#123Abc",
             ],
@@ -91,7 +112,7 @@ class UsersSeeder extends Seeder
                 "lastname" => "Kin",
                 "gender" => "F",
                 "phone" => "0876543219",
-                "user_type" => 3,
+                "user_type" => 2,
                 "email" => "sujennakin@gmail.com",
                 "password" => "!@#123Abc",
             ],
@@ -100,11 +121,10 @@ class UsersSeeder extends Seeder
                 "lastname" => "Min",
                 "gender" => "F",
                 "phone" => "015678923",
-                "user_type" => 3,
+                "user_type" => 2,
                 "email" => "chendymin@gmail.com",
                 "password" => "!@#123Abc",
             ],
-
             [
                 "firstname" => "Nacho",
                 "lastname" => "El",
@@ -123,6 +143,8 @@ class UsersSeeder extends Seeder
                 "email" => "jeanhearl@gmail.com",
                 "password" => "!@#123Abc",
             ],
+
+            // Admin //
             [
                 "firstname" => "Admin",
                 "lastname" => "The Best",
