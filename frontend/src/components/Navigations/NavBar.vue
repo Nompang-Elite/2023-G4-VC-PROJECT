@@ -60,8 +60,8 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item to="" prepend-icon="mdi-cog" title="Setting">
-          </v-list-item>
+          <!-- <v-list-item to="" prepend-icon="mdi-cog" title="Setting">
+          </v-list-item> -->
           <v-list-item
             @click.prevent="Auth.logout()"
             prepend-icon="mdi-logout"
