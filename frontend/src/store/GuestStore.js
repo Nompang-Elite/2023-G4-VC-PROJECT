@@ -37,6 +37,7 @@ export const useGuestStore = defineStore("Guest", {
       },
       roomType: null,
       errorBookingDialog: false,
+      loginAlert: false,
     };
   },
   actions: {
@@ -121,31 +122,36 @@ export const useGuestStore = defineStore("Guest", {
       return false;
     },
     bookRoom() {
-      this.bookingForm.date_in = this.date[0];
-      this.bookingForm.date_out = this.date[1];
-      this.bookingForm.number_of_room = Number(this.bookingForm.number_of_room);
-      if (this.bookingForm.date_in && this.bookingForm.date_out) {
-        api.api_base
-          .post("/guest/reserve/room", this.bookingForm)
-          .then((result) => {
-            console.log(result);
-            this.getRoomType(
-              this.bookingForm.room_type_id,
-              this.bookingForm.hotel_id
-            );
-            this.bookingForm = {
-              date_in: "",
-              date_out: "",
-              hotel_id: null,
-              number_of_room: 1,
-              room_type_id: null,
-            };
-          })
-          .catch((err) => {
-            console.log(err);
-            this.errorBookingDialog = true;
-          });
+      if (sessionStorage.getItem("user_logged")) {
+        this.bookingForm.date_in = this.date[0];
+        this.bookingForm.date_out = this.date[1];
+        this.bookingForm.number_of_room = Number(
+          this.bookingForm.number_of_room
+        );
+        if (this.bookingForm.date_in && this.bookingForm.date_out) {
+          api.api_base
+            .post("/guest/reserve/room", this.bookingForm)
+            .then((result) => {
+              console.log(result);
+              this.getRoomType(
+                this.bookingForm.room_type_id,
+                this.bookingForm.hotel_id
+              );
+              this.bookingForm = {
+                date_in: "",
+                date_out: "",
+                hotel_id: null,
+                number_of_room: 1,
+                room_type_id: null,
+              };
+            })
+            .catch((err) => {
+              console.log(err);
+              this.errorBookingDialog = true;
+            });
+        }
       }
+      this.loginAlert = true;
     },
     getRoomType(id, hotelId) {
       api.api_base

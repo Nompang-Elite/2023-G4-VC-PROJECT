@@ -103,6 +103,16 @@
       </v-card-text>
     </v-card>
   </v-dialog>
+  <v-dialog width="auto" v-model="Guest.loginAlert">
+    <v-card color="red">
+      <v-card-text>
+        <v-card-title class="text-center">
+          <v-icon icon="mdi-alert"></v-icon>
+        </v-card-title>
+        Please login to continues!
+      </v-card-text>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
