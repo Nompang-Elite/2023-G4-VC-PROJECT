@@ -7,7 +7,7 @@
     close-delay="500"
     open-delay="500"
   >
-    <v-card rounded="xl" width="30rem">
+    <v-card rounded="xl" width="30rem" theme="dark">
       <v-card-title class="pa-6 text-h5 font-weight-bold text-uppercase">
         Upload image
       </v-card-title>
@@ -15,8 +15,9 @@
         <v-file-input
           show-size
           multiple
+          rounded="xl"
           prepend-icon="mdi-camera"
-          variant="solo"
+          variant="outlined"
           label="Select your image"
           v-model="Hotel.imgFiles"
           :rules="Hotel.imgRules"
@@ -25,7 +26,8 @@
       <v-card-actions class="mx-4 mb-4">
         <v-btn
           block
-          variant="elevated"
+          variant="outlined"
+          color="info"
           rounded="xl"
           @click.prevent="Hotel.uploadHotelImg()"
           >upload</v-btn

@@ -25,7 +25,9 @@
                   ></v-rating>
                 </v-card-subtitle>
                 <v-sheet class="ma-4 text-justify" color="#F0FAFF">
-                  {{ Hotel.hotelInfo.description }}
+                  <span>
+                    {{ Hotel.hotelInfo.description }}
+                  </span>
                 </v-sheet>
               </v-col>
             </v-row>
