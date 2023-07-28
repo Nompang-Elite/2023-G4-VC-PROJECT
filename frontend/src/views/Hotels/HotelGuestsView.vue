@@ -1,6 +1,7 @@
 <template>
   <!-- Using the items props to pass down the data list for card -->
   <Table :items ="listOfguests"/>
+  {{ listOfguests }}
 </template>
 <script>
 import Table from "@/components/Cards/TableListGuests.vue";
@@ -9,7 +10,7 @@ export default {
   components: { Table },
   created() {
     api.api_base
-    .get(`/hotel/3/guests/reserved`)
+    .get(`/hotel/1/guests/reserved`)
     .then((res) => {
       if (res.data) {
         // Assign the data to a component variable
