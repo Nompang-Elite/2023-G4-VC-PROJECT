@@ -27,10 +27,10 @@ export default {
           text: "users",
           to: "/users",
         },
-        {
-          text: "hotels",
-          to: "/admin/hotels",
-        },
+        // {
+        //   text: "hotels",
+        //   to: "/admin/hotels",
+        // },
       ],
     };
   },
