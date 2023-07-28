@@ -104,25 +104,6 @@ class GuestController extends Controller
 
         $userId = auth()->user()->id;
         if (!$isValid->fails()) {
-            $reservationForm = [
-                "date_in" => $req->input()["date_in"],
-                "date_out" => $req->input()["date_out"],
-                "hotel_id" => (int)$req->input()["hotel_id"],
-                "user_id" => $userId,
-            ];
-
-            $reservation = Reservations::create($reservationForm);
-            // User reserve
-            $reservedRoomForm = [
-                "number_of_room" => $req->input()["number_of_room"],
-                "status" => "reserved",
-                "reservation_id" => $reservation->id,
-                "room_type_id" => (int)$req->input()["room_type_id"],
-            ];
-
-            // Bind with reserved room
-            $reservedRoom = ReservedRooms::create($reservedRoomForm);
-
             $rooms = Rooms::where("hotel_id", $req->input()["hotel_id"])->get();
             $occupied = null;
             $hostAt = null;
@@ -146,8 +127,28 @@ class GuestController extends Controller
                         ]
                     );
                     $booked = false;
+                } else if ($room["status"] == "unoccupied" && $booked && $room["room_type_id"]) {
+                    return $this->error("No room available", 404);
                 }
             }
+            $reservationForm = [
+                "date_in" => $req->input()["date_in"],
+                "date_out" => $req->input()["date_out"],
+                "hotel_id" => (int)$req->input()["hotel_id"],
+                "user_id" => $userId,
+            ];
+
+            $reservation = Reservations::create($reservationForm);
+            // User reserve
+            $reservedRoomForm = [
+                "number_of_room" => $req->input()["number_of_room"],
+                "status" => "reserved",
+                "reservation_id" => $reservation->id,
+                "room_type_id" => (int)$req->input()["room_type_id"],
+            ];
+
+            // Bind with reserved room
+            $reservedRoom = ReservedRooms::create($reservedRoomForm);
             return $this->success([
                 "reservation" => $reservation,
                 "reserved_room" => $reservedRoom,

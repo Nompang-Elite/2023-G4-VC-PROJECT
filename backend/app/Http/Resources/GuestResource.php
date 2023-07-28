@@ -27,7 +27,7 @@ class GuestResource extends JsonResource
         $host = HostedAt::where("user_id", $this->user_id)->get();
         $h = [];
         foreach ($host as $i) {
-            array_push($h, Rooms::find(OccupiedRooms::find($i->occupied_id)->room_id));        // $occ = OccupiedRooms::find($host->occupied_id);
+            array_push($h, Rooms::find(OccupiedRooms::find($i->occupied_id)->room_id)->number);        // $occ = OccupiedRooms::find($host->occupied_id);
         }
         $user = User::find($this->user_id);
         $res = [
