@@ -19,8 +19,9 @@ class RoomsTypeHashImages extends JsonResource
     {
 
         $img  = RoomImages::where("room_type_id", $this->id)->first();
+        // dd($img);
         if ($img !== null) {
-            $img = Images::find($img->id)->image_hash;
+            $img = Images::find($img->image_id)->image_hash;
         }
         $count = count(Rooms::where("room_type_id", $this->id)->where("hotel_id", $this->hotel_id)->where("status", "unoccupied")->get());
 
