@@ -14,7 +14,7 @@
           class="mx-auto"
           color="#F0FAFF"
           max-width="100%"
-          height="200"
+          height="210"
           rounded="xl"
           :elevation="isHovering ? 12 : 2"
           :class="{ 'on-hover': isHovering }"
@@ -31,18 +31,17 @@
             <v-col cols="7">
               <v-card-title class="pt-4 text-light text-capitalize"
                 >{{ item.name.replaceAll("_", " ") }}
-                {{ item.count }}
               </v-card-title>
 
               <v-card-subtitle>
-                {{ item.description }}
-              </v-card-subtitle>
-
-              <v-card-text class="card-text">
                 <div class="d-flex align-center">
                   <v-icon icon="mdi-bed"></v-icon
                   ><span class="mx-2">{{ item.bed_count }}</span>
                 </div>
+              </v-card-subtitle>
+
+              <v-card-text>
+                {{ item.description }}
               </v-card-text>
 
               <v-card-actions>
@@ -56,7 +55,10 @@
                 >
                   {{ item.count > 0 ? "Reserve" : "Unavailabe" }}
                 </v-btn>
-                <h3 class="mr-3" style="color: rgb(213, 17, 17);">${{ item.price }}</h3>
+                <v-spacer></v-spacer>
+                <h3 class="mr-3" style="color: rgb(213, 17, 17)">
+                  ${{ item.price }}
+                </h3>
               </v-card-actions>
             </v-col>
           </v-row>
@@ -88,7 +90,7 @@ export default {
 
     roomDetail(id) {
       this.Guest.getRoomType(id, this.hotel.id);
-      console.log(this.Guest.roomType)
+      console.log(this.Guest.roomType);
       this.Guest.bookingForm.hotel_id = this.hotel.id;
       this.Guest.bookingForm.room_type_id = id;
 

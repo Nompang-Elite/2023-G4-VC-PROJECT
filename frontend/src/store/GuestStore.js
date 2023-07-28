@@ -38,6 +38,7 @@ export const useGuestStore = defineStore("Guest", {
       roomType: null,
       errorBookingDialog: false,
       loginAlert: false,
+      bookingSuccess: false,
     };
   },
   actions: {
@@ -133,6 +134,7 @@ export const useGuestStore = defineStore("Guest", {
           api.api_base
             .post("/guest/reserve/room", this.bookingForm)
             .then(() => {
+              this.bookingSuccess = true;
               this.getRoomType(
                 this.bookingForm.room_type_id,
                 this.bookingForm.hotel_id

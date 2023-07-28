@@ -113,6 +113,9 @@
       </v-card-text>
     </v-card>
   </v-dialog>
+  <v-dialog width="auto" v-model="Guest.bookingSuccess">
+    <v-alert type="success" title="Success"></v-alert>
+  </v-dialog>
 </template>
 
 <script>
