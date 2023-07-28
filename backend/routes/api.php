@@ -45,7 +45,7 @@ Route::group(['prefix' => 'hotel'], function () {
 
     Route::get('/info/all', [HotelController::class, 'HotelsInfo']);
     Route::get('/info/{id}', [HotelController::class, 'HotelsInfoId']);
-
+    Route::post('/room/type/detail', [GuestController::class, 'getRoomType']);
     //=============Rooms in hotel==========
     Route::get('/room_types/type', [RoomTypesController::class, 'index']);
 
