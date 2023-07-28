@@ -21,6 +21,7 @@ class ReviewsFactory extends Factory
         return [
             "user_id" => $this->faker->numberBetween(1, count(User::where("user_type", 3)->get())),
             "hotel_id" => $this->faker->numberBetween(1, count(Hotel::all())),
+            "rate" => $this->faker->numberBetween(1, 5),
             "comment" => $this->faker->text(100),
         ];
     }
